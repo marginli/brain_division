@@ -1,0 +1,1298 @@
+[
+{
+"from_atlas": "chiang",
+"from_base": "AL",
+"to_atlas": "ito",
+"to_base": "AL",
+"kind": "1:1",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "AMMC",
+"to_atlas": "ito",
+"to_base": "AMMC",
+"kind": "1:多",
+"note": "AMMC 及周圍的 SAD",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "AMMC",
+"to_atlas": "ito",
+"to_base": "SAD",
+"kind": "1:多",
+"note": "Table S13 把整個 SAD（含 AMMC）對到 Chiang 的 AMMC；疊圖 Chiang AMMC 覆蓋 SAD 42%（外側部）",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "Cal",
+"to_atlas": "ito",
+"to_base": "MB_CA",
+"kind": "1:1",
+"note": "Shih 2015 起併入 MB",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "CCP",
+"to_atlas": "ito",
+"to_base": "ATL",
+"kind": "1:多",
+"note": "ATL＝CCP 背側；疊圖不到一成（ATL 大半落在 SDFP）",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "CCP",
+"to_atlas": "ito",
+"to_base": "IB",
+"kind": "1:多",
+"note": "IB＝CCP 腹側；疊圖占 CCP 體積七成",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "CMP",
+"to_atlas": "ito",
+"to_base": "IPS",
+"kind": "部分",
+"note": "疊圖：CMP 體積 12% 在 IPS（Ito 2014 S12 寫 most part of PS，但疊圖 CMP 未碰到 SPS）",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "CVLP",
+"to_atlas": "ito",
+"to_base": "PLP",
+"kind": "1:多",
+"note": "PLP 的下部；疊圖 CVLP 體積 12% 在 PLP",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "CVLP",
+"to_atlas": "ito",
+"to_base": "WED",
+"kind": "1:多",
+"note": "Ito 2014 補充材料把 wedge 對應到 CVLP；疊圖 CVLP 體積 19% 在 WED、覆蓋 WED 48%",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "DLP",
+"to_atlas": "ito",
+"to_base": "SLP",
+"kind": "1:多",
+"note": "SLP＝DLP 外側＋IDLP 外側（Ito 2014 Table S13）",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "DLP",
+"to_atlas": "ito",
+"to_base": "SIP",
+"kind": "1:多",
+"note": "SIP＝DLP 內側＋FSPP",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "DMP",
+"to_atlas": "ito",
+"to_base": "ICL",
+"kind": "1:多",
+"note": "S12／S13：DMP＝ICL；疊圖 DMP 體積 26% 在 ICL、覆蓋 ICL 74%",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "EB",
+"to_atlas": "ito",
+"to_base": "EB",
+"kind": "1:1",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "FB",
+"to_atlas": "ito",
+"to_base": "FB",
+"kind": "1:1",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "FSPP",
+"to_atlas": "ito",
+"to_base": "SIP",
+"kind": "部分",
+"note": "SIP 的後部（S12：posterior part of SIP）；疊圖 FSPP 體積 79% 在 SIP、占 SIP 30%",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "IDFP",
+"to_atlas": "ito",
+"to_base": "LAL",
+"kind": "1:多",
+"note": "LAL＝IDFP 腹側",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "IDFP",
+"to_atlas": "ito",
+"to_base": "CRE",
+"kind": "1:多",
+"note": "CRE 後部＝IDFP 背側；CRE 前部 Chiang 沒有對應",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "IDFP",
+"to_atlas": "ito",
+"to_base": "GA",
+"kind": "1:多",
+"note": "GA 在 LAL 內，隨 LAL 落在 IDFP 腹側",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "IDLP",
+"to_atlas": "ito",
+"to_base": "SLP",
+"kind": "1:多",
+"note": "IDLP 外側部→SLP；疊圖 66%",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "IDLP",
+"to_atlas": "ito",
+"to_base": "SMP",
+"kind": "1:多",
+"note": "IDLP 內側部→SMP（S13）；疊圖只 8%",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "LH",
+"to_atlas": "ito",
+"to_base": "LH",
+"kind": "1:1",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "Lob",
+"to_atlas": "ito",
+"to_base": "LO",
+"kind": "1:1",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "LoP",
+"to_atlas": "ito",
+"to_base": "LOP",
+"kind": "1:1",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "Lat_Tri",
+"to_atlas": "ito",
+"to_base": "BU",
+"kind": "1:1",
+"note": "Ito 稱 bulb",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "MB",
+"to_atlas": "ito",
+"to_base": "MB_PED",
+"kind": "1:多",
+"note": "Ito 的 MB 分成 CA、PED、VL、ML",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "MB",
+"to_atlas": "ito",
+"to_base": "MB_VL",
+"kind": "1:多",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "MB",
+"to_atlas": "ito",
+"to_base": "MB_ML",
+"kind": "1:多",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "Med",
+"to_atlas": "ito",
+"to_base": "ME",
+"kind": "1:1",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "Nod",
+"to_atlas": "ito",
+"to_base": "NO",
+"kind": "1:1",
+"note": "Chiang 左右各一，Ito 合為中線區",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "OG",
+"to_atlas": "ito",
+"to_base": "PVLP",
+"kind": "部分",
+"note": "Ito 2014 S12：OG＝VLP 的次區；疊圖 OG 體積 74% 在 PVLP",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "OPTU",
+"to_atlas": "ito",
+"to_base": "AOTU",
+"kind": "1:1",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "PAN",
+"to_atlas": "ito",
+"to_base": "VES",
+"kind": "部分",
+"note": "VES 的前部",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "PCB",
+"to_atlas": "ito",
+"to_base": "PB",
+"kind": "1:1",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "SDFP",
+"to_atlas": "ito",
+"to_base": "SMP",
+"kind": "部分",
+"note": "SMP＝SDFP＋IDLP 內側（Ito 2014 Table S13）",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "SOG",
+"to_atlas": "ito",
+"to_base": "GNG",
+"kind": "1:多",
+"note": "GNG＝SOG 腹側",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "SOG",
+"to_atlas": "ito",
+"to_base": "FLA",
+"kind": "1:多",
+"note": "FLA＝SOG 背側、PRW 之後沿食道兩側（AL 腹側；Ito 2014 Table S13 原文作 dorsoposterior part of SOG）",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "SOG",
+"to_atlas": "ito",
+"to_base": "PRW",
+"kind": "1:多",
+"note": "PRW＝SOG 最前端的背側中線（Ito 2014 Table S13：dorsoanterior part of SOG；位於食道前下方、GNG 正前方）",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "SPP",
+"to_atlas": "ito",
+"to_base": "PLP",
+"kind": "1:多",
+"note": "PLP 的上部",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "SPP",
+"to_atlas": "ito",
+"to_base": "SCL",
+"kind": "1:多",
+"note": "SCL＝SPP 內側",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "VLP",
+"to_atlas": "ito",
+"to_base": "AVLP",
+"kind": "1:多",
+"note": "Chiang 文中再分 VLP-D／VLP-V（本網格只有一塊 VLP），Ito 切前／後 AVLP／PVLP；疊圖 VLP 體積 60% 在 AVLP、AVLP 88% 在 VLP",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "VLP",
+"to_atlas": "ito",
+"to_base": "PVLP",
+"kind": "1:多",
+"note": "疊圖：VLP 體積 20% 在 PVLP、PVLP 68% 在 VLP",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "VMP",
+"to_atlas": "ito",
+"to_base": "VES",
+"kind": "1:多",
+"note": "S12：VX（VES＋EPA＋GOR）大部分；疊圖 VMP 覆蓋 VES 44%（EPA、GOR 實際落在 DMP）",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "VMP",
+"to_atlas": "ito",
+"to_base": "CAN",
+"kind": "1:多",
+"note": "CAN＝VMP 腹後部；疊圖 CAN 95% 在 VMP",
+"src": "文獻"
+},
+{
+"from_atlas": "chiang",
+"from_base": "VMP",
+"to_atlas": "ito",
+"to_base": "IPS",
+"kind": "1:多",
+"note": "疊圖：VMP 體積 17% 在 IPS、覆蓋 IPS 23%",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "OG",
+"to_atlas": "ito",
+"to_base": "AVLP",
+"kind": "部分",
+"note": "疊圖：OG 體積 18% 在 AVLP（左 31%、右 5%）",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "CMP",
+"to_atlas": "ito",
+"to_base": "GNG",
+"kind": "部分",
+"note": "疊圖：CMP 體積 75% 落在 Ito 的 GNG 標籤（食道後方、GNG 與後坡區交界；S12 未列）",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "DMP",
+"to_atlas": "ito",
+"to_base": "LAL",
+"kind": "1:多",
+"note": "疊圖：DMP 覆蓋 LAL 51%（S12 未列）",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "DMP",
+"to_atlas": "ito",
+"to_base": "EPA",
+"kind": "1:多",
+"note": "疊圖：EPA 91% 在 DMP（S12 把 EPA 列在 VMP）",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "DMP",
+"to_atlas": "ito",
+"to_base": "GOR",
+"kind": "1:多",
+"note": "疊圖：GOR 69% 在 DMP（S12 把 GOR 列在 VMP）",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "DMP",
+"to_atlas": "ito",
+"to_base": "VES",
+"kind": "1:多",
+"note": "疊圖：VES 31% 在 DMP",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "DMP",
+"to_atlas": "ito",
+"to_base": "SPS",
+"kind": "1:多",
+"note": "疊圖：SPS 20% 在 DMP",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "VMP",
+"to_atlas": "ito",
+"to_base": "SPS",
+"kind": "1:多",
+"note": "疊圖：VMP 體積 39% 在 SPS、覆蓋 SPS 46%（S12 只寫 part of PS）",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "CVLP",
+"to_atlas": "ito",
+"to_base": "IPS",
+"kind": "1:多",
+"note": "疊圖：CVLP 體積 48% 在 IPS、覆蓋 IPS 55%（Ito 2014 S12 未列）",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "SDFP",
+"to_atlas": "ito",
+"to_base": "ATL",
+"kind": "部分",
+"note": "疊圖：ATL 38% 在 SDFP（S13 未列）",
+"src": "疊圖"
+},
+{
+"from_atlas": "chiang",
+"from_base": "IDLP",
+"to_atlas": "ito",
+"to_base": "SIP",
+"kind": "1:多",
+"note": "疊圖：IDLP 體積 19% 在 SIP（S12／S13 未列）",
+"src": "疊圖"
+},
+{
+"from_atlas": "ito",
+"from_base": "AME",
+"to_atlas": "chiang",
+"to_base": "Med",
+"kind": "未切出",
+"note": "S13 未確定；疊圖 AME 體積 33% 在 Med、19% 在 Lob",
+"src": "文獻"
+},
+{
+"from_atlas": "ito",
+"from_base": "CRE",
+"to_atlas": "chiang",
+"to_base": "IDFP",
+"kind": "切法不同",
+"note": "S13：CRE 後部＝IDFP 背側、前部 Chiang 無對應；疊圖 CRE 體積 22% 在 IDFP、24% 在 SDFP、14% 在 MB",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "MB_aL",
+"to_atlas": "ito",
+"to_base": "MB_VL",
+"kind": "部分",
+"note": "Ito 的 VL＝α＋α'",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "MB_apL",
+"to_atlas": "ito",
+"to_base": "MB_VL",
+"kind": "部分",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "MB_bL",
+"to_atlas": "ito",
+"to_base": "MB_ML",
+"kind": "部分",
+"note": "Ito 的 ML＝β＋β'＋γ",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "MB_bpL",
+"to_atlas": "ito",
+"to_base": "MB_ML",
+"kind": "部分",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "MB_gL",
+"to_atlas": "ito",
+"to_base": "MB_ML",
+"kind": "部分",
+"note": "",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "LA",
+"to_atlas": "ito",
+"to_base": "ME",
+"kind": "未切出",
+"note": "FCWBNP 75 區網格沒有切出 LA；最接近的是 ME 外側",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "AB",
+"to_atlas": "ito",
+"to_base": "FB",
+"kind": "未切出",
+"note": "Ito 75 區沒有 AB；位於 FB 腹側",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "IB",
+"to_atlas": "ito",
+"to_base": "IB",
+"kind": "1:1",
+"note": "Ito 2014 視 IB 為跨中線單一結構；75 區網格切成左右兩塊，MaleCNS v5 為一塊",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "AL",
+"to_atlas": "ito",
+"to_base": "AL",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "AME",
+"to_atlas": "ito",
+"to_base": "AME",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "AOTU",
+"to_atlas": "ito",
+"to_base": "AOTU",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "ATL",
+"to_atlas": "ito",
+"to_base": "ATL",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "AVLP",
+"to_atlas": "ito",
+"to_base": "AVLP",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "BU",
+"to_atlas": "ito",
+"to_base": "BU",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "CAN",
+"to_atlas": "ito",
+"to_base": "CAN",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "CRE",
+"to_atlas": "ito",
+"to_base": "CRE",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "EB",
+"to_atlas": "ito",
+"to_base": "EB",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "EPA",
+"to_atlas": "ito",
+"to_base": "EPA",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "FB",
+"to_atlas": "ito",
+"to_base": "FB",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "FLA",
+"to_atlas": "ito",
+"to_base": "FLA",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "GNG",
+"to_atlas": "ito",
+"to_base": "GNG",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "GOR",
+"to_atlas": "ito",
+"to_base": "GOR",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "ICL",
+"to_atlas": "ito",
+"to_base": "ICL",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "IPS",
+"to_atlas": "ito",
+"to_base": "IPS",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "LH",
+"to_atlas": "ito",
+"to_base": "LH",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "LO",
+"to_atlas": "ito",
+"to_base": "LO",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "LOP",
+"to_atlas": "ito",
+"to_base": "LOP",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "MB_CA",
+"to_atlas": "ito",
+"to_base": "MB_CA",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "MB_PED",
+"to_atlas": "ito",
+"to_base": "MB_PED",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "ME",
+"to_atlas": "ito",
+"to_base": "ME",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "NO",
+"to_atlas": "ito",
+"to_base": "NO",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "PB",
+"to_atlas": "ito",
+"to_base": "PB",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "PLP",
+"to_atlas": "ito",
+"to_base": "PLP",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "PRW",
+"to_atlas": "ito",
+"to_base": "PRW",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "PVLP",
+"to_atlas": "ito",
+"to_base": "PVLP",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "SCL",
+"to_atlas": "ito",
+"to_base": "SCL",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "SIP",
+"to_atlas": "ito",
+"to_base": "SIP",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "SLP",
+"to_atlas": "ito",
+"to_base": "SLP",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "SMP",
+"to_atlas": "ito",
+"to_base": "SMP",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "SPS",
+"to_atlas": "ito",
+"to_base": "SPS",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "VES",
+"to_atlas": "ito",
+"to_base": "VES",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "WED",
+"to_atlas": "ito",
+"to_base": "WED",
+"kind": "1:1",
+"note": "同名",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "AL",
+"to_atlas": "ito",
+"to_base": "AL",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "AME",
+"to_atlas": "ito",
+"to_base": "AME",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "AMMC",
+"to_atlas": "ito",
+"to_base": "AMMC",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "AOTU",
+"to_atlas": "ito",
+"to_base": "AOTU",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "ATL",
+"to_atlas": "ito",
+"to_base": "ATL",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "AVLP",
+"to_atlas": "ito",
+"to_base": "AVLP",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "BU",
+"to_atlas": "ito",
+"to_base": "BU",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "CAN",
+"to_atlas": "ito",
+"to_base": "CAN",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "CRE",
+"to_atlas": "ito",
+"to_base": "CRE",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "EB",
+"to_atlas": "ito",
+"to_base": "EB",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "EPA",
+"to_atlas": "ito",
+"to_base": "EPA",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "FB",
+"to_atlas": "ito",
+"to_base": "FB",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "FLA",
+"to_atlas": "ito",
+"to_base": "FLA",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "GA",
+"to_atlas": "ito",
+"to_base": "GA",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "GNG",
+"to_atlas": "ito",
+"to_base": "GNG",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "GOR",
+"to_atlas": "ito",
+"to_base": "GOR",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "IB",
+"to_atlas": "ito",
+"to_base": "IB",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "ICL",
+"to_atlas": "ito",
+"to_base": "ICL",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "IPS",
+"to_atlas": "ito",
+"to_base": "IPS",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "LAL",
+"to_atlas": "ito",
+"to_base": "LAL",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "LH",
+"to_atlas": "ito",
+"to_base": "LH",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "LO",
+"to_atlas": "ito",
+"to_base": "LO",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "LOP",
+"to_atlas": "ito",
+"to_base": "LOP",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "MB_CA",
+"to_atlas": "ito",
+"to_base": "MB_CA",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "MB_ML",
+"to_atlas": "ito",
+"to_base": "MB_ML",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "MB_PED",
+"to_atlas": "ito",
+"to_base": "MB_PED",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "MB_VL",
+"to_atlas": "ito",
+"to_base": "MB_VL",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "ME",
+"to_atlas": "ito",
+"to_base": "ME",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "NO",
+"to_atlas": "ito",
+"to_base": "NO",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "PB",
+"to_atlas": "ito",
+"to_base": "PB",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "PLP",
+"to_atlas": "ito",
+"to_base": "PLP",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "PRW",
+"to_atlas": "ito",
+"to_base": "PRW",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "PVLP",
+"to_atlas": "ito",
+"to_base": "PVLP",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "SAD",
+"to_atlas": "ito",
+"to_base": "SAD",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "SCL",
+"to_atlas": "ito",
+"to_base": "SCL",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "SIP",
+"to_atlas": "ito",
+"to_base": "SIP",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "SLP",
+"to_atlas": "ito",
+"to_base": "SLP",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "SMP",
+"to_atlas": "ito",
+"to_base": "SMP",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "SPS",
+"to_atlas": "ito",
+"to_base": "SPS",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "VES",
+"to_atlas": "ito",
+"to_base": "VES",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "itoem",
+"from_base": "WED",
+"to_atlas": "ito",
+"to_base": "WED",
+"kind": "1:1",
+"note": "同名（EM 版 vs 光學版）",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "SAD",
+"to_atlas": "ito",
+"to_base": "SAD",
+"kind": "1:多",
+"note": "v5 的 SAD 含 Ito 的 SAD＋AMMC",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "SAD",
+"to_atlas": "ito",
+"to_base": "AMMC",
+"kind": "1:多",
+"note": "v5 把 AMMC 併入 SAD",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "LAL",
+"to_atlas": "ito",
+"to_base": "LAL",
+"kind": "1:多",
+"note": "v5 的 LAL 含 Ito 的 LAL＋GA",
+"src": "文獻"
+},
+{
+"from_atlas": "malecns",
+"from_base": "LAL",
+"to_atlas": "ito",
+"to_base": "GA",
+"kind": "1:多",
+"note": "v5 把 GA 併入 LAL",
+"src": "文獻"
+}
+]

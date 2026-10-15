@@ -1,0 +1,1888 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>果蠅腦區學習</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+/* 版面：頂列（模式／分區／搜尋）＋ 左 3D 視窗 ＋ 右側欄（清單／卡片）＋ 底列（視角／顯示控制）；手機寬度時側欄移到 3D 下方 */
+:root {
+  --bg: #f3f4f6; --panel: #ffffff; --fg: #1d2129; --muted: #5d6572; --line: #d9dde3;
+  --accent: #1e4b7a; --accent-fg: #ffffff; --hover: #eef2f7; --canvas: #e9ecf0; --label: #111; --label-bg: rgba(255,255,255,.82);
+  --sel: #c8102e;
+  --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --font-ui: "IBM Plex Sans", "Noto Sans TC", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #15181d; --panel: #1e2229; --fg: #e8eaee; --muted: #9aa3b0; --line: #343a44;
+  --accent: #6fa3d8; --accent-fg: #0f1420; --hover: #262c36; --canvas: #0f1216; --label: #f2f2f2; --label-bg: rgba(20,22,26,.78);
+  --sel: #ff5c6c; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #15181d; --panel: #1e2229; --fg: #e8eaee; --muted: #9aa3b0; --line: #343a44;
+  --accent: #6fa3d8; --accent-fg: #0f1420; --hover: #262c36; --canvas: #0f1216; --label: #f2f2f2; --label-bg: rgba(20,22,26,.78);
+  --sel: #ff5c6c; color-scheme: dark; }
+html, body { height: 100%; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 14px; display: flex; flex-direction: column; min-height: 100%; }
+button, select, input { font: inherit; color: inherit; }
+.top { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding: 8px 16px; background: var(--panel); border-bottom: 1px solid var(--line); }
+.top h1 { font-size: 16px; margin: 0 8px 0 0; font-weight: 700; letter-spacing: .02em; }
+.modes { display: flex; gap: 4px; }
+.modes button { border: 1px solid var(--line); background: transparent; padding: 4px 10px; border-radius: 4px; cursor: pointer; }
+.modes button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.modes button:disabled { opacity: .45; cursor: not-allowed; }
+label.f { display: inline-flex; gap: 6px; align-items: center; color: var(--muted); font-size: 13px; }
+select, input[type=search] { border: 1px solid var(--line); background: var(--bg); border-radius: 4px; padding: 4px 8px; }
+input[type=search] { width: 140px; }
+.main { flex: 1; display: flex; min-height: 0; }
+.view { flex: 1; position: relative; min-width: 0; background: var(--canvas); touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+.view.dragging, .view.dragging .lab { cursor: grabbing; }
+.view canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.lab { position: absolute; transform: translate(-50%, -50%); font-family: var(--font-ui); font-weight: 600; font-size: 12px; color: var(--label);
+  background: var(--label-bg); padding: 1px 4px; border-radius: 3px; white-space: nowrap; pointer-events: auto; cursor: pointer; line-height: 1.3; }
+.lab.dim { opacity: .35; }
+.lab.b { border: 1px dashed var(--muted); font-weight: 500; }
+.lab.cp { outline: 2px solid #2b6cb0; }
+.divider { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--line); pointer-events: none; }
+.cap { position: absolute; top: 28px; font-size: 12px; font-weight: 600; color: var(--muted); pointer-events: none; }
+.capA { left: 12px; } .capB { left: calc(50% + 12px); }
+.tb { border: 1px solid var(--line); background: transparent; border-radius: 4px; padding: 3px 9px; cursor: pointer; font-size: 13px; }
+.tb:hover { background: var(--hover); }
+dialog#abbrDlg { border: 1px solid var(--line); border-radius: 8px; padding: 0; width: min(760px, 94vw); max-height: 86vh; background: var(--panel); color: var(--fg); }
+dialog#abbrDlg::backdrop { background: rgba(0,0,0,.35); }
+.dlg { display: flex; flex-direction: column; max-height: 86vh; }
+.dlgTop { display: flex; gap: 10px; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.dlgTop h2 { font-size: 16px; margin: 0; flex: 1; }
+.dlgBody { overflow: auto; padding: 8px 16px; }
+.dlgFoot { padding: 8px 16px 12px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+#abbrTbl { border-collapse: collapse; width: 100%; font-size: 13px; }
+#abbrTbl th, #abbrTbl td { text-align: left; padding: 4px 8px 4px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+#abbrTbl th:first-child, #abbrTbl td:first-child { font-family: var(--font-ui); white-space: nowrap; }
+.card abbr { text-decoration: underline dotted; text-underline-offset: 2px; cursor: help; }
+.legend { position: absolute; left: 12px; top: 28px; font-size: 12px; color: var(--muted); pointer-events: none; display: flex; gap: 14px; }
+.legend .sw { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: -2px; margin-right: 4px; background: #7fb3d5; }
+.legend .sw.wire { background: repeating-linear-gradient(45deg, #30363d 0 2px, transparent 2px 5px); border: 1px solid #30363d; }
+.pins { padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 13px; }
+.pins .ph { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; } .pins .ph b { flex: 1; }
+.pins .pin { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; margin: 2px 4px 2px 0; font-family: var(--font-ui); font-size: 12px; }
+.pins .pin .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.pins .pin button { border: 0; background: transparent; cursor: pointer; padding: 0 2px; color: var(--muted); font-size: 13px; }
+.pins .ov2 { margin-top: 6px; color: var(--fg); }
+.pins .ov2 .muted { color: var(--muted); font-size: 12px; }
+.card .pinBtn { margin-left: 8px; }
+.ln { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 8px; }
+.ln h3 { margin: 0 0 6px; }
+.ln .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0; }
+.ln table { border-collapse: collapse; font-size: 12px; margin-top: 4px; } .ln th, .ln td { padding: 2px 8px 2px 0; border-bottom: 1px solid var(--line); text-align: right; } .ln th:first-child, .ln td:first-child { text-align: left; }
+.ln td.cur, .ln th.cur { background: var(--hover); }
+.ln .muted, .card .muted { color: var(--muted); font-size: 12px; }
+.nc .bar { display: inline-block; height: 8px; background: var(--accent); border-radius: 2px; vertical-align: middle; }
+.nc table { border-collapse: collapse; font-size: 12px; width: 100%; } .nc td { padding: 2px 6px 2px 0; border-bottom: 1px solid var(--line); } .nc td.r { text-align: right; white-space: nowrap; }
+.nc tr.rg { cursor: pointer; } .nc tr.rg:hover { background: var(--hover); }
+.lab.nl { border: 1px solid var(--fg); font-weight: 500; }
+.syn .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; vertical-align: middle; margin-right: 3px; }
+.syn tr.gh td { background: var(--hover); padding-top: 5px; border-top: 1px solid var(--line); } .syn tr.gh { cursor: pointer; } .syn tr.gh:hover b { text-decoration: underline; } .syn tr.gh.cur td { border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); } .syn tr.gh.cur td:first-child { border-left: 2px solid var(--accent); } .syn tr.gh.cur td:last-child { border-right: 2px solid var(--accent); } .syn tr.gh .tb { margin-left: 4px; } .syn tr.pt { cursor: pointer; } .syn tr.pt:hover { background: var(--hover); } .syn tr.pt.cur { outline: 2px solid var(--accent); } .syn tr.more { display: none; } .syn table.all tr.more { display: table-row; }
+.syn td .tb { padding: 1px 5px; font-size: 12px; } .syn td:last-child { white-space: nowrap; } .syn td:nth-child(2) { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11px; word-break: break-all; } .syn h4 { font-size: 13px; }
+.syn .cr { margin: 2px 0 4px; font-size: 12px; } .syn .crtag { color: #fff; border-radius: 3px; padding: 0 6px; font-weight: 600; font-size: 11px; } .syn .nt { white-space: nowrap; font-weight: 600; font-size: 12px; } .syn .ntbar { display: flex; height: 8px; border-radius: 3px; overflow: hidden; margin: 4px 0 2px; background: var(--line); } .syn .ntbar i { display: block; height: 100%; }
+.chip.done::after { content: "✓"; color: #1f9d55; font-weight: 700; margin-left: 2px; }
+.quiz h2 { font-size: 18px; margin: 0 0 6px; }
+.quiz .q { font-size: 15px; margin: 8px 0; }
+.quiz .q b { font-family: var(--font-ui); font-size: 22px; }
+.quiz .choices { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.quiz .choices button { font-family: var(--font-ui); font-size: 14px; padding: 6px 12px; }
+.quiz .ok { color: #1f9d55; font-weight: 700; } .quiz .ng { color: #c8102e; font-weight: 700; }
+.quiz .bar { height: 6px; background: var(--line); border-radius: 3px; margin: 6px 0; } .quiz .bar i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+.quiz .clock { display: flex; align-items: center; gap: 8px; margin: 4px 0; font-size: 13px; } .quiz .clock .bar { flex: 1; margin: 0; } .quiz .clock.hurry { color: #c8102e; font-weight: 700; } .quiz .clock.hurry .bar i { background: #c8102e; }
+.quiz table { border-collapse: collapse; font-size: 12px; } .quiz td, .quiz th { padding: 2px 8px 2px 0; border-bottom: 1px solid var(--line); text-align: left; }
+.bm { display: flex; gap: 8px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--line); } .bm b { flex: 1; } .bm .muted { font-size: 12px; }
+.lhead { font-weight: 700; margin: 6px 0 4px; padding-bottom: 2px; border-bottom: 1px solid var(--line); }
+.card .atl { color: var(--muted); font-size: 12px; }
+.card h3 { font-size: 13px; margin: 12px 0 4px; }
+.card .cwh { color: var(--muted); font-size: 12px; margin: 6px 0 2px; } .card .cwovl { border-left: 3px solid var(--line); padding-left: 8px; } .card dd.cwovl { margin-left: 0; }
+.card .cps { margin: 0; padding-left: 18px; } .card .cps li { margin-bottom: 3px; } .card .muted { color: var(--muted); font-size: 12px; }
+.card table.ov { border-collapse: collapse; font-size: 12px; } .card table.ov th, .card table.ov td { border-bottom: 1px solid var(--line); padding: 2px 8px 2px 0; text-align: left; } .card table.ov td:nth-child(n+2) { text-align: right; }
+.lab.sel { outline: 2px solid var(--sel); }
+.hint { position: absolute; left: 12px; bottom: 10px; font-size: 12px; color: var(--muted); pointer-events: none; }
+.status { position: absolute; left: 12px; top: 10px; font-size: 12px; color: var(--muted); pointer-events: none; }
+.side { width: 330px; display: flex; flex-direction: column; border-left: 1px solid var(--line); background: var(--panel); min-width: 0; }
+.list { flex: 1 1 50%; overflow: auto; padding: 8px 10px; border-bottom: 1px solid var(--line); min-height: 120px; }
+details { margin-bottom: 4px; }
+summary { cursor: pointer; font-weight: 500; padding: 4px 2px; display: flex; align-items: center; gap: 8px; }
+summary .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+summary .n { color: var(--muted); font-size: 12px; margin-left: auto; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; padding: 2px 0 6px 18px; }
+.chip { border: 1px solid var(--line); border-radius: 3px; padding: 1px 7px; font-family: var(--font-ui); font-size: 12px; cursor: pointer; background: transparent; display: inline-flex; align-items: center; gap: 5px; }
+.chip .sw { width: 8px; height: 8px; border-radius: 2px; }
+.chip:hover { background: var(--hover); }
+.chip.sel { border-color: var(--sel); box-shadow: inset 0 0 0 1px var(--sel); }
+.chip.hidden-by-search { display: none; }
+.chip.lpu-dim { opacity: .35; }
+.bottom .lc::before, .lpc::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--c); margin-right: 3px; vertical-align: -1px; }
+.lpc { display: flex; align-items: baseline; } .lpc::before { flex: none; } .lpc.sub { margin-left: 14px; cursor: pointer; border-radius: 3px; padding: 0 3px; } .lpc.sub:hover { background: var(--hover); } .lpc.sub.cur { outline: 2px solid #d7263d; font-weight: 600; } h2 .subsel { color: #d7263d; font-size: .8em; }
+#lpuSels select { max-width: 18vw; }
+#lpuLegend { flex-direction: column; gap: 2px; }
+.card { flex: 1 1 50%; overflow: auto; padding: 12px 14px; min-height: 160px; }
+.card h2 { margin: 0 0 2px; font-family: var(--font-ui); font-size: 26px; letter-spacing: .01em; }
+.card .full { color: var(--muted); font-size: 13px; margin-bottom: 10px; } .card dd.trivia { background: var(--hover); border-left: 3px solid #e0a800; padding: 6px 8px; border-radius: 0 4px 4px 0; } .card dd.trivia b { color: #8a6500; } .say { cursor: pointer; font-size: 12px; line-height: 1; } .card .full .say { padding: 0 5px; } .chip .say { opacity: 0.45; margin-left: 1px; } .chip:hover .say, .chip.sel .say { opacity: 1; } .say:hover { filter: brightness(0.8); }
+.card dl { display: grid; grid-template-columns: 4.5em 1fr; gap: 4px 10px; margin: 0; }
+.card dt { color: var(--muted); font-size: 12px; padding-top: 2px; }
+.card dd { margin: 0; min-width: 0; }
+.card .todo { color: var(--muted); font-style: italic; }
+.card .empty { color: var(--muted); }
+.card .ev { display: inline-block; border-radius: 3px; padding: 0 6px; font-size: 12px; border: 1px solid var(--line); }
+.bottom { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 8px 16px; background: var(--panel); border-top: 1px solid var(--line); padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)); }
+.bottom .grp { display: inline-flex; gap: 4px; align-items: center; }
+.bottom .grp > span { color: var(--muted); font-size: 12px; margin-right: 2px; }
+.bottom button { border: 1px solid var(--line); background: transparent; border-radius: 4px; padding: 3px 9px; cursor: pointer; }
+.bottom button:hover { background: var(--hover); }
+.bottom button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+input[type=range] { width: 110px; }
+button:focus-visible, .chip:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+@media (max-width: 760px) {
+  .top select { max-width: 62vw; }
+  .main { flex-direction: column; }
+  .view { min-height: 46vh; }
+  .side { width: auto; border-left: 0; border-top: 1px solid var(--line); max-height: 48vh; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>果蠅腦區學習</h1>
+  <div class="modes" role="group" aria-label="模式">
+    <button data-mode="single" aria-pressed="true">單套學習</button>
+    <button data-mode="overlay" aria-pressed="false" title="兩套同座標系的分區疊在一起（Ito × Chiang）">疊圖比較</button>
+    <button data-mode="side" aria-pressed="false" title="任兩套左右並排、鏡頭同步">並排比較</button>
+  </div>
+  <label class="f">分區 <select id="atlas"></select></label>
+  <label class="f" id="atlasBWrap" hidden>對照 <select id="atlasB"></select> <button id="swapBtn" class="tb" title="A、B 互換">⇄</button></label>
+  <button id="abbrBtn" class="tb" title="神經元型與縮寫的解釋">縮寫表</button>
+  <label class="f" title="把目前的 3D 畫面存成檔案：.glb 可插入 PowerPoint（插入 → 3D 模型），.html 用瀏覽器打開可旋轉、點區看資訊"><select id="snapSel"><option value="">存成 3D 檔…</option><option value="glb">PPT 用 3D 模型（.glb）</option><option value="html">互動網頁（.html，含區資訊）</option></select></label>
+  <button id="bmBtn" class="tb" title="把目前畫面存成書籤，之後一鍵回到">書籤</button>
+  <label class="f" title="測驗：先隱藏標籤，每次 10 題"><select id="quizSel"><option value="">測驗…</option><option value="point">給名字，在 3D 點出腦區</option><option value="mc">亮一區，四選一</option></select> <select id="quizTime" title="限時：每題倒數，時間到算答錯"><option value="0">不限時</option><option value="10">每題 10 秒</option><option value="20">每題 20 秒</option><option value="30">每題 30 秒</option><option value="60">每題 60 秒</option></select></label>
+  <label class="f">搜尋 <input id="q" type="search" placeholder="區名或神經元 id" autocomplete="off"></label>
+</div>
+<div class="main">
+  <div class="view" id="view">
+    <div class="labels" id="labels"></div>
+    <div class="status" id="status">載入中…</div>
+    <div class="divider" id="divider" hidden></div>
+    <div class="cap capA" id="capA"></div><div class="cap capB" id="capB"></div>
+    <div class="legend" id="legend" hidden></div>
+    <div class="legend" id="lpuLegend" hidden></div>
+    <div class="hint" id="hint">左鍵旋轉 ｜ 滾輪縮放 ｜ 右鍵或 Shift+左鍵平移 ｜ 點區選取、再點取消 ｜ 雙擊飛到該區</div>
+  </div>
+  <aside class="side">
+    <div class="list" id="list"></div>
+    <div class="pins" id="pins" hidden></div>
+    <div class="card" id="card"><div class="empty">點 3D 裡的腦區，或點左邊清單的名字。</div></div>
+  </aside>
+</div>
+<div class="bottom">
+  <div class="grp"><span>視角</span>
+    <button data-view="front">前</button><button data-view="back">背</button><button data-view="left">左</button><button data-view="right">右</button><button data-view="top">上</button><button data-view="bottom">下</button><button id="reset">重設</button>
+  </div>
+  <div class="grp"><span>透明度</span><input id="alpha" type="range" min="0.1" max="1" step="0.05" value="1"></div>
+  <div class="grp" role="group" aria-label="左右"><span>顯示</span>
+    <button data-side="all" aria-pressed="true">全部</button><button data-side="L">只看左</button><button data-side="R">只看右</button>
+  </div>
+  <div class="grp" id="ovlGrp" hidden role="group" aria-label="疊圖"><span>疊圖</span>
+    <button data-ovl="both" aria-pressed="true">兩套</button><button data-ovl="A">只看 A</button><button data-ovl="B">只看 B</button>
+    <span style="margin-left:8px">B 畫法</span>
+    <button data-bstyle="wire" aria-pressed="true" title="B 只畫線框，看得到 A 的實心也看得到 B 的邊界">線框</button><button data-bstyle="mono" title="B 全部同一色、半透明">單色</button><button data-bstyle="tint" title="B 用各區功能色但調淡、半透明">淡色</button>
+  </div>
+  <div class="grp"><label class="f" title="只顯示釘選的區（與目前選取的區）"><input id="focus" type="checkbox"> 只看釘選</label></div>
+  <div class="grp" id="lpuGrp" role="group" aria-label="LPU 分類" hidden><span title="依 A1 系列的判定把腦區分成四類；勾哪幾類就只畫那幾類（其他變淡或不畫）。資料來源與規則跟卡片「局部神經元」同步">LPU</span><span id="lpuSels"></span>
+    <label class="f lc" style="--c:#2e9e4f" title="判定為單一 LPU 的區"><input type="checkbox" data-lc="1"> 單一</label><label class="f lc" style="--c:#e58a1f" title="判定為多個候選 LPU 的區（候選 a–b 個）"><input type="checkbox" data-lc="2"> 多個</label><label class="f lc" style="--c:#7b4fbf" title="判定為 hub 的區（LN 太少或沒有自成一單位的熱點）"><input type="checkbox" data-lc="3"> hub</label><label class="f lc" style="--c:#8d949e" title="兩者皆非：LN 夠多但判不出單一或多個，也不像 hub"><input type="checkbox" data-lc="0"> 不可判</label><label class="f lc" style="--c:#d4b106" title="只在切分子區輪次：切分前判為多個候選（LN 密度有好幾團），但切出的子區沒有全部自成 LPU（LN 橫跨各團）→ 讀法 A 整區算一個 LPU"><input type="checkbox" data-lc="4"> 切不開</label>
+    <label class="f" title="沒勾到的類別完全不畫（不勾時只是變淡）"><input id="lpuOnly" type="checkbox"> 其他不畫</label></div>
+  <div class="grp"><label class="f"><input id="showLabels" type="checkbox" checked> 標籤</label></div>
+  <div class="grp"><label class="f"><input id="showBrain" type="checkbox"> 全腦輪廓</label></div>
+  <div class="grp"><label class="f" title="被擋住或互相重疊的標籤自動隱藏"><input id="declutter" type="checkbox" checked> 標籤避讓</label></div>
+  <div class="grp"><label class="f"><input id="spin" type="checkbox"> 自轉</label></div>
+  <div class="grp" id="neuGrp" hidden><span>神經元</span><span id="neuCount" class="muted"></span><button id="neuClear" class="tb">清除全部</button><label class="f"><input id="neuOnly" type="checkbox"> 只看選取的</label></div>
+</div>
+<dialog id="bmDlg">
+  <div class="dlg">
+    <div class="dlgTop"><h2>書籤視角</h2><button id="bmAdd" class="tb">把目前畫面加入書籤</button><button id="bmClose" class="tb">關閉</button></div>
+    <div class="dlgBody" id="bmList"></div>
+    <div class="dlgFoot">書籤存在這台電腦的瀏覽器裡；要帶到別台電腦請複製網址列的網址（目前畫面會自動寫進網址）。</div>
+  </div>
+</dialog>
+<dialog id="abbrDlg">
+  <div class="dlg">
+    <div class="dlgTop"><h2>神經元型與縮寫</h2><input id="abbrQ" type="search" placeholder="搜尋，例如 PFN" autocomplete="off"><button id="abbrClose" class="tb">關閉</button></div>
+    <div class="dlgBody"><table id="abbrTbl"><thead><tr><th>縮寫</th><th>中文</th><th>說明</th></tr></thead><tbody></tbody></table></div>
+    <div class="dlgFoot">資料：data/abbreviations.csv（可自行增修，重跑 build_site.py）。卡片裡的功能描述滑過縮寫也會顯示解釋。</div>
+  </div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+'use strict';
+const $ = (s) => document.querySelector(s);
+const viewEl = $('#view'), labelsEl = $('#labels'), statusEl = $('#status'), listEl = $('#list'), cardEl = $('#card');
+
+// ---------- three.js 基本場景（一個場景、兩個「槽」：槽 0 = 主分區、槽 1 = 對照分區；用 layers 讓並排模式的兩個鏡頭各看各的）
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+viewEl.insertBefore(renderer.domElement, labelsEl);
+const scene = new THREE.Scene();
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+function makeCamera() {
+  const cam = new THREE.PerspectiveCamera(35, 1, 1, 20000);
+  const key = new THREE.DirectionalLight(0xffffff, 0.75); key.position.set(1, 1.2, 1.5); key.layers.enableAll(); cam.add(key);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.25); fill.position.set(-1, -0.5, -1); fill.layers.enableAll(); cam.add(fill);
+  scene.add(cam);
+  return cam;
+}
+function makeSlot(i) {
+  const root = new THREE.Group(); scene.add(root);
+  const nroot = new THREE.Group(); root.add(nroot);   // 神經元（與腦區同框）
+  return { i, atlas: null, regions: [], meshes: new Map(), labels: new Map(), brain: null, root, nroot, neurons: new Map(), subCache: {}, home: null, target: new THREE.Vector3(), dist: 1200, camera: makeCamera() };
+}
+const slots = [makeSlot(0), makeSlot(1)];
+window.__bd = { slots, get neuro() { return neuro; }, get state() { return state; }, get quiz() { return quiz; }, get speech() { return speech; }, sayText };   // 除錯與自動測試用的把手
+const camA = slots[0].camera, camB = slots[1].camera;
+camA.layers.set(0); camB.layers.set(1);
+
+// ---------- 自製軌道控制（three r128 的 UMD 版沒附 OrbitControls）；theta/phi/zoom 兩個槽共用，target/dist 各槽自己的
+const ctrl = { theta: 0, phi: Math.PI / 2, zoom: 1, up: new THREE.Vector3(0, 1, 0) };
+function activeSlots() { return state.mode === 'single' ? [slots[0]] : slots.filter((s) => s.atlas); }
+function applyCamera() {
+  for (const s of activeSlots()) {
+    const cam = s.camera, p = ctrl.phi, t = ctrl.theta;
+    s.dist = (s.home ? s.home.dist : 1200) * ctrl.zoom;
+    cam.position.set(s.target.x + s.dist * Math.sin(p) * Math.sin(t), s.target.y + s.dist * Math.cos(p), s.target.z + s.dist * Math.sin(p) * Math.cos(t));
+    cam.up.copy(ctrl.up); cam.lookAt(s.target);
+  }
+  if (state.mode !== 'side') { camA.updateMatrixWorld(); }
+  markDirty();
+}
+let drag = null;
+const el = renderer.domElement;
+const labelAt = (e) => { const t = e.target && e.target.closest ? e.target.closest('.lab') : null; return t ? { slot: Number(t.dataset.slot), id: Number(t.dataset.id), sub: t.dataset.sub || null } : null; };
+viewEl.addEventListener('contextmenu', (e) => e.preventDefault());
+viewEl.addEventListener('pointerdown', (e) => {
+  if (e.pointerType === 'touch' && !e.isPrimary) return;
+  drag = { x: e.clientX, y: e.clientY, btn: e.button, shift: e.shiftKey, moved: 0, label: labelAt(e), id: e.pointerId, pinMode: e.shiftKey || e.ctrlKey || e.metaKey };
+  viewEl.classList.add('dragging');
+  try { viewEl.setPointerCapture(e.pointerId); } catch (err) { /* 舊瀏覽器 */ }
+  e.preventDefault();
+});
+viewEl.addEventListener('pointermove', (e) => {
+  if (!drag) { hover(e); return; }
+  if (drag.id !== e.pointerId) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  drag.x = e.clientX; drag.y = e.clientY; drag.moved += Math.abs(dx) + Math.abs(dy);
+  if (pinch) return;
+  if (drag.btn === 2 || drag.btn === 1 || drag.shift) {
+    for (const s of activeSlots()) {
+      const k = s.dist * 0.0018;
+      const right = new THREE.Vector3().setFromMatrixColumn(s.camera.matrix, 0);
+      const upv = new THREE.Vector3().setFromMatrixColumn(s.camera.matrix, 1);
+      s.target.addScaledVector(right, -dx * k).addScaledVector(upv, dy * k);
+    }
+  } else {
+    ctrl.theta -= dx * 0.008;
+    ctrl.phi = Math.min(Math.PI - 0.02, Math.max(0.02, ctrl.phi - dy * 0.008));
+  }
+  applyCamera();
+});
+function endDrag(e, doPick) {
+  const d = drag; if (!d || (e && d.id !== e.pointerId)) return;
+  drag = null; viewEl.classList.remove('dragging');
+  if (!doPick || d.moved >= 4 || d.btn !== 0) return;
+  if (d.pinMode) { const h = d.label || rayHit(e), nh = d.label ? null : rayHitNeuron(e); if (nh && (!h || nh.distance < h.distance)) togglePinNeuron(nh.slot, nh.id); else if (h) togglePin(h.slot, h.id, h.sub); return; }
+  if (d.label) select(d.label.slot, sameSel(d.label) ? null : d.label.id, d.label.sub);
+  else pick(e);
+}
+const sameSel = (x) => state.selected && state.selected.slot === x.slot && state.selected.id === x.id && (state.selected.sub || null) === (x.sub || null);   // 子區與母區算不同的選取
+viewEl.addEventListener('pointerup', (e) => endDrag(e, true));
+viewEl.addEventListener('pointercancel', (e) => endDrag(e, false));
+viewEl.addEventListener('lostpointercapture', (e) => endDrag(e, false));
+viewEl.addEventListener('dblclick', (e) => { const h = labelAt(e) || rayHit(e); if (h) flyTo(h.slot, h.id); });
+viewEl.addEventListener('wheel', (e) => { e.preventDefault(); ctrl.zoom *= Math.exp(e.deltaY * 0.0012); ctrl.zoom = Math.max(0.05, Math.min(6, ctrl.zoom)); applyCamera(); }, { passive: false });
+let pinch = null;
+const pinchDist = (e) => Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+viewEl.addEventListener('touchstart', (e) => { if (e.touches.length === 2) pinch = pinchDist(e); }, { passive: true });
+viewEl.addEventListener('touchmove', (e) => {
+  if (e.touches.length === 2 && pinch) { const d = pinchDist(e); ctrl.zoom *= pinch / d; ctrl.zoom = Math.max(0.05, Math.min(6, ctrl.zoom)); pinch = d; applyCamera(); e.preventDefault(); }
+}, { passive: false });
+viewEl.addEventListener('touchend', (e) => { if (e.touches.length < 2) pinch = null; });
+
+// ---------- 資料
+const state = { sources: {}, atlases: null, colors: null, crosswalk: [], overlap: {}, abbr: [], mode: 'single', selected: null, hovered: null, side: 'all', alpha: 1, showLabels: true, showBrain: false, ovl: 'both', bStyle: 'wire', pins: [], focus: false, declutter: true, spin: false, lpu: { on: new Set() /* 勾選的分類代碼 */, only: false, data: null }, subMeshes: {}, adj: {} };
+const PIN_COLORS = ['#c8102e', '#1e6fd9', '#1f9d55', '#e07b00', '#7b3fb0', '#008b8b'];
+const INLINE = window.BD_INLINE || null;
+const fetchJSON = (u) => INLINE ? (u in INLINE ? Promise.resolve(INLINE[u]) : Promise.reject(new Error(u + ' 不在單檔內'))) : fetch(u).then((r) => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); });
+const fetchText = (u) => INLINE ? (u in INLINE ? Promise.resolve(INLINE[u]) : Promise.reject(new Error(u + ' 不在單檔內'))) : fetch(u).then((r) => { if (!r.ok) throw new Error('mesh ' + r.status); return r.text(); });
+const atlasById = (id) => state.atlases.atlases.find((a) => a.id === id);
+const shortName = (id) => (atlasById(id) || { short: id }).short;
+
+function axisVec(s) { const v = new THREE.Vector3(); const sign = s[0] === '-' ? -1 : 1; v[s[1]] = sign; return v; }
+function orient(slot) {
+  const atlas = slot.atlas;
+  const Y = axisVec(atlas.up || '+y'), Z = axisVec(atlas.front || '+z'), X = new THREE.Vector3().crossVectors(Y, Z);
+  const m = new THREE.Matrix4().makeBasis(X, Y, Z);
+  slot.root.quaternion.setFromRotationMatrix(m.transpose());
+  slot.root.updateMatrixWorld(true);
+}
+function b64ToBuffer(txt) {
+  const bin = atob(txt.trim()), u8 = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+  return u8.buffer;
+}
+function parseBundle(buf, manifest) {
+  const out = new Map();
+  for (const [k, m] of Object.entries(manifest)) {
+    const dv = new DataView(buf, m.offset, m.length);
+    const nv = dv.getUint32(0, true), nf = dv.getUint32(4, true);
+    const verts = new Float32Array(buf.slice(m.offset + 8, m.offset + 8 + nv * 12));
+    const idx0 = m.offset + 8 + nv * 12;
+    const faces = nv < 65536 ? new Uint16Array(buf.slice(idx0, idx0 + nf * 6)) : new Uint32Array(buf.slice(idx0, idx0 + nf * 12));
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(verts, 3));
+    g.setIndex(new THREE.BufferAttribute(faces, 1));
+    g.computeVertexNormals();
+    out.set(k, g);
+  }
+  return out;
+}
+let loadSeq = 0;
+function loadAtlas(slot, id) { const p = loadAtlasInner(slot, id); slot.loading = p; return p; }
+async function loadAtlasInner(slot, id) {
+  const seq = ++loadSeq;
+  statusEl.textContent = '載入 ' + id + '…';
+  clearSlot(slot);
+  const atlas = atlasById(id);
+  slot.atlas = atlas;
+  const [regions, manifest, buf] = await Promise.all([
+    fetchJSON('data/regions_' + id + '.json'), fetchJSON('meshes/' + id + '/manifest.json'),
+    fetchText('meshes/' + id + '.b64.txt').then(b64ToBuffer)]);
+  if (slot.atlas !== atlas) return;   // 載入中又換了
+  slot.regions = regions;
+  orient(slot);
+  const geos = parseBundle(buf, manifest);
+  for (const r of regions) {
+    const g = geos.get(String(r.id)); if (!g) continue;
+    const col = (state.colors.bases[r.base] || { color: '#888888' }).color;
+    const mat = new THREE.MeshPhongMaterial({ color: new THREE.Color(col), shininess: 18, transparent: true, opacity: 1, side: THREE.DoubleSide });
+    const mesh = new THREE.Mesh(g, mat);
+    mesh.userData = { filtVisible: true, region: r, color: col, colorB: '#' + new THREE.Color(col).lerp(new THREE.Color(0xffffff), 0.5).getHexString(), slot: slot.i };
+    mesh.layers.set(slot.i);
+    slot.root.add(mesh);
+    slot.meshes.set(r.id, mesh);
+    const lab = document.createElement('div');
+    lab.className = 'lab' + (slot.i ? ' b' : ''); lab.textContent = r.base; lab.dataset.id = r.id; lab.dataset.slot = slot.i;
+    labelsEl.appendChild(lab);
+    slot.labels.set(r.id, { el: lab, pos: new THREE.Vector3(...manifest[String(r.id)].centroid_um) });
+  }
+  const bg = geos.get('brain');
+  if (bg) {
+    slot.brain = new THREE.Mesh(bg, new THREE.MeshPhongMaterial({ color: 0x9aa3b0, transparent: true, opacity: 0.12, depthWrite: false, side: THREE.DoubleSide }));
+    slot.brain.layers.set(slot.i); slot.brain.visible = state.showBrain; slot.root.add(slot.brain);
+  }
+  fitSlot(slot);
+  await loadOverlap();
+  if (seq === loadSeq) { setView('front'); }
+  buildList(); applyFilters(); select(null);
+  updateStatus();
+}
+function clearSlot(slot) {
+  for (const m of slot.meshes.values()) { slot.root.remove(m); m.geometry.dispose(); m.material.dispose(); }
+  if (slot.brain) { slot.root.remove(slot.brain); slot.brain.geometry.dispose(); slot.brain = null; }
+  clearSubs(slot);
+  for (const L of slot.labels.values()) L.el.remove();
+  clearNeurons(slot);
+  slot.meshes.clear(); slot.labels.clear(); slot.regions = []; slot.atlas = null; slot.home = null;
+  state.selected = null; state.hovered = null; state.pins = state.pins.filter((p) => p.slot !== slot.i); renderPins();
+}
+async function loadOverlap() {
+  const [a, b] = slots.map((s) => s.atlas && s.atlas.id);
+  if (!a || !b || state.mode === 'single') return;
+  for (const key of [a + '_' + b, b + '_' + a]) {
+    if (key in state.overlap) continue;
+    try { state.overlap[key] = await fetchJSON('data/overlap_' + key + '.json'); } catch (e) { state.overlap[key] = null; }
+  }
+}
+function updateStatus() {
+  const s0 = slots[0], s1 = slots[1];
+  if (!s0.atlas) return;
+  let t = s0.atlas.short + '：' + s0.regions.length + ' 區';
+  if (state.mode !== 'single' && s1.atlas) t += (state.mode === 'overlay' ? ' ＋ ' : ' ｜ ') + s1.atlas.short + '：' + s1.regions.length + ' 區';
+  if (state.mode === 'single' && !s0.atlas.overlay_group) t += '（座標系與 FCWB 不同，只能並排比較）';
+  statusEl.textContent = t;
+  $('#capA').textContent = state.mode === 'side' ? 'A　' + s0.atlas.short : '';
+  $('#capB').textContent = state.mode === 'side' && s1.atlas ? 'B　' + s1.atlas.short : '';
+  updateLegend();
+}
+
+// ---------- 視角
+function fitSlot(slot) {
+  const bbox = new THREE.Box3();
+  for (const m of slot.meshes.values()) bbox.expandByObject(m);
+  bbox.getCenter(slot.target);
+  const size = bbox.getSize(new THREE.Vector3()).length();
+  slot.home = { target: slot.target.clone(), dist: size * 1.15 };
+}
+const VIEWS = { front: [Math.PI / 2, 0], back: [Math.PI / 2, Math.PI], left: [Math.PI / 2, Math.PI / 2], right: [Math.PI / 2, -Math.PI / 2], top: [0.02, 0], bottom: [Math.PI - 0.02, 0] };
+function setView(name) { const v = VIEWS[name]; ctrl.phi = v[0]; ctrl.theta = v[1]; applyCamera(); }
+function boxOf(slot, ids) {
+  const b = new THREE.Box3();
+  for (const id of ids) { const m = slot.meshes.get(id); if (m) b.expandByObject(m); }
+  return b.isEmpty() ? null : b;
+}
+function flyTo(si, id) {
+  const slot = slots[si]; const b = boxOf(slot, [id]); if (!b) return;
+  b.getCenter(slot.target);
+  const want = Math.max(80, b.getSize(new THREE.Vector3()).length() * 2.2);
+  ctrl.zoom = want / slot.home.dist;
+  const other = slots[1 - si];
+  if (state.mode !== 'single' && other.atlas) {
+    const ids = counterpartIds(si, slot.meshes.get(id).userData.region.base);
+    const ob = boxOf(other, ids);
+    if (ob) ob.getCenter(other.target); else if (state.mode === 'overlay') other.target.copy(slot.target);
+  }
+  applyCamera();
+}
+document.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => setView(b.dataset.view)));
+$('#reset').addEventListener('click', () => { for (const s of slots) if (s.home) s.target.copy(s.home.target); ctrl.zoom = 1; setView('front'); });
+
+// ---------- 點選與滑過
+const ray = new THREE.Raycaster();
+function hitSlot(e) {
+  // 回傳 {slot, cam, ndc}：並排模式依左右半邊決定
+  const r = el.getBoundingClientRect();
+  let x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height, si = 0, cam = camA;
+  if (state.mode === 'side') { si = x < 0.5 ? 0 : 1; x = (x - si * 0.5) * 2; cam = slots[si].camera; }
+  return { si, cam, ndc: new THREE.Vector2(x * 2 - 1, -(y * 2 - 1)) };
+}
+function rayHit(e) {
+  const h = hitSlot(e);
+  ray.setFromCamera(h.ndc, h.cam);
+  const targets = state.mode === 'overlay' ? activeSlots() : [slots[h.si]];
+  const objs = [];
+  for (const s of targets) { for (const m of s.meshes.values()) if (m.visible && m.material.opacity > 0.02) objs.push(m); for (const C of Object.values(s.subCache)) for (const it of C.items) if (it.mesh.visible) objs.push(it.mesh); }
+  ray.layers.enableAll();
+  const hits = ray.intersectObjects(objs);
+  return hits.length ? { slot: hits[0].object.userData.slot, id: hits[0].object.userData.region.id, sub: hits[0].object.userData.sub || null, distance: hits[0].distance } : null;
+}
+function pick(e) {
+  const h = rayHit(e), nh = rayHitNeuron(e);
+  if (nh && (!h || nh.distance < h.distance)) { selectNeuron(nh.slot, sameNSel(nh) ? null : nh.id); return; }
+  if (!h) { select(0, null); if (neuro.selected) selectNeuron(0, null); return; }
+  select(h.slot, sameSel(h) ? null : h.id, h.sub);
+}
+function hover(e) {
+  const h = rayHit(e); const key = h ? h.slot + ':' + h.id + (h.sub ? ':' + h.sub : '') : null;
+  if (key !== state.hovered) { state.hovered = key; viewEl.style.cursor = h ? 'pointer' : ''; restyle(); }
+}
+// ---------- 跨套對應
+function counterparts(si, base) {
+  const A = slots[si].atlas.id, B = slots[1 - si].atlas && slots[1 - si].atlas.id;
+  if (!B) return [];
+  const direct = (from, b, to) => state.crosswalk.filter((r) => (r.from_atlas === from && r.from_base === b && r.to_atlas === to) || (r.to_atlas === from && r.to_base === b && r.from_atlas === to))
+    .map((r) => ({ base: r.from_atlas === to ? r.from_base : r.to_base, kind: r.kind, note: r.note, src: r.src || '文獻', via: null }));
+  let out = direct(A, base, B);
+  if (!out.length && A !== 'ito' && B !== 'ito') {   // Chiang ↔ MaleCNS 沒有直接對應，經 Ito 轉
+    for (const m of direct(A, base, 'ito')) for (const n of direct('ito', m.base, B)) out.push({ base: n.base, kind: m.kind + '→' + n.kind, note: [m.note, n.note].filter(Boolean).join('；'), src: (m.src === '疊圖' || n.src === '疊圖') ? '疊圖' : '文獻', via: 'ito ' + m.base });
+  }
+  const seen = new Set(); return out.filter((o) => !seen.has(o.base) && seen.add(o.base));
+}
+function counterpartIds(si, base) {
+  const other = slots[1 - si]; const bases = new Set(counterparts(si, base).map((o) => o.base));
+  return other.regions.filter((r) => bases.has(r.base)).map((r) => r.id);
+}
+function overlapRows(si, id) {
+  // 疊圖／並排 Ito×Chiang：這一區與對照套各區的重疊體素
+  const a = slots[si].atlas.id, b = slots[1 - si].atlas && slots[1 - si].atlas.id; if (!b) return null;
+  const d = state.overlap[a + '_' + b] || state.overlap[b + '_' + a]; if (!d) return null;
+  const mine = d.a === a;
+  const volMe = (mine ? d.vol_a : d.vol_b)[String(id)] || 0; if (!volMe) return [];
+  const rows = [];
+  for (const [x, y, v] of d.pairs) {
+    const me = mine ? x : y, ot = mine ? y : x;
+    if (me !== id) continue;
+    const volOt = (mine ? d.vol_b : d.vol_a)[String(ot)] || 1;
+    const r = slots[1 - si].regions.find((q) => q.id === ot); if (!r) continue;
+    rows.push({ id: ot, name: r.name, base: r.base, vox: v, fMe: v / volMe, fOt: v / volOt });
+  }
+  rows.sort((p, q) => q.vox - p.vox);
+  const covered = rows.reduce((s, r) => s + r.vox, 0) / volMe;
+  return { rows: rows.filter((r) => r.fMe >= 0.01), covered, volMe };
+}
+
+function pinIndex(si, id, sub) { return state.pins.findIndex((p) => p.slot === si && p.id === id && p.nid == null && (p.sub || null) === (sub || null)); }   // sub：釘選的是切分子區（例如 ME_R.4）
+function pinIndexAny(si, id) { return state.pins.findIndex((p) => p.slot === si && p.id === id && p.nid == null); }   // 整區或其任一子區被釘
+function pinIndexN(si, nid) { return state.pins.findIndex((p) => p.slot === si && p.nid === nid); }
+function togglePinNeuron(si, nid) {
+  const k = pinIndexN(si, nid);
+  if (k >= 0) state.pins.splice(k, 1);
+  else { if (state.pins.length >= PIN_COLORS.length) state.pins.shift(); state.pins.push({ slot: si, nid }); }
+  restyle(); restyleNeurons(); renderPins(); renderCard();
+}
+function togglePin(si, id, sub) {
+  const k = pinIndex(si, id, sub);
+  if (k >= 0) state.pins.splice(k, 1);
+  else { if (state.pins.length >= PIN_COLORS.length) state.pins.shift(); state.pins.push(sub ? { slot: si, id, sub } : { slot: si, id }); }
+  restyle(); renderPins(); renderCard();
+}
+function clearPins() { state.pins = []; state.selected = null; if (neuro.selected) { neuro.selected = null; } restyleNeurons(); restyle(); renderPins(); renderCard(); listEl.querySelectorAll('.chip.sel').forEach((c) => c.classList.remove('sel')); }
+function pairOverlap(p, q) {
+  // 兩個釘選分屬不同套（同座標系）時，查這兩區的重疊體素
+  if (p.slot === q.slot) return null;
+  const a = slots[p.slot].atlas.id, b = slots[q.slot].atlas.id;
+  const d = state.overlap[a + '_' + b] || state.overlap[b + '_' + a]; if (!d) return null;
+  const pa = d.a === a ? p : q, pb = d.a === a ? q : p;   // pa 屬 d.a、pb 屬 d.b
+  const row = d.pairs.find(([x, y]) => x === pa.id && y === pb.id);
+  const vox = row ? row[2] : 0;
+  return { vox, fP: vox / ((d.a === a ? d.vol_a : d.vol_b)[String(p.id)] || 1), fQ: vox / ((d.a === a ? d.vol_b : d.vol_a)[String(q.id)] || 1) };
+}
+function renderPins() {
+  const box = $('#pins');
+  if (!state.pins.length) { box.hidden = true; box.innerHTML = ''; return; }
+  box.hidden = false;
+  const pinHtml = state.pins.map((p, i) => {
+    if (p.nid != null) { const m = neuro.metaCache.get(p.nid); const t = m && (m.t || m.d); return `<span class="pin"><span class="dot" style="background:${PIN_COLORS[i]}"></span>神經元 ${esc(p.nid)}${t ? '<span class="muted">（' + esc(t) + '）</span>' : ''}<button title="取消釘選" data-unpin="${i}">✕</button></span>`; }
+    const r = slots[p.slot].meshes.get(p.id).userData.region; return `<span class="pin"><span class="dot" style="background:${PIN_COLORS[i]}"></span>${esc(shortName(slots[p.slot].atlas.id))} ${esc(p.sub || r.name)}<button title="取消釘選" data-unpin="${i}">✕</button></span>`; }).join('');
+  let ov = '';
+  if (state.pins.length === 2 && state.pins.every((p) => p.nid == null)) {
+    const [p, q] = state.pins; const o = pairOverlap(p, q);
+    const rn = (x) => esc(slots[x.slot].meshes.get(x.id).userData.region.name);
+    if (p.sub || q.sub) ov = '<div class="ov2 muted">子區沒有逐體素重疊資料（只有整區有）</div>';
+    else if (o) ov = `<div class="ov2">兩區重疊 ${Math.round(o.vox / 1000).toLocaleString()} ×10³ µm³：占 ${rn(p)} 的 ${pct(o.fP)}、占 ${rn(q)} 的 ${pct(o.fQ)}${o.vox === 0 ? '<span class="muted">（完全不重疊）</span>' : ''}</div>`;
+    else if (p.slot !== q.slot) ov = '<div class="ov2 muted">兩套座標系不同，無法算重疊</div>';
+  }
+  box.innerHTML = `<div class="ph"><b>釘選比較（${state.pins.length}）</b><span class="muted" style="font-size:12px">Shift＋點腦區、子區或神經元可加入</span><button class="tb" id="clearPins">清除</button></div>${pinHtml}${ov}`;
+  box.querySelectorAll('[data-unpin]').forEach((b) => b.addEventListener('click', () => { state.pins.splice(Number(b.dataset.unpin), 1); restyle(); restyleNeurons(); renderPins(); renderCard(); }));
+  $('#clearPins').addEventListener('click', clearPins);
+}
+$('#focus').addEventListener('change', (e) => { state.focus = e.target.checked; restyle(); restyleNeurons(); });
+document.querySelectorAll('[data-bstyle]').forEach((b) => b.addEventListener('click', () => {
+  state.bStyle = b.dataset.bstyle; document.querySelectorAll('[data-bstyle]').forEach((x) => x.setAttribute('aria-pressed', x === b)); restyle(); updateLegend();
+}));
+function updateLegend() {
+  const lg = $('#legend');
+  if (state.mode !== 'overlay' || !slots[1].atlas) { lg.hidden = true; return; }
+  const bs = { wire: '<span class="sw wire"></span>線框', mono: '<span class="sw" style="background:#4a6fa5;opacity:.6"></span>單色半透明', tint: '<span class="sw" style="background:#9fd0a8"></span>淡色半透明' }[state.bStyle];
+  lg.innerHTML = `<span><span class="sw" style="background:#4caf50"></span>A　${esc(slots[0].atlas.short)}（實心，標籤實線）</span><span>${bs}　B　${esc(slots[1].atlas.short)}（標籤虛線）</span><span><span class="sw" style="background:#d7263d"></span>選取 <span class="sw" style="background:#2b6cb0"></span>對應區</span>`;
+  lg.hidden = false;
+}
+function select(si, id, sub) {
+  if (quiz.on && !quiz.internal) { if (quiz.type === 'point' && quiz.awaiting && id != null) quizAnswer(si, id); return; }
+  state.selected = id == null ? null : sub ? { slot: si, id, sub } : { slot: si, id };   // sub：切分輪次點到的子區（例如 ME_R.3），只亮那一塊
+  restyle(); renderCard();
+  listEl.querySelectorAll('.chip').forEach((c) => c.classList.toggle('sel', !!state.selected && Number(c.dataset.slot) === si && Number(c.dataset.id) === id));
+  const chip = listEl.querySelector('.chip.sel'); if (chip) { chip.closest('details').open = true; chip.scrollIntoView({ block: 'nearest' }); }
+}
+function restyle() {
+  const sel = state.selected;
+  const selSlot = sel ? slots[sel.slot] : null;
+  const selBase = sel ? selSlot.meshes.get(sel.id).userData.region.base : null;
+  const cpIds = sel && state.mode !== 'single' ? new Set(counterpartIds(sel.slot, selBase)) : new Set();
+  const anyFocus = !!sel || state.pins.length > 0 || !!neuro.selected;
+  const lpuOn = lpuActive();
+  for (const s of activeSlots()) {
+    const nh = neuro.selected ? neuronRegionSet(s) : null;
+    const SB = subsShown(s); if (lpuOn && !SB) { const tag = subTagFor(s); if (tag && !s.subCache[tag]) loadSubs(s, tag); }
+    const baseHit = new Map();   // 清單籤（左右合一個）：任一側命中就算命中
+    const isB = state.mode === 'overlay' && s.i === 1;
+    const baseAlpha = isB ? (state.bStyle === 'wire' ? 0.55 : state.bStyle === 'mono' ? 0.4 : Math.min(state.alpha, 0.45)) : state.alpha;
+    for (const m of s.meshes.values()) {
+      const r = m.userData.region, key = s.i + ':' + r.id;
+      const isSel = sel && s.i === sel.slot && r.base === selBase;
+      const isCp = sel && s.i !== sel.slot && cpIds.has(r.id);
+      let pk = pinIndex(s.i, r.id); if (pk < 0) pk = pinIndexAny(s.i, r.id); const isPin = pk >= 0;   // 釘了子區但子區沒畫出（LPU 關掉）時，母區塗那個釘選色
+      const isHov = key === state.hovered;
+      const isNh = !!(nh && nh.has(r.id));
+      const lit = isSel || isCp || isPin || isNh;
+      let op = baseAlpha;
+      if (anyFocus) op = lit ? ((isNh && !isSel && !isCp && !isPin) ? 0.35 : Math.max(baseAlpha, 0.9)) : (state.focus ? 0 : Math.min(baseAlpha, 0.15));   // 只因神經元經過而亮的區畫半透明，神經元才看得到
+      if (neuro.drawn.has(s.i + ':' + r.name) && op > 0.3) op = 0.3;   // 這區畫了 LN：腦區變透明，神經元才看得到
+      // LPU 分類：勾選類別的區塗分類色；其他區變淡（或「其他不畫」時不畫）。有選取／釘選時命中的區仍維持可見
+      const lc = lpuOn ? lpuClassOf(s.atlas.id, r.name) : null;
+      const lpuHit = !!(lc && state.lpu.on.has(lc[0]));
+      if (lpuOn) { if (!lpuHit) op = state.lpu.only ? 0 : Math.min(op, 0.12); else if (anyFocus && !lit && !state.focus && !(sel && sel.sub)) op = Math.max(op, 0.45); }   // 選了子區：其他命中區不撐到 0.45，子區才看得出來
+      if (lpuOn) baseHit.set(r.base, (baseHit.get(r.base) || false) || lpuHit);
+      const splitShown = !!(SB && lc && lc[5] && SB.parents.has(r.name));   // 切開的母區：改畫子區
+      if (splitShown) op = 0;
+      m.material.opacity = op;
+      m.visible = m.userData.filtVisible !== false && op > 0.02;   // 只看釘選：其他區真的不畫，否則仍會寫入深度、擋住後面的區
+      m.material.depthWrite = op >= 0.5;                            // 變暗的區不寫深度，亮的區從任何角度都看得到
+      // B 的畫法：線框／單色／淡色；被選取或釘選的 B 區一律實心顯示
+      const wire = isB && state.bStyle === 'wire' && !lit && !lpuHit;
+      m.material.wireframe = wire;
+      // 釘選的區直接塗成釘選色（紅／藍／綠／橙…），不同套也能一眼分開
+      const cmp = state.mode !== 'single' || quiz.on;   // 比較模式與測驗：選取區塗紅、對應區塗藍
+      m.material.color.set(isPin ? PIN_COLORS[pk] : (cmp && isSel) ? '#d7263d' : (cmp && (isCp || isNh)) ? '#2b6cb0' : lpuHit ? lpuColorOf(s, r.name, lc[0]) : isB ? (lit ? m.userData.colorB : state.bStyle === 'wire' ? '#30363d' : state.bStyle === 'mono' ? '#4a6fa5' : m.userData.colorB) : m.userData.color);
+      m.material.emissive.set((isPin || (cmp && lit)) ? '#000000' : isSel ? '#552222' : (isCp || isNh) ? '#224466' : isHov ? '#333333' : '#000000');
+      const L = s.labels.get(r.id);
+      if (L) {
+        L.pri = lit || lpuHit; L.off = op <= 0.02;
+        L.el.classList.toggle('dim', (anyFocus && !lit && !lpuHit) || (lpuOn && !lpuHit)); L.el.classList.toggle('sel', !!isSel); L.el.classList.toggle('cp', !!(isCp || isNh));
+        L.el.style.outline = isPin ? '2px solid ' + PIN_COLORS[pk] : '';
+      }
+    }
+    // 子區（只有切分輪次且 LPU 篩選開著時）
+    for (const C of Object.values(s.subCache)) for (const it of C.items) {
+      const on = C === SB && SB.parents.has(it.parent.name) && !!(lpuClassOf(s.atlas.id, it.parent.name) || [])[5];
+      const sc = on ? subClassOf(s.atlas.id, it.parent.name, it.name) : null;
+      const pm = s.meshes.get(it.parent.id); const filt = pm ? pm.userData.filtVisible !== false : true;
+      const isSel = !!(sel && sel.slot === s.i && sel.id === it.parent.id && (!sel.sub || sel.sub === it.name)), pk = pinIndex(s.i, it.parent.id, it.name) >= 0 ? pinIndex(s.i, it.parent.id, it.name) : pinIndex(s.i, it.parent.id), lit = isSel || pk >= 0;   // 選了子區：只有那一塊算選取，同母區其他子區照一般變淡
+      const hit = !!(sc && state.lpu.on.has(sc[1]));
+      let op = !on || !filt ? 0 : !hit ? (state.lpu.only ? 0 : 0.12) : lit ? (sel && sel.sub ? 1 : 0.9) : anyFocus ? (state.focus ? 0 : sel && sel.sub ? 0.18 : 0.45) : state.alpha;
+      if (on && neuro.drawn.has(s.i + ':' + it.parent.name) && op > 0.3) op = 0.3;
+      it.mesh.material.opacity = op; it.mesh.visible = op > 0.02; it.mesh.material.depthWrite = op >= 0.5;
+      const col = new THREE.Color(sc ? lpuColorOf(s, it.name, sc[1]) : '#888888');
+      it.mesh.material.color.copy(pk >= 0 ? new THREE.Color(PIN_COLORS[pk]) : (isSel && (state.mode !== 'single' || quiz.on)) ? new THREE.Color('#d7263d') : col);
+      it.mesh.material.emissive.set(isSel ? '#552222' : state.hovered === s.i + ':' + it.parent.id + ':' + it.name ? '#333333' : '#000000');
+      it.L.off = op <= 0.02; it.L.pri = hit; it.L.el.hidden = !on || !state.showLabels || quiz.on;
+      it.L.el.classList.toggle('dim', !hit); it.L.el.classList.toggle('sel', isSel); it.L.el.style.outline = pk >= 0 ? '2px solid ' + PIN_COLORS[pk] : '';
+      if (on && hit) baseHit.set(it.parent.base, true);
+    }
+    // 清單籤：命中的左側塗分類色、未命中的變淡
+    listEl.querySelectorAll(`.chip[data-slot="${s.i}"]`).forEach((c) => {
+      const hit = lpuOn && !!baseHit.get(c.dataset.base);
+      c.classList.toggle('lpu-dim', lpuOn && !hit);
+      let col = '';
+      if (hit) { const r = s.regions.find((x) => { if (x.base !== c.dataset.base) return false; const k = lpuClassOf(s.atlas.id, x.name); return !!k && state.lpu.on.has(k[0]); }); if (r) col = LPU_COLOR[lpuClassOf(s.atlas.id, r.name)[0]]; }
+      c.style.boxShadow = col ? 'inset 3px 0 0 ' + col : '';
+    });
+  }
+  updateLpuLegend();
+  markDirty();
+}
+function applyFilters() {
+  for (const s of slots) {
+    const on = s.atlas && (state.mode !== 'single' || s.i === 0);
+    s.root.visible = !!on;
+    const ovlHide = state.mode === 'overlay' && ((state.ovl === 'A' && s.i === 1) || (state.ovl === 'B' && s.i === 0));
+    for (const m of s.meshes.values()) {
+      const sd = m.userData.region.side;
+      m.userData.filtVisible = !ovlHide && (state.side === 'all' || sd === 'M' || sd === state.side);
+      m.visible = m.userData.filtVisible;
+      const L = s.labels.get(m.userData.region.id); if (L) L.el.hidden = !on || !m.visible || !state.showLabels || quiz.on;
+    }
+    if (s.brain) s.brain.visible = state.showBrain && !ovlHide;
+  }
+  restyle();
+}
+$('#alpha').addEventListener('input', (e) => { state.alpha = Number(e.target.value); restyle(); });
+document.querySelectorAll('[data-side]').forEach((b) => b.addEventListener('click', () => {
+  state.side = b.dataset.side; document.querySelectorAll('[data-side]').forEach((x) => x.setAttribute('aria-pressed', x === b)); applyFilters();
+}));
+document.querySelectorAll('[data-ovl]').forEach((b) => b.addEventListener('click', () => {
+  state.ovl = b.dataset.ovl; document.querySelectorAll('[data-ovl]').forEach((x) => x.setAttribute('aria-pressed', x === b)); applyFilters();
+}));
+$('#showLabels').addEventListener('change', (e) => { state.showLabels = e.target.checked; applyFilters(); });
+$('#showBrain').addEventListener('change', (e) => { state.showBrain = e.target.checked; applyFilters(); });
+$('#declutter').addEventListener('change', (e) => { state.declutter = e.target.checked; markDirty(); });
+$('#spin').addEventListener('change', (e) => { state.spin = e.target.checked; });
+
+// ---------- LPU 分類（data/lpu_class.json：A1 系列每輪 run 的每區判定；分區|庫 → 規則 → 區 → [代碼, lo, hi, LN 數, 文字]）
+const LPU_CLASSES = [{ code: 1, zh: '單一 LPU', color: '#2e9e4f' }, { code: 2, zh: '多個候選', color: '#e58a1f' }, { code: 3, zh: 'hub', color: '#7b4fbf' }, { code: 0, zh: '不可判', color: '#8d949e' }, { code: 4, zh: '切不開（整區一個 LPU）', color: '#d4b106' }];   // 4：只在切分輪（讀法 A，切分失敗的多候選母區）
+const LPU_COLOR = Object.fromEntries(LPU_CLASSES.map((c) => [c.code, c.color]));
+const STORE_SHORT = { fc: 'FlyCircuit', em: 'FlyWire', mcns: 'MaleCNS' };
+function lpuSet(atlasId) { const d = state.lpu.data; return (d && d.sets[atlasId + '|' + srcOf(atlasId)]) || null; }
+function lpuClassOf(atlasId, regionName) { const s = lpuSet(atlasId); if (!s) return null; const c = s.cls[ruleOf(atlasId)]; return (c && c[regionName]) || null; }
+function lpuActive() { return !!state.lpu.data && state.lpu.on.size > 0; }
+function lpuRuleText(atlasId) { const s = lpuSet(atlasId); const key = ruleOf(atlasId); const r = s && s.rules.find((x) => x.key === key); return (STORE_SHORT[srcOf(atlasId)] || '') + '｜' + (r ? r.label : key); }
+function syncLpuUI() {
+  // 底列「LPU」：每套在畫面上的分區一個「庫｜規則」下拉（與卡片「局部神經元」的來源／規則同一份狀態）
+  const grp = $('#lpuGrp'); if (!state.lpu.data) { grp.hidden = true; return; }
+  grp.hidden = false; const box = $('#lpuSels'); box.innerHTML = '';
+  const act = activeSlots().filter((s) => s.atlas); const distinct = [...new Set(act.map((s) => s.atlas.id))];
+  for (const s of act) {
+    const a = s.atlas.id; if (box.querySelector(`select[data-atlas="${a}"]`)) continue;
+    const sel = document.createElement('select'); sel.dataset.atlas = a; sel.title = '資料來源｜規則（與卡片「局部神經元」同步）';
+    for (const st of (STORES[a] || ['fc'])) { const set = state.lpu.data.sets[a + '|' + st]; if (!set) continue; for (const r of set.rules) { const o = document.createElement('option'); o.value = st + '|' + r.key; o.textContent = (distinct.length > 1 ? (s.i ? 'B ' : 'A ') + s.atlas.short + '：' : '') + STORE_SHORT[st] + '｜' + r.label; o.title = r.desc; sel.appendChild(o); } }
+    sel.value = srcOf(a) + '|' + ruleOf(a);
+    sel.addEventListener('change', () => { const i = sel.value.indexOf('|'); const st = sel.value.slice(0, i), rule = sel.value.slice(i + 1); neuro.src[a] = st; neuro.rule[a + '|' + st] = rule; lpuChanged(); renderCard(); });
+    box.appendChild(sel);
+  }
+  syncLpuBoxes();
+}
+function syncLpuBoxes() { document.querySelectorAll('[data-lc]').forEach((cb) => { cb.checked = state.lpu.on.has(Number(cb.dataset.lc)); }); $('#lpuOnly').checked = state.lpu.only; }
+function lpuChanged() { syncLpuUI(); restyle(); }
+function updateLpuLegend() {
+  const lg = $('#lpuLegend'); if (!lpuActive()) { lg.hidden = true; return; }
+  const parts = []; const seen = new Set();
+  for (const s of activeSlots()) {
+    if (!s.atlas || seen.has(s.atlas.id)) continue; seen.add(s.atlas.id);
+    const SB = subsShown(s); let nsplit = 0;
+    const n = {}; for (const r of s.regions) { const c = lpuClassOf(s.atlas.id, r.name); if (!c) continue; if (SB && c[5] && SB.parents.has(r.name)) { nsplit++; for (const x of c[5]) n[x[1]] = (n[x[1]] || 0) + 1; } else n[c[0]] = (n[c[0]] || 0) + 1; }
+    parts.push(`<span>${state.mode !== 'single' ? esc((s.i ? 'B ' : 'A ') + s.atlas.short) + '　' : ''}${esc(lpuRuleText(s.atlas.id))}：` + LPU_CLASSES.filter((c) => c.code !== 4 || n[4]).map((c) => `<span style="${state.lpu.on.has(c.code) ? '' : 'opacity:.45;text-decoration:line-through'}"><span class="sw" style="background:${c.code === 1 ? 'linear-gradient(90deg,' + SINGLE_COLORS.slice(0, 4).join(',') + ')' : c.color}"></span>${c.zh}${c.code === 1 ? '（相鄰不同色）' : ''} ${n[c.code] || 0}</span>`).join(' ') + (nsplit ? `<span>（${nsplit} 個母區切開，以子區計）</span>` : '') + '</span>');
+  }
+  lg.innerHTML = parts.join(''); lg.style.top = (!$('#legend').hidden ? 48 : state.mode === 'side' ? 46 : 28) + 'px'; lg.hidden = false;   // 疊圖圖例或並排的 A／B 標題在上面時往下挪
+}
+document.querySelectorAll('[data-lc]').forEach((cb) => cb.addEventListener('change', () => { const c = Number(cb.dataset.lc); if (cb.checked) state.lpu.on.add(c); else state.lpu.on.delete(c); restyle(); }));
+$('#lpuOnly').addEventListener('change', (e) => { state.lpu.only = e.target.checked; restyle(); });
+// 切分子區輪次：切開的母區改畫各子區（site/data/sub_meshes.json → meshes/<atlas>__<rule>.b64.txt；四套分區都有）
+const SUB_COLORS = ['#1b9e77', '#d95f02', '#7570b3', '#e7298a', '#66a61e', '#e6ab02', '#a6761d', '#1f78b4'];
+// 單一 LPU：相鄰的（含切開的子區）配不同顏色（site/data/adjacency.json，兩區最近距離 ≤ 3 µm 算相鄰；貪婪著色，度數大的先上色）；多個／hub／不可判各一色
+const SINGLE_COLORS = ['#2e9e4f', '#1fb5c9', '#e377c2', '#4a7fd6', '#5fd3a0', '#c2185b', '#2f4b9c', '#00796b', '#f4a6c8'];   // 避開橙（多個）、紫（hub）、灰（不可判）與黃棕系
+const unitColorCache = new Map();
+function lpuUnitColors(s) {
+  // 回傳 Map 單位名 → 顏色（只含單一 LPU）；單位 = 未切開的區，或切開母區的子區
+  const SB = subsShown(s), tag = SB ? subTagFor(s) : null, aid = s.atlas.id, key = aid + '|' + srcOf(aid) + '|' + ruleOf(aid) + '|' + (tag || '');
+  if (unitColorCache.has(key)) return unitColorCache.get(key);
+  const singles = [];
+  for (const r of s.regions) { const c = lpuClassOf(aid, r.name); if (!c) continue; if (SB && c[5] && SB.parents.has(r.name)) { for (const x of c[5]) if (x[1] === 1) singles.push(x[0]); } else if (c[0] === 1) singles.push(r.name); }
+  const edges = (tag ? (state.adj.tag || {})[tag] : (state.adj.atlas || {})[aid]) || [];
+  const set = new Set(singles), nb = new Map(singles.map((n) => [n, []]));
+  for (const [a, b] of edges) if (set.has(a) && set.has(b)) { nb.get(a).push(b); nb.get(b).push(a); }
+  const order = singles.slice().sort((a, b) => nb.get(b).length - nb.get(a).length || (a < b ? -1 : 1));
+  const out = new Map();
+  for (const n of order) { const used = new Set(nb.get(n).map((x) => out.get(x)).filter(Boolean)); out.set(n, SINGLE_COLORS.find((c) => !used.has(c)) || SINGLE_COLORS[out.size % SINGLE_COLORS.length]); }
+  unitColorCache.set(key, out); return out;
+}
+function lpuColorOf(s, unit, code) { return code === 1 ? (lpuUnitColors(s).get(unit) || LPU_COLOR[1]) : LPU_COLOR[code]; }
+function subTagFor(s) { return (s.atlas && state.subMeshes[s.atlas.id] || {})[ruleOf(s.atlas.id)] || null; }
+function subsShown(s) { const tag = lpuActive() ? subTagFor(s) : null; return tag && s.subCache[tag] && s.subCache[tag].ready ? s.subCache[tag] : null; }
+function subClassOf(atlasId, parent, name) { const c = lpuClassOf(atlasId, parent); return c && c[5] ? c[5].find((x) => x[0] === name) || null : null; }
+async function loadSubs(s, tag) {
+  if (s.subCache[tag]) return; const atlas = s.atlas; const C = s.subCache[tag] = { ready: false, items: [], parents: new Set() };
+  try {
+    const [manifest, buf] = await Promise.all([fetchJSON('meshes/' + tag + '/manifest.json'), fetchText('meshes/' + tag + '.b64.txt').then(b64ToBuffer)]);
+    if (s.atlas !== atlas) return;
+    const geos = parseBundle(buf, manifest); const byName = new Map(s.regions.map((r) => [r.name, r]));
+    for (const [name, m] of Object.entries(manifest)) {
+      const parent = byName.get(m.parent); if (!parent) continue;
+      const mesh = new THREE.Mesh(geos.get(name), new THREE.MeshPhongMaterial({ color: '#888888', shininess: 18, transparent: true, opacity: 1, side: THREE.DoubleSide }));
+      mesh.userData = { region: parent, sub: name, slot: s.i, filtVisible: true }; mesh.layers.set(s.i); mesh.visible = false; s.root.add(mesh);
+      const k = Number(name.split('.').pop()) - 1;
+      const lab = document.createElement('div'); lab.className = 'lab' + (s.i ? ' b' : ''); lab.textContent = parent.base + '.' + (k + 1); lab.dataset.id = parent.id; lab.dataset.slot = s.i; lab.dataset.sub = name; lab.hidden = true; labelsEl.appendChild(lab);
+      const L = { el: lab, pos: new THREE.Vector3(...m.centroid_um), own: mesh, sub: true, off: true }; s.labels.set('sub:' + tag + ':' + name, L);
+      C.items.push({ mesh, name, parent, k, L }); C.parents.add(parent.name);
+    }
+    C.ready = true; restyle();
+  } catch (e) { console.warn('子區形狀載入失敗', tag, e); }
+}
+function clearSubs(s) {
+  for (const C of Object.values(s.subCache || {})) for (const it of C.items) { s.root.remove(it.mesh); it.mesh.geometry.dispose(); it.mesh.material.dispose(); it.L.el.remove(); }
+  for (const k of [...s.labels.keys()]) if (typeof k === 'string' && k.startsWith('sub:')) s.labels.delete(k);
+  s.subCache = {};
+}
+
+// ---------- 側欄：清單與卡片
+function buildList() {
+  listEl.innerHTML = '';
+  const groups = state.colors.groups;
+  for (const s of activeSlots()) {
+    if (!s.atlas) continue;
+    if (state.mode !== 'single') { const h = document.createElement('div'); h.className = 'lhead'; h.textContent = (s.i ? 'B　' : 'A　') + s.atlas.short; listEl.appendChild(h); }
+    const bases = new Map();
+    for (const r of s.regions) { if (!bases.has(r.base)) bases.set(r.base, []); bases.get(r.base).push(r); }
+    const byGroup = new Map();
+    for (const [b, rs] of bases) { const g = (state.colors.bases[b] || { group: 'other' }).group; if (!byGroup.has(g)) byGroup.set(g, []); byGroup.get(g).push([b, rs]); }
+    for (const g of groups) {
+      const items = byGroup.get(g.group); if (!items || !items.length) continue;
+      const d = document.createElement('details'); d.open = state.mode === 'single';
+      d.innerHTML = `<summary><span class="sw" style="background:hsl(${g.hue} 55% 50%)"></span>${g.zh}<span class="n">${items.length}</span></summary><div class="chips"></div>`;
+      const chips = d.querySelector('.chips');
+      const prog = loadProgress(s.atlas.id);
+      for (const [b, rs] of items.sort((a, c) => a[0].localeCompare(c[0]))) {
+        const btn = document.createElement('button'); btn.className = 'chip' + (mastered(prog, b) ? ' done' : ''); btn.dataset.id = rs[0].id; btn.dataset.base = b; btn.dataset.slot = s.i;
+        btn.innerHTML = `<span class="sw" style="background:${(state.colors.bases[b] || {}).color || '#888'}"></span>${b}`;
+        btn.title = rs.map((r) => r.name).join('、') + (rs[0].full_en ? '：' + rs[0].full_en : '');
+        if (rs[0].full_en) { const sp = document.createElement('span'); sp.className = 'say'; sp.dataset.say = rs[0].full_en; sp.title = '唸英文全名：' + rs[0].full_en; sp.textContent = '🔊'; btn.appendChild(sp); }
+        const pickSide = (want) => (rs.find((r) => r.side === want) || rs.find((r) => r.side === 'L') || rs[0]).id;
+        btn.addEventListener('click', (e) => {
+          if (e.shiftKey || e.ctrlKey || e.metaKey) { const last = [...state.pins].reverse().find((p) => p.nid == null); const want = last ? slots[last.slot].meshes.get(last.id).userData.region.side : 'L'; togglePin(s.i, pickSide(want)); }
+          else select(s.i, pickSide('L'));
+        });
+        btn.addEventListener('dblclick', () => flyTo(s.i, pickSide('L')));
+        chips.appendChild(btn); wireSay(btn);
+      }
+      listEl.appendChild(d);
+    }
+  }
+  syncLpuUI();
+}
+$('#q').addEventListener('input', (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  listEl.querySelectorAll('.chip').forEach((c) => c.classList.toggle('hidden-by-search', !!q && !c.dataset.base.toLowerCase().includes(q)));
+  listEl.querySelectorAll('details').forEach((d) => { d.open = true; });
+  if (q) for (const s of activeSlots()) {
+    const first = s.regions.find((r) => r.base.toLowerCase() === q) || s.regions.find((r) => r.base.toLowerCase().startsWith(q));
+    if (first) { select(s.i, first.id); break; }
+  }
+});
+$('#q').addEventListener('keydown', (e) => {
+  const q = e.target.value.trim();
+  if (e.key !== 'Enter') return;
+  let si = -1;
+  const kind = metaKeyOf(q); if (!/-[FM]-\d+$/.test(q) && !/^\d{4,}$/.test(q)) return;   // FlyCircuit 名稱如 Gad1-F-200214、104198-F-000002；數字 = bodyId 或 root_id
+  const fits = (s) => s.atlas && (kind === 'mcns' ? s.atlas.id === 'malecns' : s.atlas.id !== 'malecns');
+  const act = activeSlots(); si = act.findIndex((s) => fits(s) && (kind !== 'em' || s.atlas.id === 'itoem' || s.atlas.id === 'ito')); if (si < 0) si = act.findIndex(fits);
+  if (si < 0) { statusEl.textContent = kind === 'mcns' ? 'MaleCNS 的神經元要先把分區（或對照）切到 MaleCNS' : 'FlyCircuit／FlyWire 的神經元要在 Chiang 或 Ito 分區下看'; return; }
+  e.preventDefault(); const slot = activeSlots()[si];
+  showNeuron(slot.i, q, null).then((ok) => { if (ok) selectNeuron(slot.i, q); else statusEl.textContent = '找不到神經元 ' + q + '（或主機未連線）'; });
+});
+const esc = (s) => String(s || '').replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const todo = (v) => v ? esc(v) : '<span class="todo">待填</span>';
+// ---------- 英文全名發音：瀏覽器內建語音（Web Speech API），離線可用；data/pronounce.csv 做逐字代換修正
+const speech = { ok: 'speechSynthesis' in window, voice: null, last: null };
+function pickVoice() {
+  if (!speech.ok) return null;
+  const vs = window.speechSynthesis.getVoices(); if (!vs.length) return null;
+  const lang = (v) => (v.lang || '').replace('_', '-');
+  for (const p of ['en-US', 'en-GB', 'en-AU', 'en']) { const v = vs.find((x) => lang(x).startsWith(p) && x.localService) || vs.find((x) => lang(x).startsWith(p)); if (v) return v; }
+  return vs[0];
+}
+if (speech.ok) window.speechSynthesis.addEventListener('voiceschanged', () => { speech.voice = pickVoice(); });
+function sayText(text) {
+  // 讀一段英文；回傳實際送出的字串（測試用）。沒有語音功能回 null。
+  if (!text) return null;
+  let t = String(text);
+  for (const r of state.pron || []) t = t.replace(new RegExp('\\b' + r.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi'), r.say);
+  speech.last = t;
+  if (!speech.ok) { statusEl.textContent = '這個瀏覽器沒有語音功能'; return null; }
+  const u = new SpeechSynthesisUtterance(t); u.lang = 'en-US'; u.rate = 0.85;
+  if (!speech.voice) speech.voice = pickVoice(); if (speech.voice) u.voice = speech.voice;
+  window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
+  return t;
+}
+const CR_LABEL = { few: ['不判', '#9a9a9a', '高信心突觸太少（< 30）'], single: ['單一', '#2ca02c', '第二種傳導物質占高信心突觸 < 15%'], noise: ['雜訊可能', '#e0a800', '第二種 ≥ 15%，但同型別成員不一致、也沒有哪個腦區以第二種為主；多半是預測雜訊'], cand: ['疑似共釋放', '#d62728', '第二種 ≥ 25%，且同型別多數成員同一組合，或第二種在某個腦區占多數'] };
+function cotransHtml(cr, id) {
+  // 共釋放判讀（export_synapses.py 的 cr）：只用高信心（機率 ≥ 0.5）前突觸端；列出判讀與旁證，由人判斷
+  if (!cr) return '';
+  const [lab, col, why] = CR_LABEL[cr.v] || CR_LABEL.few;
+  const ev = [];
+  if (cr.v !== 'few') ev.push(`高信心 ${cr.n.toLocaleString()} 個：${ntTag(cr.t1)} ${pct(cr.f1)}${cr.t2 ? `、${ntTag(cr.t2)} ${pct(cr.f2)}` : ''}`);
+  else ev.push(`高信心突觸只有 ${cr.n} 個`);
+  if (cr.ty) ev.push(`同型別 ${cr.ty[1]} 顆裡 ${cr.ty[0]} 顆同組合${cr.ty[0] / cr.ty[1] >= 0.6 ? '（一致）' : '（不一致）'}`);
+  if (cr.rg && cr.rg.length) ev.push('第二種占多數的區：' + cr.rg.slice(0, 4).map(([r, n, f]) => `${esc(regionLabel(id, r))} ${pct(f)}（${n}）`).join('、'));
+  const warn = cr.v === 'cand' && ((cr.t1 === 'gaba' && cr.t2 === 'glut') || (cr.t1 === 'glut' && cr.t2 === 'gaba')) ? '<br><span class="muted">注意：GABA 與 Glu 是分類器最常互相混淆的一對，同型別一致也可能是系統性誤判，不一定真的共釋放。</span>' : '';
+  return `<div class="cr"><span class="muted">共釋放判讀</span> <span class="crtag" style="background:${col}" title="${esc(why)}">${lab}</span> <span class="muted">${ev.join('；')}</span>${warn}</div>`;
+}
+const sayBtn = (text, cls) => text ? `<button class="tb say ${cls || ''}" data-say="${esc(text)}" title="唸英文全名：${esc(text)}">🔊</button>` : '';
+function wireSay(root) { (root || document).querySelectorAll('[data-say]').forEach((b) => { if (b.dataset.wired) return; b.dataset.wired = '1'; b.addEventListener('click', (e) => { e.stopPropagation(); sayText(b.dataset.say); }); }); }
+const pct = (f) => (f * 100).toFixed(0) + '%';
+let abbrRe = null;
+function withAbbr(escaped) {
+  // 在已經 esc 過的文字裡把縮寫包成 <abbr>；只在卡片的功能／備註欄用
+  if (!abbrRe) {
+    const keys = state.abbr.map((a) => a.key).sort((x, y) => y.length - x.length).map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    abbrRe = keys.length ? new RegExp("(?<![A-Za-z0-9_'’\\-])(" + keys.join('|') + ")(?![A-Za-z0-9_'’\\-])", 'g') : /(?!)/g;
+  }
+  return escaped.replace(abbrRe, (m) => { const a = state.abbr.find((x) => x.key === m); return a ? `<abbr title="${esc(a.zh)}${a.desc ? '：' + esc(a.desc) : ''}">${m}</abbr>` : m; });
+}
+function renderCard() {
+  if (quiz.on) { renderQuiz(); return; }
+  if (neuro.selected) { renderNeuronCard(); return; }
+  if (!state.selected) {
+    cardEl.innerHTML = '<div class="empty">' + (state.mode === 'single' ? '點 3D 裡的腦區，或點左邊清單的名字。' : '點任一套的腦區：另一套會亮起對應的區，卡片會列出對應關係' + (state.mode === 'overlay' ? '與體素重疊率' : '') + '。') + '</div>';
+    return;
+  }
+  const si = state.selected.slot, slot = slots[si];
+  const r0 = slot.meshes.get(state.selected.id).userData.region;
+  const sibs = slot.regions.filter((r) => r.base === r0.base);
+  const SIDE = { L: '左', R: '右', M: '中線' };
+  const sides = sibs.map((r) => SIDE[r.side] + (r.volume ? '（' + Math.round(r.volume / 1000).toLocaleString() + ' ×10³ µm³）' : '')).join('、');
+  const cw = state.crosswalk.filter((c) => (c.from_atlas === slot.atlas.id && c.from_base === r0.base) || (c.to_atlas === slot.atlas.id && c.to_base === r0.base));
+  // 對應分兩段：文獻（Ito 2014 Table S12／S13、同名）與疊圖（只由體素疊圖補列，S12／S13 未列）
+  const cwLine = (c) => esc(c.from_atlas === slot.atlas.id ? `${shortName(c.to_atlas)} ${c.to_base}（${c.kind}${c.note ? '，' + c.note : ''}）` : `${shortName(c.from_atlas)} ${c.from_base}（${c.kind}${c.note ? '，' + c.note : ''}）`);
+  const cwLit = cw.filter((c) => (c.src || '文獻') !== '疊圖'), cwOvl = cw.filter((c) => c.src === '疊圖');
+  const cwTxt = cwLit.length ? cwLit.map(cwLine).join('<br>') : cwOvl.length ? '<span class="empty">文獻（Ito 2014 S12／S13）未列</span>' : '<span class="empty">其他分區沒有對應</span>';
+  const cwOvlRow = cwOvl.length ? `<dt title="只由體素疊圖補列（占比 ≥ 15%），Ito 2014 S12／S13 沒有這個對應">疊圖對應</dt><dd class="cwovl">${cwOvl.map(cwLine).join('<br>')}<div class="muted">只由體素疊圖補列（占比 ≥ 15%），文獻未列；受配準與分區邊界影響，當參考。</div></dd>` : '';
+  const g = state.colors.bases[r0.base] || {}; const gz = (state.colors.groups.find((x) => x.group === g.group) || {}).zh || '—';
+  const pinned = pinIndex(si, r0.id, state.selected.sub) >= 0;
+  let html = `<div class="atl">${state.mode === 'single' ? '' : (si ? 'B　' : 'A　')}${esc(slot.atlas.short)}</div><h2>${esc(r0.base)}${state.selected.sub ? ` <span class="subsel">› ${esc(state.selected.sub)}</span>` : ''} <button class="tb pinBtn" id="pinBtn" title="加入釘選比較（Shift＋點腦區也可以）">${pinned ? '取消釘選' : '釘選'}${state.selected.sub ? ' ' + esc(state.selected.sub) : ''}</button></h2><div class="full">${todo(r0.full_en)} ${sayBtn(r0.full_en)}</div>
+  <dl><dt>中文</dt><dd>${todo(r0.zh)}${r0.zh_short ? '（' + esc(r0.zh_short) + '）' : ''}</dd>
+  <dt>功能</dt><dd>${r0.function ? withAbbr(esc(r0.function)) : todo('')}</dd>
+  ${(() => { const tv = (state.trivia || {})[r0.base]; if (!tv) return ''; const src = tv.source ? tv.source.split(';').map((k) => k.trim()).filter(Boolean).map((k) => `<span title="${esc(state.sources[k] || k)}">${esc(k)}</span>`).join('、') : ''; return `<dt>小知識</dt><dd class="trivia"><b>💡 ${esc(tv.hook)}</b><br>${withAbbr(esc(tv.text))}${src ? `<div class="muted">出處：${src}</div>` : ''}</dd>`; })()}
+  <dt>證據</dt><dd>${r0.evidence ? '<span class="ev">' + esc(r0.evidence) + '</span>' : todo('')}</dd>
+  <dt>出處</dt><dd>${r0.source ? r0.source.split(';').map((k) => esc(state.sources[k.trim()] || k.trim())).join('<br>') : '<span class="empty">—</span>'}</dd>
+  <dt>左右</dt><dd>${sides}</dd>
+  ${(() => { const set = lpuSet(slot.atlas.id); if (!set) return ''; const rule = ruleOf(slot.atlas.id); const items = sibs.map((r) => { const c = (set.cls[rule] || {})[r.name]; return c ? `<span class="lpc" style="--c:${lpuColorOf(slot, r.name, c[0])}">${esc(r.name)}：${esc(c[5] ? '切成 ' + c[5].length + ' 子區' : c[4])}${c[3] != null ? '（LN ' + Number(c[3]).toLocaleString() + ' 顆）' : ''}</span>` + (c[5] ? c[5].map((x) => `<div class="lpc sub${state.selected.sub === x[0] ? ' cur' : ''}" data-selsub="${esc(r.id + '|' + x[0])}" title="點這列只亮這個子區" style="--c:${lpuColorOf(slot, x[0], x[1])}">${esc(x[0])}：${esc(x[5])}（LN ${Number(x[4]).toLocaleString()}）</div>`).join('') : '') : null; }).filter(Boolean); return items.length ? `<dt title="A1 系列的判定；資料來源與規則可在底列「LPU」或下方「局部神經元」切換">LPU 分類</dt><dd>${items.map((x) => '<div>' + x + '</div>').join('')}<div class="muted">${esc(lpuRuleText(slot.atlas.id))}</div></dd>` : ''; })()}
+  <dt>系統</dt><dd>${esc(gz)}</dd>
+  <dt>${cwOvl.length ? '文獻對應' : '對應'}</dt><dd>${cwTxt}</dd>
+  ${cwOvlRow}
+  ${r0.note ? '<dt>備註</dt><dd>' + withAbbr(esc(r0.note)) + '</dd>' : ''}</dl>`;
+  if (state.mode !== 'single' && slots[1 - si].atlas) {
+    const other = slots[1 - si].atlas;
+    const cps = counterparts(si, r0.base);
+    html += `<h3>在 ${esc(other.short)} 裡對應</h3>`;
+    const cpLi = (o) => `<li><b>${esc(o.base)}</b>　${esc(o.kind)}${o.via ? '（經 ' + esc(o.via) + '）' : ''}${o.note ? '<br><span class="muted">' + esc(o.note) + '</span>' : ''}</li>`;
+    const cpLit = cps.filter((o) => o.src !== '疊圖'), cpOvl = cps.filter((o) => o.src === '疊圖');
+    if (!cps.length) html += '<div class="empty">對應表沒有這一區的對應</div>';
+    else {
+      if (cpOvl.length) html += '<div class="cwh">文獻對應</div>';
+      html += cpLit.length ? '<ul class="cps">' + cpLit.map(cpLi).join('') + '</ul>' : '<div class="empty">文獻（Ito 2014 S12／S13）未列</div>';
+      if (cpOvl.length) html += '<div class="cwh" title="只由體素疊圖補列（占比 ≥ 15%），文獻未列">疊圖對應</div><ul class="cps cwovl">' + cpOvl.map(cpLi).join('') + '</ul>';
+    }
+    const ov = overlapRows(si, r0.id);
+    if (ov) {
+      html += `<h3>體素重疊（${esc(r0.name)}，${Math.round(ov.volMe / 1000).toLocaleString()} ×10³ µm³；被 ${esc(other.short)} 覆蓋 ${pct(ov.covered)}）</h3>`;
+      html += ov.rows.length ? '<table class="ov"><tr><th>' + esc(other.short) + '</th><th>占本區</th><th>占該區</th></tr>' + ov.rows.map((o) => `<tr><td>${esc(o.name)}</td><td>${pct(o.fMe)}</td><td>${pct(o.fOt)}</td></tr>`).join('') + '</table>' : '<div class="empty">沒有重疊</div>';
+    }
+  }
+  html += `<div class="ln" id="lnBlock"><h3>局部神經元（LN）</h3><div class="muted">載入中…</div></div>`;
+  cardEl.innerHTML = html;
+  const pb = $('#pinBtn'); if (pb) pb.addEventListener('click', () => togglePin(si, r0.id, state.selected.sub));   // 選的是子區就釘子區
+  cardEl.querySelectorAll('[data-selsub]').forEach((el) => el.addEventListener('click', () => { const [id, nm] = el.dataset.selsub.split('|'); select(si, Number(id), state.selected && state.selected.sub === nm ? null : nm); }));   // 再點一次回到整區
+  wireSay(cardEl);
+  fillLnBlock(si, r0);
+}
+
+// ---------- 模式
+function setMode(m, bId) {
+  state.mode = m;
+  document.querySelectorAll('.modes button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.mode === m));
+  $('#atlasBWrap').hidden = m === 'single';
+  $('#ovlGrp').hidden = m !== 'overlay';
+  $('#divider').hidden = m !== 'side';
+  camA.layers.set(0); if (m === 'overlay') camA.layers.enable(1);
+  $('#hint').textContent = m === 'side' ? '左右兩邊鏡頭同步 ｜ 點區：另一邊亮起對應區 ｜ Shift＋點：釘選比較' : m === 'overlay' ? 'A 實心、B 線框疊在同一座標 ｜ 點區：另一套亮起重疊區 ｜ Shift＋點：釘選（可跨套、算兩區重疊）｜ 勾「只看釘選」只留釘選的區' : '左鍵旋轉 ｜ 滾輪縮放 ｜ 右鍵平移 ｜ 點區選取、再點取消 ｜ Shift＋點：釘選比較 ｜ 雙擊飛到該區';
+  fillAtlasB();
+  if (bId && [...$('#atlasB').options].some((o) => o.value === bId)) $('#atlasB').value = bId;
+  resize();
+  if (m === 'single') { state.selected = null; buildList(); applyFilters(); renderCard(); updateStatus(); applyCamera(); return Promise.resolve(); }
+  return ensureB();
+}
+function compatible(a, b) { return !!(a && b && a.overlay_group && a.overlay_group === b.overlay_group); }
+function fillAtlasB() {
+  const sel = $('#atlasB'), A = $('#atlas').value, cur = sel.value;
+  sel.innerHTML = '';
+  for (const a of state.atlases.atlases) {
+    if (a.id === A) continue;
+    if (state.mode === 'overlay' && !compatible(atlasById(A), a)) continue;
+    const o = document.createElement('option'); o.value = a.id; o.textContent = a.name; sel.appendChild(o);
+  }
+  if ([...sel.options].some((o) => o.value === cur)) sel.value = cur;
+}
+async function ensureB() {
+  const sel = $('#atlasB');
+  if (!sel.options.length) {   // 疊圖模式找不到同座標系的對照套 → 改並排
+    if (state.mode === 'overlay') { statusEl.textContent = atlasById($('#atlas').value).short + ' 的座標系沒有其他分區可疊圖，改用並排比較'; setMode('side'); }
+    return;
+  }
+  const want = sel.value;
+  if (!slots[1].atlas || slots[1].atlas.id !== want) await loadAtlas(slots[1], want);
+  else { await slots[1].loading; await loadOverlap(); buildList(); applyFilters(); select(null); updateStatus(); applyCamera(); }
+}
+document.querySelectorAll('.modes button').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+$('#atlasB').addEventListener('change', () => ensureB());
+
+// ---------- 每幀：標籤投影（含遮擋判斷與互相避讓）
+const tmp = new THREE.Vector3();
+let camDirty = true, lastCamMove = 0, lastOcc = 0;
+function markDirty() { camDirty = true; lastCamMove = performance.now(); }
+const occRay = new THREE.Raycaster(); occRay.layers.enableAll();
+function computeOcclusion() {
+  const t0 = performance.now();
+  // 從鏡頭射向每個標籤的質心；若先打到別的（不透明的）腦區，標籤就算被擋住
+  for (const s of activeSlots()) {
+    const cam = state.mode === 'side' ? s.camera : camA;
+    const objs = [];
+    for (const t of (state.mode === 'overlay' ? activeSlots() : [s])) { for (const m of t.meshes.values()) if (m.visible && m.material.opacity > 0.5) objs.push(m); for (const C of Object.values(t.subCache)) for (const it of C.items) if (it.mesh.visible && it.mesh.material.opacity > 0.5) objs.push(it.mesh); }
+    for (const [id, L] of s.labels) {
+      if (L.el.hidden || !state.declutter) { L.occ = false; continue; }
+      const own = L.own || s.meshes.get(id);
+      const wp = tmp.copy(L.pos).applyMatrix4(s.root.matrixWorld);
+      const dir = wp.clone().sub(cam.position); const dist = dir.length(); dir.normalize();
+      occRay.set(cam.position, dir); occRay.far = dist;
+      const hits = occRay.intersectObjects(objs);
+      L.occ = hits.length > 0 && hits[0].object !== own && hits[0].distance < dist - 2;
+    }
+  }
+  window.__occMs = performance.now() - t0;   // 除錯用：最近一次遮擋計算耗時
+}
+function updateLabels() {
+  if (!state.showLabels) return;
+  const now = performance.now();
+  if (camDirty && ((!drag && now - lastCamMove > 150) || now - lastOcc > 600)) { camDirty = false; lastOcc = now; computeOcclusion(); }
+  const w = el.clientWidth, h = el.clientHeight, side = state.mode === 'side';
+  const cands = [];
+  for (const s of activeSlots()) {
+    const cam = side ? s.camera : camA, pw = side ? w / 2 : w, ox = side && s.i ? w / 2 : 0;
+    for (const L of s.labels.values()) {
+      if (L.el.hidden || L.off) { L.el.style.display = 'none'; continue; }
+      tmp.copy(L.pos).applyMatrix4(s.root.matrixWorld).project(cam);
+      if (tmp.z > 1 || tmp.x < -1 || tmp.x > 1) { L.el.style.display = 'none'; continue; }
+      cands.push({ L, x: ox + (tmp.x + 1) / 2 * pw, y: (1 - tmp.y) / 2 * h, z: tmp.z });
+    }
+  }
+  for (const [nid, el] of neuro.pinLabels) { const s = slots[Number(el.dataset.slot)], N = s.neurons.get(nid); if (!N || !N.soma || !N.line.visible || (neuro.selected && neuro.selected.id === nid)) { el.style.display = 'none'; continue; } const cam = side ? s.camera : camA, pw = side ? w / 2 : w, ox = side && s.i ? w / 2 : 0; tmp.set(...N.soma).applyMatrix4(s.root.matrixWorld).project(cam); el.style.display = tmp.z > 1 ? 'none' : ''; el.style.left = (ox + (tmp.x + 1) / 2 * pw) + 'px'; el.style.top = ((1 - tmp.y) / 2 * h + 14) + 'px'; }
+  if (neuro.selected) { const s = slots[neuro.selected.slot], N = s.neurons.get(neuro.selected.id); if (N && N.soma) { const cam = side ? s.camera : camA, pw = side ? w / 2 : w, ox = side && s.i ? w / 2 : 0; tmp.set(...N.soma).applyMatrix4(s.root.matrixWorld).project(cam); nlab.style.display = tmp.z > 1 ? 'none' : ''; nlab.style.left = (ox + (tmp.x + 1) / 2 * pw) + 'px'; nlab.style.top = ((1 - tmp.y) / 2 * h) + 'px'; } else nlab.style.display = 'none'; } else nlab.style.display = 'none';
+  cands.sort((a, b) => (b.L.pri ? 1 : 0) - (a.L.pri ? 1 : 0) || a.z - b.z);   // 選取／對應的優先，再依遠近
+  const placed = [];
+  for (const c of cands) {
+    const L = c.L;
+    if (!L.w) { L.el.style.display = ''; L.w = L.el.offsetWidth || 30; L.h = L.el.offsetHeight || 16; }
+    let show = true;
+    if (state.declutter && !L.pri) {
+      if (L.occ) show = false;
+      else for (const p of placed) { if (Math.abs(p.x - c.x) < (p.w + L.w) / 2 + 2 && Math.abs(p.y - c.y) < (p.h + L.h) / 2 + 1) { show = false; break; } }
+    }
+    L.el.style.display = show ? '' : 'none';
+    if (show) { L.el.style.left = c.x + 'px'; L.el.style.top = c.y + 'px'; placed.push({ x: c.x, y: c.y, w: L.w, h: L.h }); }
+  }
+}
+function resize() {
+  const w = viewEl.clientWidth, h = viewEl.clientHeight; renderer.setSize(w, h, false);
+  const aspect = (state.mode === 'side' ? w / 2 : w) / h;
+  for (const s of slots) { s.camera.aspect = aspect; s.camera.updateProjectionMatrix(); }
+}
+window.addEventListener('resize', resize);
+function render() {
+  const w = el.clientWidth, h = el.clientHeight;
+  if (state.mode === 'side') {
+    renderer.setScissorTest(true);
+    renderer.setViewport(0, 0, w / 2, h); renderer.setScissor(0, 0, w / 2, h); renderer.render(scene, camA);
+    renderer.setViewport(w / 2, 0, w / 2, h); renderer.setScissor(w / 2, 0, w / 2, h); renderer.render(scene, camB);
+    renderer.setScissorTest(false);
+  } else { renderer.setViewport(0, 0, w, h); renderer.render(scene, camA); }
+}
+function loop() { if (state.spin && !drag) { ctrl.theta += 0.004; applyCamera(); } render(); updateLabels(); requestAnimationFrame(loop); }
+
+// ---------- 神經元（B7）：骨架庫 site/neurons/fc/<id>.bin、LN 索引 ln_<atlas>.json、中繼資料 fc_neurons.json；只在連線到主機時可用
+const NEURON_BASE = 'neurons/';
+const STORES = { chiang: ['fc'], ito: ['fc', 'em'], itoem: ['em'], malecns: ['mcns'] };   // 分區 → 可用的骨架庫（第一個是預設）
+const STORE_LABEL = { fc: 'FlyCircuit（光學，28,573 顆）', em: 'FlyWire v783（EM，139,255 顆）', mcns: 'MaleCNS v1.0（EM，165,122 顆）' };
+const META_FIBRE = { 'chiang|fc': 'c', 'ito|fc': 'i', 'malecns|mcns': 'm', 'ito|em': 'e', 'itoem|em': 'e' };   // 分區|庫 → 逐區體素（纖維口徑）的鍵
+const META_SYN = { 'malecns|mcns': 'ms', 'ito|em': 'es', 'itoem|em': 'es' };                                  // 突觸口徑
+const neuro = { ln: {}, ids: {}, metaP: {}, metaCache: new Map(), regionNames: {}, skel: new Map(), rule: {}, src: {}, selected: null, only: false, drawn: new Set() /* 'slot:region' */, pinLabels: new Map(), syn: new Map() /* id → 突觸點與上下游 */ };
+function srcOf(atlasId) { return neuro.src[atlasId] || (STORES[atlasId] || ['fc'])[0]; }
+function ruleOf(atlasId) { const st = srcOf(atlasId); return neuro.rule[atlasId + '|' + st] || (st === 'fc' ? 'rinf' : 'f_rinf'); }
+function metaKeyOf(id) { return /^\d{15,}$/.test(id) ? 'em' : /^\d+$/.test(id) ? 'mcns' : 'fc'; }   // FlyWire root_id 18 位數、MaleCNS bodyId 短數字、FlyCircuit 名稱
+async function metaFor(id) {
+  // 取一顆神經元的中繼資料（FlyCircuit 一次整包；MaleCNS 依 bodyId % 64 分片）
+  if (neuro.metaCache.has(id)) return neuro.metaCache.get(id);
+  const store = metaKeyOf(id);
+  const url = store === 'fc' ? NEURON_BASE + 'fc_neurons.json' : store === 'mcns' ? NEURON_BASE + 'mcns_meta/' + (Number(id) % 64) + '.json' : NEURON_BASE + 'em_meta/' + (Number(id.slice(-6)) % 64) + '.json';
+  if (!neuro.metaP[url]) neuro.metaP[url] = fetchJSON(url).then((m) => {
+    const entries = store === 'fc' ? m.n : m;
+    if (store === 'fc') { neuro.regionNames['chiang|fc'] = m.regions.chiang; neuro.regionNames['ito|fc'] = m.regions.ito; }
+    for (const [k, v] of Object.entries(entries)) neuro.metaCache.set(k, v);
+    return m;
+  }).catch(() => null);
+  await neuro.metaP[url];
+  const rk = store === 'mcns' ? 'malecns|mcns' : store === 'em' ? 'ito|em' : null;
+  if (rk && !neuro.regionNames[rk]) { try { neuro.regionNames[rk] = await fetchJSON(NEURON_BASE + (store === 'mcns' ? 'mcns_meta' : 'em_meta') + '/regions.json'); if (store === 'em') neuro.regionNames['itoem|em'] = neuro.regionNames[rk]; } catch (e) { /* 無 */ } }
+  return neuro.metaCache.get(id) || null;
+}
+const nlab = document.createElement('div'); nlab.className = 'lab nl'; nlab.style.display = 'none'; labelsEl.appendChild(nlab);
+const sameNSel = (x) => neuro.selected && neuro.selected.slot === x.slot && neuro.selected.id === x.id;
+async function lnIndex(atlasId, store) {
+  store = store || srcOf(atlasId); const key = atlasId + '|' + store;
+  if (!(key in neuro.ln)) {
+    const file = store === (STORES[atlasId] || ['fc'])[0] ? 'ln_' + atlasId + '.json' : 'ln_' + atlasId + '_' + store + '.json';
+    try { neuro.ln[key] = await fetchJSON(NEURON_BASE + file); } catch (e) { neuro.ln[key] = null; }
+  }
+  return neuro.ln[key];
+}
+function lnCount(idx, region, rule) { return idx.regions ? ((idx.regions[region] || {})[rule] || []).length : ((idx.counts[region] || {})[rule] || 0); }
+async function lnIds(idx, region, rule) {
+  // id 清單：小索引直接內含；大索引（EM）按規則分檔、按需載入
+  if (idx.regions) return (idx.regions[region] || {})[rule] || [];
+  const key = idx.atlas + '|' + idx.store + '|' + rule;
+  if (!neuro.ids[key]) neuro.ids[key] = fetchJSON(NEURON_BASE + idx.ids_dir + rule + '.json').catch(() => ({}));
+  return ((await neuro.ids[key])[region]) || [];
+}
+async function fetchSkel(id) {
+  if (neuro.skel.has(id)) return neuro.skel.get(id);
+  const r = await fetch(NEURON_BASE + metaKeyOf(id) + '/' + id + '.bin'); if (!r.ok) throw new Error('no skeleton ' + id);
+  const buf = await r.arrayBuffer();
+  const n = new DataView(buf).getUint32(0, true);
+  const xyz = new Int16Array(buf.slice(4, 4 + 6 * n)), par = new Int32Array(buf.slice(4 + 6 * n, 4 + 6 * n + 4 * n)), typ = new Uint8Array(buf, 4 + 10 * n, n);
+  let E = 0; for (let i = 0; i < n; i++) if (par[i] >= 0) E++;
+  const pos = new Float32Array(E * 6); let k = 0;
+  for (let i = 0; i < n; i++) { const p = par[i]; if (p < 0) continue; pos[k++] = xyz[3 * i] / 10; pos[k++] = xyz[3 * i + 1] / 10; pos[k++] = xyz[3 * i + 2] / 10; pos[k++] = xyz[3 * p] / 10; pos[k++] = xyz[3 * p + 1] / 10; pos[k++] = xyz[3 * p + 2] / 10; }
+  let soma = null; for (let i = 0; i < n; i++) if (typ[i] === 1 || par[i] < 0) { soma = [xyz[3 * i] / 10, xyz[3 * i + 1] / 10, xyz[3 * i + 2] / 10]; break; }
+  const out = { pos, n, soma }; neuro.skel.set(id, out); return out;
+}
+function neuronColor(base, k) {
+  const c = new THREE.Color((state.colors.bases[base] || { color: '#888888' }).color);
+  c.offsetHSL(0, 0.05, ((k * 0.618) % 1 - 0.5) * 0.3); return c;
+}
+async function showNeuron(si, id, region, color, k = 0, rule = null) {
+  const slot = slots[si]; if (!slot.atlas) return false;
+  if (slot.neurons.has(id)) return true;
+  let sk; try { sk = await fetchSkel(id); } catch (e) { return false; }
+  if (!slot.atlas || slot.neurons.has(id)) return !!slot.atlas;
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(sk.pos, 3));
+  const mat = new THREE.LineBasicMaterial({ color: color || neuronColor(region ? baseOf(region) : 'x', k), transparent: true, opacity: 0.9 });
+  const line = new THREE.LineSegments(g, mat); line.layers.set(si); line.userData = { nid: id, slot: si, region };
+  slot.nroot.add(line); slot.neurons.set(id, { line, region, rule, soma: sk.soma, color: mat.color.getHex() });
+  updateNeuCount(); return true;
+}
+const baseOf = (name) => name.replace(/_(L|R)$/, '');
+function removeNeuron(slot, id) { const N = slot.neurons.get(id); if (!N) return; disposeSynPoints(N); slot.nroot.remove(N.line); N.line.geometry.dispose(); N.line.material.dispose(); slot.neurons.delete(id); const k = pinIndexN(slot.i, id); if (k >= 0) { state.pins.splice(k, 1); renderPins(); } }
+function clearNeurons(slot, region) {
+  for (const [id, N] of [...slot.neurons]) if (!region || N.region === region) removeNeuron(slot, id);
+  for (const key of [...neuro.drawn]) { const [si, reg] = key.split(':'); if (Number(si) === slot.i && (!region || reg === region)) neuro.drawn.delete(key); }
+  if (neuro.selected && neuro.selected.slot === slot.i && !slot.neurons.has(neuro.selected.id)) selectNeuron(slot.i, null);
+  updateNeuCount(); restyleNeurons(); restyle();
+}
+function updateNeuCount() {
+  const n = slots.reduce((a, s) => a + s.neurons.size, 0);
+  $('#neuGrp').hidden = n === 0; $('#neuCount').textContent = n ? n + ' 顆' : '';
+}
+let drawSeq = 0;
+async function lnSubs(idx, region, rule) {
+  // 切開區各子區的 id 清單：小索引在 idx.sub；大索引（EM）在規則分檔的 _sub
+  const v = idx && idx.sub && idx.sub[rule] && idx.sub[rule][region]; if (!v) return null;
+  if (Object.values(v).some(Array.isArray)) return v;
+  if (!idx.ids_dir) return null; await lnIds(idx, region, rule);
+  const f = await neuro.ids[idx.atlas + '|' + idx.store + '|' + rule]; return (f && f._sub && f._sub[region]) || null;
+}
+async function drawLN(si, region, limit, subKey) {
+  const slot = slots[si]; const idx = await lnIndex(slot.atlas.id); if (!idx) return;
+  const rule = ruleOf(slot.atlas.id);
+  const subs = await lnSubs(idx, region, rule); const subKeys = subs ? Object.keys(subs).sort((a, b) => Number(a.slice(1)) - Number(b.slice(1))) : [];
+  const subOf = new Map(); subKeys.forEach((k, i) => { for (const id of subs[k]) subOf.set(id, i); });   // 切分輪次：每個子區一種顏色
+  const ids = subKey && subs ? subs[subKey] || [] : await lnIds(idx, region, rule);
+  const todo = ids.filter((id) => !slot.neurons.has(id)).slice(0, limit || 500);
+  const seq = ++drawSeq; let done = 0;
+  neuro.drawn.add(si + ':' + region);
+  const base = baseOf(region);
+  const queue = todo.slice(); const workers = [];
+  for (let w = 0; w < 24; w++) workers.push((async () => { while (queue.length && seq === drawSeq) { const id = queue.shift(); await showNeuron(si, id, region, subOf.has(id) ? SUB_COLORS[subOf.get(id) % SUB_COLORS.length] : null, ids.indexOf(id), rule); done++; if (done % 50 === 0) statusEl.textContent = `載入 ${region} 的 LN：${done}/${todo.length}`; } })());
+  await Promise.all(workers);
+  if (seq === drawSeq) { statusEl.textContent = `${region}${subKey ? subKey : ''}：畫出 ${ids.filter((id) => slot.neurons.has(id)).length}/${ids.length} 顆 LN（${ruleLabel(slot.atlas.id)}${subs && !subKey ? '；依子區上色' : ''}）`; }
+  neuro.drawn.add(si + ':' + region);
+  restyleNeurons(); restyle(); if (state.selected) renderCard();
+}
+function ruleLabel(atlasId) { const idx = neuro.ln[atlasId + '|' + srcOf(atlasId)]; const key = ruleOf(atlasId); const r = idx && idx.rules.find((r) => r.key === key); return r ? r.label : key; }
+async function fillLnBlock(si, r0) {
+  const slot = slots[si], box = $('#lnBlock'); if (!box) return;
+  const atlasId = slot.atlas.id, store = srcOf(atlasId);
+  const idx = await lnIndex(atlasId, store);
+  if (!box.isConnected || !state.selected || state.selected.slot !== si) return;   // 卡片已重畫：這次填寫作廢
+  const stores = STORES[atlasId] || [];
+  const srcSel = stores.length > 1 ? `<span class="muted">來源</span><select id="lnSrc">${stores.map((st) => `<option value="${st}" ${st === store ? 'selected' : ''}>${esc(STORE_LABEL[st])}</option>`).join('')}</select>` : `<span class="muted">${esc(STORE_LABEL[store] || '')}</span>`;
+  if (!idx) { box.innerHTML = `<h3>局部神經元（LN）</h3><div class="row">${srcSel}</div><div class="muted">神經元資料需連線到主機（例如 http://100.76.14.33:9010/）才能載入；artifact 與單檔版不提供。</div>`; const ss = $('#lnSrc'); if (ss) ss.addEventListener('change', (e) => { neuro.src[atlasId] = e.target.value; renderCard(); }); return; }
+  const rule = ruleOf(atlasId);
+  const sibs = slot.regions.filter((r) => r.base === r0.base).map((r) => r.name);
+  const opts = idx.rules.map((r) => `<option value="${r.key}" ${r.key === rule ? 'selected' : ''} title="${esc(r.desc)}">${esc(r.label)}</option>`).join('');
+  let html = `<h3>局部神經元（LN）</h3><div class="row">${srcSel}</div><div class="row"><span class="muted">規則</span><select id="lnRule">${opts}</select></div>`;
+  // 直排：每列一組規則、每欄一個區（左／右）
+  html += '<table><tr><th>規則</th>' + sibs.map((n) => `<th>${esc(n)}</th>`).join('') + '</tr>';
+  for (const r of idx.rules) html += `<tr class="${r.key === rule ? 'cur' : ''}" data-rule="${r.key}" title="${esc(r.desc)}"><td class="${r.key === rule ? 'cur' : ''}">${esc(r.label)}</td>` + sibs.map((n) => `<td class="${r.key === rule ? 'cur' : ''}">${lnCount(idx, n, r.key)}</td>`).join('') + '</tr>';
+  html += '</table>';
+  const sub = (idx.sub && idx.sub[rule]) || {};
+  for (const name of sibs) {
+    if (!sub[name]) continue; const subs = await lnSubs(idx, name, rule);
+    if (!subs) { html += `<div class="muted">${esc(name)} 子區：` + Object.entries(sub[name]).map(([k, v]) => `${esc(k)} ${Array.isArray(v) ? v.length : v}`).join('、') + '</div>'; continue; }
+    const lc = lpuClassOf(atlasId, name), full = !!(lc && lc[5]);
+    html += `<div class="muted" style="margin-top:4px">${esc(name)} 切成 ${Object.keys(subs).length} 子區（畫出時依子區上色、各子區輪流抽）${full ? '' : '；讀法 A 未全切開，LPU 判定以整區算'}：</div>`;
+    Object.keys(subs).sort((a, b) => Number(a.slice(1)) - Number(b.slice(1))).forEach((k, i) => { const v = full ? subClassOf(atlasId, name, name + k) : null;
+      html += `<div class="row" style="margin:1px 0"><span class="lpc" style="--c:${SUB_COLORS[i % SUB_COLORS.length]}">${esc(name + k)}</span><span class="muted">${subs[k].length.toLocaleString()} 顆${v ? '・' + esc(v[5]) : ''}</span><button class="tb" data-drawsub="${esc(name)}|${esc(k)}">畫出</button></div>`; });
+  }
+  const have = (name) => [...slot.neurons.values()].filter((N) => N.region === name && N.rule === rule).length;
+  html += '<div class="row">' + sibs.map((name) => { const n = lnCount(idx, name, rule); const h = have(name); return `<button class="tb" data-draw="${esc(name)}" ${n ? '' : 'disabled'}>畫出 ${esc(name)}（${h ? h + '/' : ''}${n}）</button>`; }).join('') + `<button class="tb" data-clear="1">清除本區</button></div>`;
+  html += `<div class="muted">一次最多畫 500 顆；再按一次接著畫。點表格某一列可切換規則。畫出後點任一條神經元看它經過的區。</div>`;
+  if (!box.isConnected || !state.selected || state.selected.slot !== si) return;   // 載子區清單時卡片已重畫
+  box.innerHTML = html;
+  const ss = $('#lnSrc'); if (ss) ss.addEventListener('change', (e) => { neuro.src[atlasId] = e.target.value; lpuChanged(); renderCard(); });
+  $('#lnRule').addEventListener('change', (e) => { neuro.rule[atlasId + '|' + store] = e.target.value; lpuChanged(); renderCard(); });
+  box.querySelectorAll('tr[data-rule]').forEach((tr) => tr.addEventListener('click', () => { neuro.rule[atlasId + '|' + store] = tr.dataset.rule; lpuChanged(); renderCard(); }));
+  box.querySelectorAll('[data-draw]').forEach((b) => b.addEventListener('click', () => drawLN(si, b.dataset.draw)));
+  box.querySelectorAll('[data-drawsub]').forEach((b) => b.addEventListener('click', () => { const [n, k] = b.dataset.drawsub.split('|'); drawLN(si, n, 500, k); }));
+  box.querySelector('[data-clear]').addEventListener('click', () => { for (const name of sibs) clearNeurons(slot, name); renderCard(); });
+}
+// 點選神經元
+const nray = new THREE.Raycaster(); nray.params.Line.threshold = 2.5; nray.layers.enableAll();
+function rayHitNeuron(e) {
+  const h = hitSlot(e); const targets = state.mode === 'overlay' ? activeSlots() : [slots[h.si]];
+  const objs = []; for (const s of targets) for (const N of s.neurons.values()) if (N.line.visible) objs.push(N.line);
+  if (!objs.length) return null;
+  nray.setFromCamera(h.ndc, h.cam); const hits = nray.intersectObjects(objs);
+  return hits.length ? { slot: hits[0].object.userData.slot, id: hits[0].object.userData.nid, distance: hits[0].distance } : null;
+}
+function neuronRegionSet(slot) {
+  // 選取的神經元在這一槽的分區裡經過的區（體素占比 ≥ 2%）
+  const sel = neuro.selected; if (!sel || !slot.atlas) return new Set();
+  const m = neuro.metaCache.get(sel.id); if (!m) return new Set();
+  const rk = slot.atlas.id + '|' + metaKeyOf(sel.id); const key = META_FIBRE[rk]; if (!key || !m[key]) return new Set();
+  const names = neuro.regionNames[rk]; if (!names) return new Set(); const tot = m[key].reduce((a, [, v]) => a + v, 0) || 1;
+  const out = new Set();
+  for (const [ri, v] of m[key]) if (v / tot >= 0.02) { const r = slot.regions.find((q) => q.name === names[ri]); if (r) out.add(r.id); }
+  return out;
+}
+async function selectNeuron(si, id) {
+  neuro.selected = id == null ? null : { slot: si, id };
+  if (id != null) { state.selected = null; await metaFor(id); nlab.textContent = id; }
+  restyleNeurons(); restyle(); renderCard();
+}
+function restyleNeurons() {
+  const sel = neuro.selected; const dark = matchMedia('(prefers-color-scheme: dark)').matches && document.documentElement.dataset.theme !== 'light';
+  const anyPin = state.pins.length > 0;
+  for (const s of slots) for (const [id, N] of s.neurons) {
+    const isSel = sel && sel.slot === s.i && sel.id === id;
+    const pk = pinIndexN(s.i, id); const isPin = pk >= 0;
+    N.line.visible = !(neuro.only && sel && !isSel) && !(state.focus && anyPin && !isPin && !isSel);
+    N.line.material.color.set(isPin ? PIN_COLORS[pk] : isSel ? (dark ? '#ffffff' : '#111111') : N.color);
+    N.line.material.opacity = (sel || anyPin) ? ((isSel || isPin) ? 1 : 0.18) : 0.9;
+    if (N.synPts) for (const P of N.synPts) { P.visible = N.line.visible; }
+  }
+  for (const [nid, el] of neuro.pinLabels) if (pinIndexN(Number(el.dataset.slot), nid) < 0) { el.remove(); neuro.pinLabels.delete(nid); }
+  for (const p of state.pins) if (p.nid != null && !neuro.pinLabels.has(p.nid)) { const el = document.createElement('div'); el.className = 'lab nl'; el.textContent = p.nid; el.dataset.slot = p.slot; el.style.display = 'none'; labelsEl.appendChild(el); neuro.pinLabels.set(p.nid, el); }
+  for (const p of state.pins) if (p.nid != null) { const el = neuro.pinLabels.get(p.nid); el.style.outline = '2px solid ' + PIN_COLORS[state.pins.indexOf(p)]; }
+  markDirty();
+}
+function renderNeuronCard() {
+  const sel = neuro.selected, slot = slots[sel.slot], m = neuro.metaCache.get(sel.id), store = metaKeyOf(sel.id);
+  const TITLE = { fc: 'FlyCircuit', mcns: 'MaleCNS v1.0', em: 'FlyWire v783' };
+  const npinned = pinIndexN(sel.slot, sel.id) >= 0;
+  let html = `<div class="atl">神經元（${TITLE[store]}）</div><h2 style="font-size:18px">${esc(sel.id)} <button class="tb" id="nPin">${npinned ? '取消釘選' : '釘選'}</button> <button class="tb" id="nUnsel">取消</button> <button class="tb" id="nRemove">移除</button></h2>`;
+  if (!m) { html += '<div class="muted">中繼資料載入中或不存在。</div>'; cardEl.innerHTML = html; wireNeuronCard(); return; }
+  if (store === 'mcns') html += `<dl><dt>型別</dt><dd>${esc(m.t || '—')}${m.inst ? '<span class="muted">（' + esc(m.inst) + '）</span>' : ''}</dd><dt>大類</dt><dd>${esc(m.sc || '—')}${m.c ? '／' + esc(m.c) : ''}</dd><dt>胞體側</dt><dd>${esc(m.side || '—')}</dd><dt>長度</dt><dd>${m.L ? m.L.toLocaleString() + ' µm' : '—'}</dd><dt>狀態</dt><dd>${esc(m.st || '—')}</dd></dl>`;
+  else if (store === 'em') html += `<dl><dt>細胞型</dt><dd>${esc(m.t || '—')}</dd><dt>大類</dt><dd>${esc(m.sc || '—')}${m.c ? '／' + esc(m.c) : ''}</dd><dt>側</dt><dd>${esc(m.side || '—')}<span class="muted">（FlyWire 的左右定義，與本表相反）</span></dd><dt>長度</dt><dd>${m.L ? m.L.toLocaleString() + ' FC12 格' : '—'}</dd><dt>胞體</dt><dd>${m.soma ? m.soma.map((v) => v.toFixed(0)).join(', ') : '—'}</dd></dl>`;
+  else html += `<dl><dt>品系</dt><dd>${esc(m.d)}</dd><dt>性別</dt><dd>${m.s === 'F' ? '雌' : '雄'}</dd><dt>長度</dt><dd>${m.L.toLocaleString()} FC12 格（約 µm）</dd><dt>胞體</dt><dd>${m.soma.map((v) => v.toFixed(0)).join(', ')}</dd></dl>`;
+  const tables = [];
+  for (const s of activeSlots()) {
+    if (!s.atlas) continue; const rk = s.atlas.id + '|' + store; const key = META_FIBRE[rk]; if (!key || !m[key]) continue;
+    tables.push([s, rk, key, `在 ${esc(s.atlas.short)} 經過的區`]);
+    if (META_SYN[rk] && m[META_SYN[rk]]) tables.push([s, rk, META_SYN[rk], `在 ${esc(s.atlas.short)} 的突觸所在區`]);
+  }
+  for (const [s, rk, key, title] of tables) {
+    const names = neuro.regionNames[rk] || []; const tot = m[key].reduce((a, [, v]) => a + v, 0) || 1;
+    const rule = ruleOf(s.atlas.id);
+    const lnOf = (() => { const idx = neuro.ln[s.atlas.id + '|' + srcOf(s.atlas.id)]; if (!idx || !idx.regions) return null; for (const [reg, rr] of Object.entries(idx.regions)) if ((rr[rule] || []).includes(sel.id)) return reg; return null; })();
+    html += `<h3>${title}${lnOf && !META_SYN[rk] ? `　<span class="muted">（${esc(ruleLabel(s.atlas.id))}：${esc(lnOf)} 的 LN）</span>` : ''}</h3><div class="nc"><table>`;
+    for (const [ri, v] of m[key].slice(0, 12)) { const f = v / tot; const r = s.regions.find((q) => q.name === names[ri]); html += `<tr class="rg" data-slot="${s.i}" data-rid="${r ? r.id : ''}"><td>${esc(names[ri] || ri)}${r ? '' : '<span class="muted">（VNC）</span>'}</td><td class="r">${pct(f)}</td><td style="width:40%"><span class="bar" style="width:${Math.max(2, Math.round(f * 100))}%"></span></td></tr>`; }
+    html += `</table><div class="muted">占比 = 該區 2 µm 體素數 ÷ 落在任何區的體素數；≥ 2% 的區在 3D 亮起。點區名跳到該區卡片。</div></div>`;
+  }
+  html += synBlockHtml(sel, slot, store);
+  cardEl.innerHTML = html; wireNeuronCard(); wireSynBlock(sel, slot);
+  cardEl.querySelectorAll('tr.rg').forEach((tr) => tr.addEventListener('click', () => { const rid = Number(tr.dataset.rid); if (rid) { const si = Number(tr.dataset.slot); neuro.selected = null; restyleNeurons(); select(si, rid); } }));
+}
+function wireNeuronCard() {
+  const u = $('#nUnsel'); if (u) u.addEventListener('click', () => selectNeuron(0, null));
+  const pn = $('#nPin'); if (pn) pn.addEventListener('click', () => { const sel = neuro.selected; togglePinNeuron(sel.slot, sel.id); });
+  const rm = $('#nRemove'); if (rm) rm.addEventListener('click', () => { const sel = neuro.selected; removeNeuron(slots[sel.slot], sel.id); selectNeuron(0, null); updateNeuCount(); });
+}
+// ---------- 突觸點與上下游（B7-N5）：site/neurons/syn_<store>/<id>.bin（ver、npre、npost、jlen；int16 xyz×10；uint16 對象序號；json 上下游清單）
+const SYN_COLOR = { pre: '#f28e2b', post: '#4e9fd8' };          // 前突觸端橙、後突觸端藍
+const PARTNER_COLOR = { up: '#9467bd', down: '#2ca02c' };       // 上游紫、下游綠
+const SYN_TITLE = { em: 'FlyWire v783', mcns: 'MaleCNS v1.0' };
+const NT_CODES = ['', 'ach', 'gaba', 'glut', 'da', 'ser', 'oct', 'his'];                       // 突觸檔 uint8 代碼 → 鍵
+const NT_LABEL = { '': '不明', ach: 'ACh', gaba: 'GABA', glut: 'Glu', da: 'DA', ser: '5-HT', oct: 'OA', his: 'His' };
+const NT_ZH = { '': '不明', ach: '乙醯膽鹼', gaba: 'GABA', glut: '麩胺酸', da: '多巴胺', ser: '血清素', oct: '章魚胺', his: '組織胺' };
+const NT_COLOR = { '': '#9a9a9a', ach: '#2ca02c', gaba: '#d62728', glut: '#ff7f0e', da: '#9467bd', ser: '#e377c2', oct: '#1f77b4', his: '#8c564b' };
+neuro.synColor = 'kind';   // 突觸點著色：kind＝端別（pre 橙、post 藍）、nt＝傳導物質（pre 端＝這顆的、post 端＝上游那顆的）、snt＝逐突觸預測（機率 < 0.5 的點變淡）
+const SYN_LOW = 16;        // 逐突觸 packed byte 的高 5 位（機率×31）低於此＝低信心（<0.5）
+neuro.partnerGroup = false; // 上下游對象表依腦區分組（ver 4 突觸檔才有端點所在腦區）
+const SYN_REGION_KEY = { em: 'ito|em', mcns: 'malecns|mcns' };   // 端點腦區用哪份 regions.json 名單
+function partnerGroups(S, dir) {
+  // 依腦區分組：{reg: 標籤值, n: 該區突觸數, rows: [[rank, count]…依 count 排], other: 不在前 50 名的突觸數}，依 n 排
+  const rank = dir === 'up' ? S.rpost : S.rpre, reg = dir === 'up' ? S.regPost : S.regPre; if (!reg) return null;
+  const G = new Map();
+  for (let i = 0; i < rank.length; i++) { const r = reg[i]; let g = G.get(r); if (!g) { g = { reg: r, n: 0, cnt: new Map(), other: 0 }; G.set(r, g); } g.n++; if (rank[i] === 0xFFFF) g.other++; else g.cnt.set(rank[i], (g.cnt.get(rank[i]) || 0) + 1); }
+  return [...G.values()].map((g) => ({ reg: g.reg, n: g.n, other: g.other, rows: [...g.cnt].sort((a, b) => b[1] - a[1]) })).sort((a, b) => b.n - a.n);
+}
+const ntComp = (arr, mask) => { const cnt = new Array(NT_CODES.length).fill(0); let n = 0; for (const c of arr) { const k = mask ? c & 7 : c; cnt[k < NT_CODES.length ? k : 0]++; n++; } return { n, order: cnt.map((m, k) => [m, k]).filter(([m]) => m > 0).sort((a, b) => b[0] - a[0]) }; };
+const ntBar = (comp, title, label) => `<div class="ntbar" title="${esc(title)}">` + comp.order.map(([m, k]) => `<i style="width:${(m / comp.n * 100).toFixed(1)}%;background:${NT_COLOR[NT_CODES[k]]}"></i>`).join('') + `</div><div class="muted">${label}` + comp.order.map(([m, k]) => `${ntTag(NT_CODES[k])} ${pct(m / comp.n)}`).join('　') + `</div>`;
+const ntTag = (k) => `<span class="nt" style="color:${NT_COLOR[k] || NT_COLOR['']}" title="${esc(NT_ZH[k] || '不明')}"><span class="dot" style="background:${NT_COLOR[k] || NT_COLOR['']}"></span>${esc(NT_LABEL[k] || '不明')}</span>`;
+async function fetchSyn(id) {
+  // 取一顆神經元的突觸資料；沒有（光學、404）回 null，並快取避免重抓
+  if (neuro.syn.has(id)) return neuro.syn.get(id);
+  const store = metaKeyOf(id); let out = null;
+  if (store !== 'fc') {
+    try {
+      const r = await fetch(NEURON_BASE + 'syn_' + store + '/' + id + '.bin');
+      if (r.ok) {
+        const buf = await r.arrayBuffer(); const dv = new DataView(buf);
+        const npre = dv.getUint32(4, true), npost = dv.getUint32(8, true), jlen = dv.getUint32(12, true);
+        let off = 16;
+        const pre = new Float32Array(npre * 3), post = new Float32Array(npost * 3);
+        const q1 = new Int16Array(buf, off, npre * 3); for (let i = 0; i < npre * 3; i++) pre[i] = q1[i] / 10; off += npre * 6;
+        const q2 = new Int16Array(buf, off, npost * 3); for (let i = 0; i < npost * 3; i++) post[i] = q2[i] / 10; off += npost * 6;
+        const rpre = new Uint16Array(buf.slice(off, off + npre * 2)); off += npre * 2;
+        const rpost = new Uint16Array(buf.slice(off, off + npost * 2)); off += npost * 2;
+        const ver = dv.getUint32(0, true); let ntPost = null, sPre = null, sPost = null;
+        if (ver >= 2) { ntPost = new Uint8Array(buf.slice(off, off + npost)); off += npost; }
+        if (ver >= 3) { sPre = new Uint8Array(buf.slice(off, off + npre)); off += npre; sPost = new Uint8Array(buf.slice(off, off + npost)); off += npost; }   // 逐突觸：低 3 位代碼、高 5 位機率×31
+        let regPre = null, regPost = null;
+        if (ver >= 4) { regPre = new Uint8Array(buf.slice(off, off + npre)); off += npre; regPost = new Uint8Array(buf.slice(off, off + npost)); off += npost; }   // 端點所在腦區：k → regions.json[k-1]，0＝不在任何區
+        const info = JSON.parse(new TextDecoder().decode(new Uint8Array(buf, off, jlen)));
+        out = { pre, post, rpre, rpost, ntPost, sPre, sPost, regPre, regPost, info };
+      }
+    } catch (e) { out = null; }
+  }
+  neuro.syn.set(id, out); return out;
+}
+function disposeSynPoints(N) { if (!N.synPts) return; for (const P of N.synPts) { P.parent && P.parent.remove(P); P.geometry.dispose(); P.material.dispose(); } N.synPts = null; }
+function buildSynPoints(slot, id) {
+  // 依 N.synFocus（對象 id 或 null）與 N.synRegion（{reg, kind} 或 null：只亮某區的 pre 或 post 端）把突觸點分成「亮」與「淡」兩組畫；pre 橙、post 藍
+  const N = slot.neurons.get(id), S = neuro.syn.get(id); if (!N || !S) return;
+  disposeSynPoints(N); N.synPts = [];
+  const lists = S.info; const F = N.synFocus || null, R = N.synRegion || null; const anyFocus = F !== null || R !== null;
+  for (const kind of ['pre', 'post']) {
+    const xyz = S[kind], rank = kind === 'pre' ? S.rpre : S.rpost, plist = kind === 'pre' ? lists.down : lists.up, regArr = kind === 'pre' ? S.regPre : S.regPost;
+    const fi = F ? plist.findIndex((p) => p[0] === F) : -1;
+    const match = (i) => (F === null || rank[i] === fi) && (R === null || (R.kind === kind && regArr && regArr[i] === R.reg));
+    const groups = !anyFocus ? [[null, 1, 3]] : [[false, 0.15, 3], [true, 1, 6]];
+    for (const [want, op, size] of groups) {
+      const idx = []; for (let i = 0; i < rank.length; i++) if (want === null || match(i) === want) idx.push(i);
+      if (!idx.length) continue;
+      const pos = new Float32Array(idx.length * 3); for (let k = 0; k < idx.length; k++) { pos[3 * k] = xyz[3 * idx[k]]; pos[3 * k + 1] = xyz[3 * idx[k] + 1]; pos[3 * k + 2] = xyz[3 * idx[k] + 2]; }
+      const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      const bySyn = neuro.synColor === 'snt' && S.sPre, byNT = neuro.synColor === 'nt' || bySyn;
+      if (byNT) {   // 傳導物質：nt＝pre 端一律這顆的、post 端逐點看上游那顆的；snt＝逐突觸預測，低信心變淡
+        const col = new Float32Array(idx.length * 3); const mine = new THREE.Color(NT_COLOR[(lists.nt && lists.nt.t) || '']); const cache = {}; const packed = kind === 'pre' ? S.sPre : S.sPost;
+        for (let k = 0; k < idx.length; k++) {
+          let c = mine;
+          if (bySyn) { const b = packed[idx[k]]; const key = NT_CODES[b & 7] + ((b >> 3) < SYN_LOW ? '-' : ''); c = cache[key] || (cache[key] = (b >> 3) < SYN_LOW ? new THREE.Color(NT_COLOR[NT_CODES[b & 7]]).lerp(new THREE.Color('#bbbbbb'), 0.6) : new THREE.Color(NT_COLOR[NT_CODES[b & 7]])); }
+          else if (kind === 'post') { const code = S.ntPost ? NT_CODES[S.ntPost[idx[k]]] || '' : ''; c = cache[code] || (cache[code] = new THREE.Color(NT_COLOR[code])); }
+          col[3 * k] = c.r; col[3 * k + 1] = c.g; col[3 * k + 2] = c.b;
+        }
+        g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+      }
+      const m = new THREE.PointsMaterial({ color: byNT ? '#ffffff' : SYN_COLOR[kind], vertexColors: byNT, size, sizeAttenuation: false, transparent: true, opacity: op, depthWrite: op >= 0.5 });
+      const P = new THREE.Points(g, m); P.layers.set(slot.i); P.visible = N.line.visible; P.userData = { nid: id, kind };
+      slot.nroot.add(P); N.synPts.push(P);
+    }
+  }
+  markDirty();
+}
+async function setSynOn(si, id, on) {
+  const slot = slots[si], N = slot.neurons.get(id); if (!N) return false;
+  N.synOn = !!on;
+  if (!on) { disposeSynPoints(N); N.synFocus = null; N.synRegion = null; markDirty(); return true; }
+  const S = await fetchSyn(id); if (!S || !slot.neurons.has(id)) { N.synOn = false; return false; }
+  buildSynPoints(slot, id); statusEl.textContent = `${id}：前突觸端 ${S.info.pre.toLocaleString()} 個、後突觸端 ${S.info.post.toLocaleString()} 個`;
+  return true;
+}
+async function setSynFocus(si, id, pid, region) {
+  // 點對象列：pid；點腦區那一列：region={reg, kind}；分組表裡點對象列：兩者都有（只亮該區內與該對象的突觸）。再點同一個就取消。沒開突觸點會自動打開。
+  const N = slots[si].neurons.get(id); if (!N) return;
+  const sameR = (a, b) => (!a && !b) || (a && b && a.reg === b.reg && a.kind === b.kind);
+  const same = (N.synFocus || null) === (pid || null) && sameR(N.synRegion, region);
+  N.synFocus = same ? null : (pid || null); N.synRegion = same ? null : (region || null);
+  if (!N.synOn) { if (!(await setSynOn(si, id, true))) return; const el = $('#synOn'); if (el) el.checked = true; }
+  buildSynPoints(slots[si], id);
+  if (N.synRegion || N.synFocus) { let n = 0; for (const P of N.synPts) if (P.material.opacity >= 0.5) n += P.geometry.attributes.position.count; statusEl.textContent = `亮起 ${n.toLocaleString()} 個突觸端點${N.synRegion ? `（${N.synRegion.kind === 'pre' ? '前' : '後'}突觸端在 ${regionLabel(id, N.synRegion.reg)}）` : ''}${N.synFocus ? `，對象 ${N.synFocus}` : ''}`; }
+}
+function regionLabel(id, k) { const store = metaKeyOf(id); const names = neuro.regionNames[SYN_REGION_KEY[store]] || []; return k ? (names[k - 1] || `區 ${k}`) : '不在任何區'; }
+async function showPartner(si, of, pid, dir) {
+  // 畫出上游（紫）或下游（綠）對象；記下它是誰的對象，視角連結用
+  const slot = slots[si]; const ok = await showNeuron(si, pid, null, new THREE.Color(PARTNER_COLOR[dir]), 0, 'partner');
+  const N = slot.neurons.get(pid); if (ok && N && !N.rel) { N.rel = { of, dir }; }
+  restyleNeurons(); return ok;
+}
+async function showPartners(si, of, dir, n) {
+  const S = neuro.syn.get(of); if (!S) return;
+  const list = (dir === 'up' ? S.info.up : S.info.down).slice(0, n);
+  let done = 0; for (const p of list) { if (await showPartner(si, of, p[0], dir)) done++; }
+  statusEl.textContent = `畫出 ${of} 的${dir === 'up' ? '上游' : '下游'} ${done}/${list.length} 顆`; renderCard();
+}
+function synBlockHtml(sel, slot, store) {
+  if (store === 'fc') return `<div class="syn"><h3>突觸與連結</h3><div class="muted">FlyCircuit 是光學影像，沒有突觸資料；FlyWire 與 MaleCNS 的神經元有。</div></div>`;
+  const S = neuro.syn.get(sel.id); const N = slot.neurons.get(sel.id);
+  if (S === undefined) { fetchSyn(sel.id).then(() => { if (neuro.selected && neuro.selected.id === sel.id) renderCard(); }); return `<div class="syn"><h3>突觸與連結（${SYN_TITLE[store]}）</h3><div class="muted">載入突觸資料…</div></div>`; }
+  if (!S) return `<div class="syn"><h3>突觸與連結（${SYN_TITLE[store]}）</h3><div class="muted">這顆沒有突觸資料（不在 proofread 名單或沒有突觸）。</div></div>`;
+  const I = S.info;
+  let html = `<div class="syn"><h3>突觸與連結（${SYN_TITLE[store]}）</h3>`;
+  const nt = I.nt || { t: '' };
+  html += `<div class="row"><span class="muted">傳導物質</span>${ntTag(nt.t)}${nt.c != null ? `<span class="muted">（預測信心 ${nt.c.toFixed(2)}）</span>` : ''}${nt.k ? `<span class="muted">　文獻：</span>${ntTag(nt.k)}` : ''}${nt.p ? `<span class="muted">　單顆預測：</span>${ntTag(nt.p)}` : ''}</div>`;
+  html += `<div class="row"><label class="f"><input type="checkbox" id="synOn" ${N && N.synOn ? 'checked' : ''}> 顯示突觸點</label><span class="muted">著色</span><select id="synColor"><option value="kind" ${neuro.synColor === 'kind' ? 'selected' : ''}>端別（pre 橙／post 藍）</option><option value="nt" ${neuro.synColor === 'nt' ? 'selected' : ''}>傳導物質（神經元）</option>${S.sPre ? `<option value="snt" ${neuro.synColor === 'snt' ? 'selected' : ''}>傳導物質（逐突觸）</option>` : ''}</select></div>`;
+  html += `<div class="muted"><span class="dot" style="background:${SYN_COLOR.pre}"></span>前突觸端 ${I.pre.toLocaleString()}（這顆是 pre）　<span class="dot" style="background:${SYN_COLOR.post}"></span>後突觸端 ${I.post.toLocaleString()}（這顆是 post）</div>`;
+  if (S.sPre && S.sPre.length) {       // 輸出組成（逐突觸）：這顆前突觸端每個突觸的預測；與神經元層級一致的比例
+    const comp = ntComp(S.sPre, true); const me = NT_CODES.indexOf(nt.t || ''); const agree = comp.order.find(([, k]) => k === me); let low = 0; for (const b of S.sPre) if ((b >> 3) < SYN_LOW) low++;
+    html += ntBar(comp, '前突觸端逐突觸預測的組成', '輸出（逐突觸）：') + `<div class="muted" style="margin-top:-2px">${nt.t ? `與神經元層級一致 ${pct(agree ? agree[0] / comp.n : 0)}` : '神經元層級不明，以上逐突觸組成可當參考'}；低信心（機率 &lt; 0.5）${pct(low / comp.n)}</div>`;
+    html += cotransHtml(I.cr, sel.id);
+  }
+  if (S.ntPost && S.ntPost.length) {   // 輸入組成：後突觸端依上游傳導物質（神經元層級）；有逐突觸就再列一條
+    html += ntBar(ntComp(S.ntPost, false), '後突觸端依上游神經元的傳導物質分', '輸入（上游神經元）：');
+    if (S.sPost) html += ntBar(ntComp(S.sPost, true), '後突觸端依上游 T-bar 的逐突觸預測分', '輸入（逐突觸）：');
+  }
+  const drawn = (pid) => slot.neurons.has(pid);
+  const regNames = neuro.regionNames[SYN_REGION_KEY[store]] || []; const regName = (k) => k ? (regNames[k - 1] || `區 ${k}`) : '不在任何區';
+  const regAtlas = activeSlots().find((s) => s.atlas && s.atlas.id === SYN_REGION_KEY[store].split('|')[0]);   // 有同套分區的格，區名可點去看
+  const grouped = neuro.partnerGroup && S.regPre;
+  if (S.regPre) html += `<div class="row"><label class="f"><input type="checkbox" id="pGroup" ${grouped ? 'checked' : ''}> 上下游依腦區分組</label><span class="muted">（突觸端點落在 ${esc(store === 'em' ? 'Ito 75' : 'MaleCNS')} 的哪一區）</span></div>`;
+  const kindOf = (dir) => dir === 'up' ? 'post' : 'pre';
+  const rowHtml = (p, k, dir, cnt, hide, reg) => { const [pid, , typ, side, pnt] = p; const cur = N && N.synFocus === pid && (reg === undefined ? !N.synRegion : (N.synRegion && N.synRegion.reg === reg && N.synRegion.kind === kindOf(dir))); return `<tr class="pt ${hide ? 'more' : ''} ${cur ? 'cur' : ''}" data-pid="${esc(pid)}" data-dir="${dir}" ${reg === undefined ? '' : `data-reg="${reg}"`} title="${reg === undefined ? '點一列：只亮與這顆之間的突觸' : '點一列：只亮這區內與這顆之間的突觸'}"><td>${k + 1}</td><td>${esc(pid)}</td><td>${esc(typ || '—')}</td><td>${esc(side || '—')}</td><td>${ntTag(pnt || '')}</td><td class="r">${cnt}</td><td><button class="tb" data-pdraw="${esc(pid)}" data-dir="${dir}">${drawn(pid) ? '看' : '畫出'}</button>${drawn(pid) ? `<button class="tb" data-prm="${esc(pid)}">移除</button>` : ''}</td></tr>`; };
+  for (const [dir, title, list, tot] of [['up', '上游', I.up, I.n_up], ['down', '下游', I.down, I.n_down]]) {
+    const shown = list.length;
+    html += `<h4 style="margin:8px 0 2px"><span class="dot" style="background:${PARTNER_COLOR[dir]}"></span>${title}對象 ${tot.toLocaleString()} 顆${tot > shown ? `<span class="muted">（列突觸數最多的 ${shown}）</span>` : ''}`;
+    html += `　<button class="tb" data-pall="${dir}:10" ${list.length ? '' : 'disabled'}>畫出前 10</button><button class="tb" data-pclear="${dir}">清除${title}</button></h4>`;
+    if (!list.length) continue;
+    const head = `<tr><th></th><th>id</th><th>型</th><th>側</th><th>傳導</th><th class="r">突觸</th><th></th></tr>`;
+    if (grouped) {   // 依腦區：每區一段（區名、該區突觸數、對象數；對象依該區內突觸數排，每區先列 5 顆）
+      const groups = partnerGroups(S, dir); const totSyn = dir === 'up' ? I.post : I.pre; let nMore = 0;
+      html += `<div class="nc"><table data-dir="${dir}" class="grp">`;
+      for (const g of groups) {
+        const r = regAtlas ? regAtlas.regions.find((q) => q.name === regName(g.reg)) : null;
+        const curR = N && !N.synFocus && N.synRegion && N.synRegion.reg === g.reg && N.synRegion.kind === kindOf(dir);
+        html += `<tr class="gh ${curR ? 'cur' : ''}" data-reg="${g.reg}" data-dir="${dir}" title="點這列：只亮這區的${dir === 'up' ? '後' : '前'}突觸端"><td colspan="5"><b>${esc(regName(g.reg))}</b>${r ? `<button class="tb" data-rgo="${r.id}" data-slot="${regAtlas.i}" title="跳到這區的卡片">看區</button>` : ''}<span class="muted">　${g.rows.length} 顆${g.other ? `（另 ${g.other} 個突觸來自前 ${shown} 名以外）` : ''}</span></td><td class="r">${g.n}</td><td class="muted">${pct(g.n / totSyn)}</td></tr>`;
+        g.rows.forEach(([rk, cnt], k) => { if (k >= 5) nMore++; html += rowHtml(list[rk], rk, dir, cnt, k >= 5, g.reg); });
+      }
+      html += `</table>${nMore ? `<button class="tb" data-more="${dir}">顯示全部（每區多於 5 顆的）</button>` : ''}</div>`;
+    } else {
+      html += `<div class="nc"><table data-dir="${dir}">${head}`;
+      list.forEach((p, k) => { html += rowHtml(p, k, dir, p[1], k >= 10); });
+      html += `</table>${list.length > 10 ? `<button class="tb" data-more="${dir}">顯示全部 ${list.length}</button>` : ''}</div>`;
+    }
+  }
+  html += `<div class="muted">傳導物質（神經元）：FlyWire 取 Schlegel 2024 註解的 top_nt（Eckstein 2024 逐突觸預測的多數）；MaleCNS 取 Berg 2025 的細胞型共識（consensus_nt），不明時退回單顆預測；「文獻」是實驗已知的。逐突觸：FlyWire 每個突觸六種機率（Eckstein 2024）、MaleCNS 每個 T-bar 七種機率，各取最高者；post 端用的是上游那個 T-bar 的預測。共釋放判讀只用機率 ≥ 0.5 的前突觸端：第二種 &lt; 15% 算單一；≥ 25% 且「同型別多數成員同一組合」或「第二種在某區占多數」才標疑似共釋放，其餘標雜訊可能；它是給人看的線索，不是定論。突觸數 = 兩顆之間的突觸個數（FlyWire 兩端都在 proofread 名單；MaleCNS 兩端都是 Traced）。「畫出」畫對象的骨架（上游紫、下游綠）、「看」切到它的卡片；點一列只亮與該對象之間的突觸（需先勾「顯示突觸點」）。「依腦區分組」把上下游表改成每區一段：上游依後突觸端所在區、下游依前突觸端所在區（A1 的 1 µm 標籤體），同一對象在幾個區就出現幾次，各列該區內的突觸數。點區名那一列只亮該區的突觸端點、點區內的對象列只亮該區內與該對象的突觸（再點一次取消；沒開突觸點會自動打開）；「看區」跳到該區的卡片（需目前有同套分區）。</div></div>`;
+  return html;
+}
+function wireSynBlock(sel, slot) {
+  const on = $('#synOn'); if (on) on.addEventListener('change', async (e) => { const ok = await setSynOn(sel.slot, sel.id, e.target.checked); if (!ok) { e.target.checked = false; statusEl.textContent = '突觸資料載入失敗'; } });
+  const sc = $('#synColor'); if (sc) sc.addEventListener('change', (e) => { neuro.synColor = e.target.value; for (const s of slots) for (const [id, N] of s.neurons) if (N.synOn) buildSynPoints(s, id); });
+  const pg = $('#pGroup'); if (pg) pg.addEventListener('change', (e) => { neuro.partnerGroup = e.target.checked; renderCard(); });
+  cardEl.querySelectorAll('[data-rgo]').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); const rid = Number(b.dataset.rgo), si = Number(b.dataset.slot); neuro.selected = null; restyleNeurons(); select(si, rid); }));
+  const syncCur = () => { const N = slot.neurons.get(sel.id); const kindOf = (dir) => dir === 'up' ? 'post' : 'pre'; const R = N && N.synRegion;
+    cardEl.querySelectorAll('tr.pt').forEach((x) => x.classList.toggle('cur', !!(N && N.synFocus === x.dataset.pid && (x.dataset.reg === undefined ? !R : (R && R.reg === Number(x.dataset.reg) && R.kind === kindOf(x.dataset.dir))))));
+    cardEl.querySelectorAll('tr.gh').forEach((x) => x.classList.toggle('cur', !!(N && !N.synFocus && R && R.reg === Number(x.dataset.reg) && R.kind === kindOf(x.dataset.dir)))); };
+  cardEl.querySelectorAll('tr.gh').forEach((tr) => tr.addEventListener('click', async () => { await setSynFocus(sel.slot, sel.id, null, { reg: Number(tr.dataset.reg), kind: tr.dataset.dir === 'up' ? 'post' : 'pre' }); syncCur(); }));
+  cardEl.querySelectorAll('[data-pdraw]').forEach((b) => b.addEventListener('click', async (e) => {
+    e.stopPropagation(); const pid = b.dataset.pdraw, dir = b.dataset.dir;
+    if (slot.neurons.has(pid)) { selectNeuron(sel.slot, pid); return; }
+    b.disabled = true; const ok = await showPartner(sel.slot, sel.id, pid, dir); if (!ok) statusEl.textContent = '找不到骨架 ' + pid; renderCard();
+  }));
+  cardEl.querySelectorAll('[data-prm]').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); removeNeuron(slot, b.dataset.prm); updateNeuCount(); restyleNeurons(); renderCard(); }));
+  cardEl.querySelectorAll('[data-pall]').forEach((b) => b.addEventListener('click', () => { const [dir, n] = b.dataset.pall.split(':'); b.disabled = true; showPartners(sel.slot, sel.id, dir, Number(n)); }));
+  cardEl.querySelectorAll('[data-pclear]').forEach((b) => b.addEventListener('click', () => { const dir = b.dataset.pclear; for (const [id, N] of [...slot.neurons]) if (N.rel && N.rel.of === sel.id && N.rel.dir === dir) removeNeuron(slot, id); updateNeuCount(); restyleNeurons(); renderCard(); }));
+  cardEl.querySelectorAll('[data-more]').forEach((b) => b.addEventListener('click', () => { const t = cardEl.querySelector(`table[data-dir="${b.dataset.more}"]`); t.classList.toggle('all'); b.textContent = t.classList.contains('all') ? (t.classList.contains('grp') ? '每區只列前 5' : '只列前 10') : (t.classList.contains('grp') ? '顯示全部（每區多於 5 顆的）' : '顯示全部 ' + t.querySelectorAll('tr.pt').length); }));
+  cardEl.querySelectorAll('tr.pt').forEach((tr) => tr.addEventListener('click', async () => { const reg = tr.dataset.reg === undefined ? null : { reg: Number(tr.dataset.reg), kind: tr.dataset.dir === 'up' ? 'post' : 'pre' }; await setSynFocus(sel.slot, sel.id, tr.dataset.pid, reg); syncCur(); }));
+}
+$('#neuClear').addEventListener('click', () => { for (const s of slots) clearNeurons(s); if (state.selected) renderCard(); });
+$('#neuOnly').addEventListener('change', (e) => { neuro.only = e.target.checked; restyleNeurons(); });
+
+// ---------- 測驗（B5）：隱藏標籤；題型 point＝給名字點腦區、mc＝亮一區四選一
+const quiz = { on: false, type: 'point', n: 10, items: [], i: 0, score: 0, wrong: [], awaiting: false, internal: false, atlasId: null, onlyWrong: null, limit: 0, deadline: 0, timer: null, timeouts: 0 };
+function quizLimit() { return Number($('#quizTime').value) || 0; }   // 每題秒數；0＝不限時
+function clearQuizTimer() { if (quiz.timer) { clearInterval(quiz.timer); quiz.timer = null; } }
+function startQuizTimer() {   // 限時：每 200 ms 更新剩餘秒數與倒數條；到 0 就當答錯
+  clearQuizTimer(); if (!quiz.limit || !quiz.awaiting) return;
+  quiz.deadline = Date.now() + quiz.limit * 1000; tickQuizTimer();
+  quiz.timer = setInterval(tickQuizTimer, 200);
+}
+function tickQuizTimer() {
+  const left = Math.max(0, (quiz.deadline - Date.now()) / 1000);
+  const el = $('#quizClock'); if (el) { el.querySelector('span').textContent = `剩 ${Math.ceil(left)} 秒`; el.querySelector('i').style.width = `${left / quiz.limit * 100}%`; el.classList.toggle('hurry', left <= 5); }
+  if (left <= 0) { clearQuizTimer(); quizTimeout(); }
+}
+function quizTimeout() {   // 時間到：算答錯，亮出正解，等使用者按「下一題」
+  if (!quiz.awaiting) return;
+  const it = quiz.items[quiz.i]; const slot = slots[0]; quiz.awaiting = false; quiz.timeouts++; quiz.wrong.push(it.base);
+  recordProgress(quiz.atlasId, it.base, false);
+  quiz.feedback = `<span class="ng">時間到。</span>正確是 <b>${esc(it.base)}</b>（${esc((basesOf(slot).get(it.base) || {}).zh || '')}）。`;
+  quiz.internal = true; state.selected = { slot: 0, id: it.id }; quiz.internal = false;
+  restyle(); renderQuiz();
+}
+function loadProgress(atlasId) { try { return JSON.parse(localStorage.getItem('bd.progress.' + atlasId) || '{}'); } catch (e) { return {}; } }
+function saveProgress(atlasId, p) { try { localStorage.setItem('bd.progress.' + atlasId, JSON.stringify(p)); } catch (e) { /* 無法存 */ } }
+function mastered(p, base) { const r = p[base]; return !!r && r.ok >= 2 && r.ok > r.ng; }
+function recordProgress(atlasId, base, ok) { const p = loadProgress(atlasId); const r = p[base] || (p[base] = { ok: 0, ng: 0 }); if (ok) r.ok++; else r.ng++; saveProgress(atlasId, p); }
+function basesOf(slot) { const seen = new Map(); for (const r of slot.regions) if (!seen.has(r.base)) seen.set(r.base, r); return seen; }
+function pickRegionId(slot, base) { const rs = slot.regions.filter((r) => r.base === base); return (rs.find((r) => r.side === 'L') || rs.find((r) => r.side === 'M') || rs[0]).id; }
+function startQuiz(opts) {
+  const slot = slots[0]; if (!slot.atlas) return;
+  clearQuizTimer();
+  Object.assign(quiz, { on: true, i: 0, score: 0, wrong: [], awaiting: false, atlasId: slot.atlas.id, limit: quizLimit(), timeouts: 0 }, opts || {});
+  const bases = [...basesOf(slot).keys()];
+  let pool = quiz.onlyWrong && quiz.onlyWrong.length ? quiz.onlyWrong.filter((b) => bases.includes(b)) : bases;
+  pool = pool.slice().sort(() => Math.random() - 0.5);
+  quiz.items = pool.slice(0, Math.min(quiz.n, pool.length)).map((b) => {
+    const others = bases.filter((x) => x !== b).sort(() => Math.random() - 0.5).slice(0, 3);
+    return { base: b, id: pickRegionId(slot, b), choices: [b, ...others].sort(() => Math.random() - 0.5) };
+  });
+  quiz.onlyWrong = null;
+  if (state.mode !== 'single') setMode('single');
+  listEl.hidden = true; $('#pins').hidden = true; state.selected = null; state.pins = [];
+  applyFilters(); nextQuestion(); syncQuizSel();
+}
+function stopQuiz() {
+  clearQuizTimer(); quiz.on = false; quiz.awaiting = false; listEl.hidden = false; state.selected = null; syncQuizSel();
+  buildList(); applyFilters(); renderPins(); renderCard(); updateStatus();
+}
+function nextQuestion() {
+  clearQuizTimer();
+  if (quiz.i >= quiz.items.length) { quiz.awaiting = false; renderQuiz(); return; }
+  const it = quiz.items[quiz.i]; quiz.awaiting = true; quiz.feedback = ''; quiz.limit = quizLimit();
+  quiz.internal = true; state.selected = quiz.type === 'mc' ? { slot: 0, id: it.id } : null; quiz.internal = false;
+  restyle(); renderQuiz(); startQuizTimer();
+  if (quiz.type === 'mc') { const b = boxOf(slots[0], [it.id]); if (b) { b.getCenter(slots[0].target); applyCamera(); } }
+}
+function quizAnswer(si, idOrBase) {
+  if (!quiz.awaiting) return;
+  const it = quiz.items[quiz.i]; const slot = slots[0];
+  const base = typeof idOrBase === 'number' ? slot.meshes.get(idOrBase).userData.region.base : idOrBase;
+  const ok = base === it.base; quiz.awaiting = false; clearQuizTimer();
+  if (ok) quiz.score++; else quiz.wrong.push(it.base);
+  recordProgress(quiz.atlasId, it.base, ok);
+  quiz.feedback = ok ? `<span class="ok">答對！</span>` : `<span class="ng">答錯。</span>你選的是 <b>${esc(base)}</b>，正確是 <b>${esc(it.base)}</b>（${esc((basesOf(slot).get(it.base) || {}).zh || '')}）。`;
+  quiz.internal = true; state.selected = { slot: 0, id: it.id }; quiz.internal = false;
+  restyle(); renderQuiz();   // 不自動跳題：等使用者按「下一題」
+}
+function renderQuiz() {
+  const slot = slots[0], prog = loadProgress(slot.atlas.id), allBases = [...basesOf(slot).keys()];
+  const nMaster = allBases.filter((b) => mastered(prog, b)).length;
+  let html = `<div class="quiz"><h2>測驗　<span class="muted">${esc(slot.atlas.short)}</span> <button class="tb" id="quizStop">結束</button></h2>`;
+  if (quiz.i >= quiz.items.length) {
+    html += `<div class="q">完成：${quiz.score}／${quiz.items.length} 題答對${quiz.limit ? `　<span class="muted">（每題限 ${quiz.limit} 秒${quiz.timeouts ? `，${quiz.timeouts} 題超時` : ''}）</span>` : ''}</div>`;
+    if (quiz.wrong.length) html += `<div>答錯的：${quiz.wrong.map((b) => `<b>${esc(b)}</b>`).join('、')}</div>`;
+    html += `<div class="choices"><button class="tb" id="quizAgain">再測一次</button>${quiz.wrong.length ? '<button class="tb" id="quizWrong">只練答錯的</button>' : ''}<button class="tb" id="quizType">換題型（目前：${quiz.type === 'point' ? '給名字點腦區' : '亮一區四選一'}）</button></div>`;
+  } else {
+    const it = quiz.items[quiz.i];
+    html += `<div class="bar"><i style="width:${Math.round(quiz.i / quiz.items.length * 100)}%"></i></div><div class="muted">第 ${quiz.i + 1}／${quiz.items.length} 題　答對 ${quiz.score}</div>`;
+    if (quiz.limit && quiz.awaiting) html += `<div class="clock" id="quizClock"><span>剩 ${quiz.limit} 秒</span><div class="bar"><i style="width:100%"></i></div></div>`;
+    if (quiz.type === 'point') html += `<div class="q">請在 3D 裡點出 <b>${esc(it.base)}</b><br><span class="muted">${esc((basesOf(slot).get(it.base) || {}).zh || '')}</span></div><div class="muted">左右任一側都算；可以旋轉、縮放。</div>`;
+    else html += `<div class="q">紅色的是哪一區？</div><div class="choices">${it.choices.map((c) => `<button class="tb" data-ans="${esc(c)}" ${quiz.awaiting ? '' : 'disabled'}>${esc(c)}</button>`).join('')}</div>`;
+    html += `<div class="q">${quiz.feedback || ''}</div>`;
+    if (!quiz.awaiting && quiz.feedback) html += `<div class="choices"><button class="tb" id="quizNext" style="font-weight:600">${quiz.i + 1 >= quiz.items.length ? '看結果' : '下一題 ▸'}</button></div>`;
+  }
+  html += `<hr><div class="muted">學習進度（答對 2 次以上且多於答錯）：已掌握 ${nMaster}／${allBases.length} 區，清單裡打 ✓。<button class="tb" id="progClear">清除進度</button></div></div>`;
+  cardEl.innerHTML = html;
+  $('#quizStop').addEventListener('click', stopQuiz);
+  const nx = $('#quizNext'); if (nx) { nx.addEventListener('click', () => { quiz.i++; nextQuestion(); }); nx.focus(); }
+  cardEl.querySelectorAll('[data-ans]').forEach((b) => b.addEventListener('click', () => quizAnswer(0, b.dataset.ans)));
+  const ag = $('#quizAgain'); if (ag) ag.addEventListener('click', () => startQuiz());
+  const qw = $('#quizWrong'); if (qw) qw.addEventListener('click', () => startQuiz({ onlyWrong: quiz.wrong.slice() }));
+  const qt = $('#quizType'); if (qt) qt.addEventListener('click', () => startQuiz({ type: quiz.type === 'point' ? 'mc' : 'point' }));
+  $('#progClear').addEventListener('click', () => { saveProgress(slot.atlas.id, {}); renderQuiz(); });
+}
+function syncQuizSel() {   // 測驗中：下拉顯示「結束測驗」；平時回到「測驗…」
+  const sel = $('#quizSel'); const stop = sel.querySelector('option[value=stop]');
+  if (quiz.on) { if (!stop) { const o = document.createElement('option'); o.value = 'stop'; o.textContent = '結束測驗'; sel.appendChild(o); } sel.value = 'stop'; }
+  else { if (stop) stop.remove(); sel.value = ''; }
+}
+try { const t = localStorage.getItem('bd.quizTime'); if (t != null && $('#quizTime').querySelector(`option[value="${t}"]`)) $('#quizTime').value = t; } catch (e) { /* 無法讀 */ }
+$('#quizTime').addEventListener('change', () => { try { localStorage.setItem('bd.quizTime', $('#quizTime').value); } catch (e) { /* 無法存 */ } });   // 測驗中改：下一題生效
+$('#quizSel').addEventListener('change', (e) => {
+  const v = e.target.value;
+  if (v === 'stop' || (quiz.on && !v)) { stopQuiz(); return; }
+  if (v === 'point' || v === 'mc') startQuiz({ type: v });
+  syncQuizSel();
+});
+// ---------- 書籤視角
+function loadBookmarks() { try { return JSON.parse(localStorage.getItem('bd.bookmarks') || '[]'); } catch (e) { return []; } }
+function saveBookmarks(b) { try { localStorage.setItem('bd.bookmarks', JSON.stringify(b)); } catch (e) { /* 無法存 */ } }
+function renderBookmarks() {
+  const bms = loadBookmarks(); const box = $('#bmList');
+  box.innerHTML = bms.length ? bms.map((b, i) => `<div class="bm"><b>${esc(b.name)}</b><span class="muted">${esc(b.t)}</span><button class="tb" data-go="${i}">回到</button><button class="tb" data-del="${i}">刪除</button></div>`).join('') : '<div class="muted">還沒有書籤。按「把目前畫面加入書籤」。</div>';
+  box.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', async () => { const bm = loadBookmarks()[Number(b.dataset.go)]; $('#bmDlg').close(); await restoreFromHash(parseHash(bm.hash)); }));
+  box.querySelectorAll('[data-del]').forEach((b) => b.addEventListener('click', () => { const l = loadBookmarks(); l.splice(Number(b.dataset.del), 1); saveBookmarks(l); renderBookmarks(); }));
+}
+$('#bmBtn').addEventListener('click', () => { renderBookmarks(); const d = $('#bmDlg'); if (d.showModal) d.showModal(); else d.setAttribute('open', ''); });
+$('#bmClose').addEventListener('click', () => { const d = $('#bmDlg'); if (d.close) d.close(); else d.removeAttribute('open'); });
+$('#bmAdd').addEventListener('click', () => {
+  const name = window.prompt('書籤名稱：', (slots[0].atlas ? slots[0].atlas.short + ' ' : '') + (state.selected ? slots[state.selected.slot].meshes.get(state.selected.id).userData.region.base : state.mode));
+  if (!name) return; const l = loadBookmarks(); l.push({ name, hash: buildHash(), t: new Date().toLocaleString('zh-TW', { hour12: false }) }); saveBookmarks(l); renderBookmarks();
+});
+async function restoreFromHash(hash) {
+  // 由連結或書籤恢復：分區、模式、對照、視角、左右、選取、釘選、B 畫法、神經元
+  if (quiz.on) stopQuiz();
+  const sel = $('#atlas');
+  if (hash.a && hash.a !== sel.value && state.atlases.atlases.some((a) => a.id === hash.a)) { sel.value = hash.a; await loadAtlas(slots[0], hash.a); }
+  const m = hash.m && ['overlay', 'side'].includes(hash.m) ? hash.m : 'single';
+  if (m !== 'single') await setMode(m, hash.b); else if (state.mode !== 'single') setMode('single');
+  if (hash.v && ['all', 'L', 'R'].includes(hash.v)) { const b = document.querySelector(`[data-side="${hash.v}"]`); if (b) b.click(); }
+  if (hash.t) { ctrl.theta = Number(hash.t) || 0; ctrl.phi = Math.min(Math.PI - 0.02, Math.max(0.02, Number(hash.p) || Math.PI / 2)); ctrl.zoom = Math.max(0.05, Math.min(6, Number(hash.z) || 1)); applyCamera(); }
+  state.pins = []; state.selected = null; if (neuro.selected) { neuro.selected = null; restyleNeurons(); }
+  if (hash.s) { const [a, b, sb] = hash.s.split(':'); const si = Number(a), id = Number(b); if (slots[si] && slots[si].meshes.has(id)) select(si, id, sb || null); }
+  if (hash.bs && ['wire', 'mono', 'tint'].includes(hash.bs)) { const b = document.querySelector(`[data-bstyle="${hash.bs}"]`); if (b) b.click(); }
+  if (hash.k) { for (const kv of hash.k.split(',')) { const i = kv.indexOf(':'); const si = Number(kv.slice(0, i)), v = kv.slice(i + 1); if (!slots[si] || !slots[si].atlas) continue; if (v.startsWith('N')) { const nid = v.slice(1); if (await showNeuron(si, nid, null) && pinIndexN(si, nid) < 0) state.pins.push({ slot: si, nid }); } else { const [a, sb] = v.split(':'); const id = Number(a); if (slots[si].meshes.has(id) && pinIndex(si, id, sb) < 0) state.pins.push(sb ? { slot: si, id, sub: sb } : { slot: si, id }); } } }
+  $('#focus').checked = !!hash.f; state.focus = !!hash.f;
+  renderPins(); restyle(); restyleNeurons(); renderCard();
+  if (hash.src) for (const kv of hash.src.split(',')) { const i = kv.indexOf(':'); if (i > 0) neuro.src[kv.slice(0, i)] = kv.slice(i + 1); }
+  if (hash.ln) for (const kv of hash.ln.split(',')) { const i = kv.lastIndexOf(':'); if (i > 0) neuro.rule[kv.slice(0, i)] = kv.slice(i + 1); }
+  if (hash.nr) { for (const kv of hash.nr.split(',')) { const i = kv.indexOf(':'); const si = Number(kv.slice(0, i)), reg = kv.slice(i + 1); if (slots[si] && slots[si].atlas) await drawLN(si, reg); } }
+  if (hash.nn) { const i = hash.nn.indexOf(':'); const si = Number(hash.nn.slice(0, i)), id = hash.nn.slice(i + 1); if (await showNeuron(si, id, null)) selectNeuron(si, id); }
+  if (hash.pp) for (const kv of hash.pp.split(',')) { const [si, pid, d, of] = kv.split(':'); if (slots[Number(si)] && slots[Number(si)].atlas) { await showNeuron(Number(si), of, null); await showPartner(Number(si), of, pid, d === 'u' ? 'up' : 'down'); } }   // 對象所屬的那顆也要畫（它未必是目前選取的）
+  if (hash.sc && ['kind', 'nt', 'snt'].includes(hash.sc)) neuro.synColor = hash.sc;
+  if (hash.pg === '1') neuro.partnerGroup = true;
+  if (hash.sy) for (const kv of hash.sy.split(',')) { const i = kv.indexOf(':'); const si = Number(kv.slice(0, i)), id = kv.slice(i + 1); if (slots[si] && slots[si].atlas && await showNeuron(si, id, null)) await setSynOn(si, id, true); }
+  if (hash.sf) for (const kv of hash.sf.split(',')) {   // 突觸焦點：對象／腦區（只亮）；要那顆已開突觸點
+    const [si, id, pid, kind, reg] = kv.split(':'); const N = slots[Number(si)] && slots[Number(si)].neurons.get(id); if (!N || !N.synOn) continue;
+    N.synFocus = pid || null; N.synRegion = kind ? { reg: Number(reg), kind: kind === 'p' ? 'pre' : 'post' } : null; buildSynPoints(slots[Number(si)], id);
+  }
+  if (hash.pp || hash.sy) renderCard();
+  // LPU 分類（lc=勾選的代碼、lo=其他不畫）：放在規則恢復之後
+  state.lpu.on = new Set(); state.lpu.only = hash.lo === '1';
+  if (hash.lc) for (const c of hash.lc.split(',')) if (['0', '1', '2', '3', '4'].includes(c)) state.lpu.on.add(Number(c));
+  lpuChanged();
+}
+// ---------- 縮寫表
+function buildAbbr() {
+  const tb = $('#abbrTbl tbody'); tb.innerHTML = '';
+  const sorted = state.abbr.slice().sort((x, y) => x.key.localeCompare(y.key, 'en', { sensitivity: 'base', numeric: true }));   // 依首字母（不分大小寫、數字照大小）
+  for (const a of sorted) { const tr = document.createElement('tr'); tr.innerHTML = `<td>${esc(a.key)}</td><td>${esc(a.zh)}</td><td>${esc(a.desc || '')}</td>`; tb.appendChild(tr); }
+}
+$('#abbrBtn').addEventListener('click', () => { const d = $('#abbrDlg'); if (d.showModal) d.showModal(); else d.setAttribute('open', ''); $('#abbrQ').focus(); });
+$('#abbrClose').addEventListener('click', () => { const d = $('#abbrDlg'); if (d.close) d.close(); else d.removeAttribute('open'); });
+$('#abbrQ').addEventListener('input', (e) => { const q = e.target.value.trim().toLowerCase(); $('#abbrTbl tbody').querySelectorAll('tr').forEach((tr) => { tr.hidden = !!q && !tr.textContent.toLowerCase().includes(q); }); });
+// ---------- 視角連結（#m=模式&a=主分區&b=對照&t=theta&p=phi&z=zoom&v=左右&s=槽:區id）
+function buildHash() {
+  const h = { m: state.mode, a: $('#atlas').value, t: ctrl.theta.toFixed(3), p: ctrl.phi.toFixed(3), z: ctrl.zoom.toFixed(3), v: state.side };
+  if (state.mode !== 'single') h.b = $('#atlasB').value;
+  if (state.selected) h.s = state.selected.slot + ':' + state.selected.id + (state.selected.sub ? ':' + state.selected.sub : '');
+  if (state.pins.length) h.k = state.pins.map((p) => p.slot + ':' + (p.nid != null ? 'N' + p.nid : p.id + (p.sub ? ':' + p.sub : ''))).join(',');
+  if (state.focus) h.f = 1;
+  if (state.mode === 'overlay') h.bs = state.bStyle;
+  h.ln = Object.entries(neuro.rule).map(([a, r]) => a + ':' + r).join(',');
+  if (Object.keys(neuro.src).length) h.src = Object.entries(neuro.src).map(([a, r]) => a + ':' + r).join(',');
+  if (neuro.drawn.size) h.nr = [...neuro.drawn].join(',');
+  if (neuro.selected) h.nn = neuro.selected.slot + ':' + neuro.selected.id;
+  const sy = [], pp = [];
+  const sf = [];
+  for (const s of slots) for (const [id, N] of s.neurons) { if (N.synOn) sy.push(s.i + ':' + id); if (N.rel) pp.push(s.i + ':' + id + ':' + N.rel.dir[0] + ':' + N.rel.of); if (N.synOn && (N.synFocus || N.synRegion)) sf.push([s.i, id, N.synFocus || '', N.synRegion ? (N.synRegion.kind === 'pre' ? 'p' : 'q') : '', N.synRegion ? N.synRegion.reg : ''].join(':')); }
+  if (sy.length) h.sy = sy.join(','); if (pp.length) h.pp = pp.join(','); if (sf.length) h.sf = sf.join(','); if (neuro.synColor !== 'kind') h.sc = neuro.synColor; if (neuro.partnerGroup) h.pg = '1';
+  if (state.lpu.on.size) { h.lc = [...state.lpu.on].join(','); if (state.lpu.only) h.lo = '1'; }
+  return '#' + Object.entries(h).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
+}
+function parseHash(str) {
+  const out = {}; for (const kv of (str == null ? location.hash : str).replace(/^#/, '').split('&')) { const [k, v] = kv.split('='); if (k) out[k] = decodeURIComponent(v || ''); } return out;
+}
+// ---------- 存成 3D 檔：把目前畫面上看得到的腦區／神經元／突觸點，轉到「目前鏡頭」座標（正面朝觀看者、上方朝上）後輸出
+//   .glb：PowerPoint「插入 → 3D 模型」可用（編輯畫面可拖曳旋轉，放映時用 3D 動畫「轉盤」或轉化轉場）
+//   .html：獨立互動網頁，滑鼠旋轉、縮放、點區看資訊
+const SNAP_SCALE = 0.01;   // µm → 檔案單位（PPT 會自動縮放，只是避免數字太大）
+function snapRegionInfo(s, r) {
+  const o = { n: r.name, b: r.base, en: r.full_en || '', zh: r.zh || '', fn: r.function || '', ev: r.evidence || '', src: r.source || '', note: r.note || '', at: s.atlas.short };
+  const tv = (state.trivia || {})[r.base]; if (tv) o.tv = tv.hook + '：' + tv.text;
+  if (lpuActive()) { const lc = lpuClassOf(s.atlas.id, r.name); if (lc) o.lpu = (LPU_CLASSES.find((c) => c.code === lc[0]) || {}).zh + (lc[4] ? '（' + lc[4] + '）' : '') + '　' + lpuRuleText(s.atlas.id); }
+  return o;
+}
+function snapCollect() {
+  const out = { prims: [], labels: [], sel: null };
+  const act = activeSlots(); let shiftX = 0;
+  act.forEach((s, k) => {
+    if (!s.root.visible) return;
+    const cam = state.mode === 'side' ? s.camera : camA;
+    cam.updateMatrixWorld(true); s.root.updateMatrixWorld(true);
+    const view = new THREE.Matrix4().extractRotation(cam.matrixWorldInverse);
+    const base = new THREE.Matrix4().makeScale(SNAP_SCALE, SNAP_SCALE, SNAP_SCALE).multiply(view).multiply(new THREE.Matrix4().makeTranslation(-s.target.x, -s.target.y, -s.target.z));
+    const first = out.prims.length, firstLab = out.labels.length;
+    s.root.traverseVisible((o) => {
+      if (!(o.isMesh || o.isLine || o.isPoints) || !o.geometry || !o.material || o.material.opacity <= 0.02) return;
+      const g = o.geometry, P = g.attributes.position; if (!P || !P.count) return;
+      const M = base.clone().multiply(o.matrixWorld), pos = new Float32Array(P.count * 3), v = new THREE.Vector3();
+      for (let i = 0; i < P.count; i++) { v.fromBufferAttribute(P, i).applyMatrix4(M); pos[i * 3] = v.x; pos[i * 3 + 1] = v.y; pos[i * 3 + 2] = v.z; }
+      const p = { pos, mode: o.isMesh ? 4 : o.isPoints ? 0 : (o.isLineSegments ? 1 : 3), slot: s.i };
+      if (o.isMesh) {
+        if (!g.attributes.normal) g.computeVertexNormals();
+        const N = g.attributes.normal, nm = new THREE.Matrix3().getNormalMatrix(M), nrm = new Float32Array(N.count * 3);
+        for (let i = 0; i < N.count; i++) { v.fromBufferAttribute(N, i).applyMatrix3(nm).normalize(); nrm[i * 3] = v.x; nrm[i * 3 + 1] = v.y; nrm[i * 3 + 2] = v.z; }
+        p.nrm = nrm;
+      }
+      if (g.index) p.idx = Uint32Array.from(g.index.array);
+      const mat = o.material;
+      if (mat.vertexColors && g.attributes.color) { const C = g.attributes.color; p.col = new Float32Array(C.count * 3); for (let i = 0; i < C.count; i++) { p.col[i * 3] = C.getX(i); p.col[i * 3 + 1] = C.getY(i); p.col[i * 3 + 2] = C.getZ(i); } }
+      p.color = '#' + mat.color.getHexString(); p.opacity = mat.wireframe ? Math.min(mat.opacity, 0.25) : mat.opacity; p.wire = !!mat.wireframe; if (o.isPoints) p.size = mat.size || 2;
+      const ud = o.userData || {};
+      if (ud.nid != null) { const m = neuro.metaCache.get(ud.nid) || {}; p.name = '神經元 ' + ud.nid + (ud.kind ? ' ' + ud.kind : ''); p.info = { nid: String(ud.nid), t: m.t || '', d: m.d || '', at: s.atlas.short }; }
+      else if (ud.region && typeof ud.region === 'object') { p.name = ud.sub || ud.region.name; p.info = snapRegionInfo(s, ud.region); if (ud.sub) { const sc = subClassOf(s.atlas.id, ud.region.name, ud.sub); p.info = Object.assign({}, p.info, { n: ud.sub, lpu: sc ? sc[5] + '（' + ud.region.name + ' 的子區；LN ' + sc[4] + ' 顆）　' + lpuRuleText(s.atlas.id) : p.info.lpu }); } if (state.selected && state.selected.slot === s.i && state.selected.id === ud.region.id) out.sel = out.prims.length; }
+      else p.name = o === s.brain ? '全腦輪廓' : 'obj';
+      out.prims.push(p);
+    });
+    for (const [id, L] of s.labels) {
+      const m = L.own || s.meshes.get(id); if (!m || !m.visible || L.off || L.el.hidden) continue;
+      const w = L.pos.clone().applyMatrix4(s.root.matrixWorld).applyMatrix4(base);
+      out.labels.push({ t: L.el.textContent, p: [w.x, w.y, w.z], pri: !!L.pri, b: s.i === 1 && state.mode === 'overlay' });
+    }
+    // 並排模式：B 放到 A 的右邊
+    if (state.mode === 'side' && k > 0) {
+      let minB = Infinity; for (let i = first; i < out.prims.length; i++) { const a = out.prims[i].pos; for (let j = 0; j < a.length; j += 3) minB = Math.min(minB, a[j]); }
+      const dx = shiftX - minB + 40 * SNAP_SCALE;
+      for (let i = first; i < out.prims.length; i++) { const a = out.prims[i].pos; for (let j = 0; j < a.length; j += 3) a[j] += dx; }
+      for (let i = firstLab; i < out.labels.length; i++) out.labels[i].p[0] += dx;
+    }
+    for (const p of out.prims) { const a = p.pos; for (let j = 0; j < a.length; j += 3) shiftX = Math.max(shiftX, a[j]); }
+  });
+  out.dist = (slots[0].home ? slots[0].home.dist : 1200) * ctrl.zoom * SNAP_SCALE;
+  out.title = act.filter((s) => s.atlas).map((s) => s.atlas.short).join(state.mode === 'overlay' ? ' ＋ ' : ' ｜ ');
+  return out;
+}
+const srgbToLin = (c) => (c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+function snapGLB(snap) {
+  // 自己寫的 glTF 2.0 二進位輸出（不靠外部函式庫，離線、artifact 也能用）
+  const json = { asset: { version: '2.0', generator: '果蠅腦區學習 brain_division' }, scene: 0, scenes: [{ name: snap.title, nodes: [] }], nodes: [], meshes: [], materials: [], accessors: [], bufferViews: [], buffers: [] };
+  const chunks = []; let off = 0;
+  const addView = (arr, target) => { const pad = (4 - (off % 4)) % 4; if (pad) { chunks.push(new Uint8Array(pad)); off += pad; } const u8 = new Uint8Array(arr.buffer, arr.byteOffset, arr.byteLength); chunks.push(u8); json.bufferViews.push({ buffer: 0, byteOffset: off, byteLength: u8.byteLength, target }); off += u8.byteLength; return json.bufferViews.length - 1; };
+  const addAcc = (arr, type, ct, target, minmax) => { const n = type === 'VEC3' ? 3 : 1; const a = { bufferView: addView(arr, target), componentType: ct, count: arr.length / n, type }; if (minmax) { const mn = [Infinity, Infinity, Infinity], mx = [-Infinity, -Infinity, -Infinity]; for (let i = 0; i < arr.length; i += 3) for (let j = 0; j < 3; j++) { mn[j] = Math.min(mn[j], arr[i + j]); mx[j] = Math.max(mx[j], arr[i + j]); } a.min = mn; a.max = mx; } json.accessors.push(a); return json.accessors.length - 1; };
+  const matKey = new Map();
+  for (const p of snap.prims) {
+    if (p.mode !== 4 && !p.pos.length) continue;
+    const c = new THREE.Color(p.color); const k = p.color + '|' + p.opacity.toFixed(2) + '|' + p.mode + '|' + !!p.col;
+    if (!matKey.has(k)) {
+      json.materials.push({ name: 'm' + json.materials.length, pbrMetallicRoughness: { baseColorFactor: [srgbToLin(c.r), srgbToLin(c.g), srgbToLin(c.b), p.opacity], metallicFactor: 0, roughnessFactor: 0.65 }, doubleSided: true, alphaMode: p.opacity < 0.99 ? 'BLEND' : 'OPAQUE' });
+      matKey.set(k, json.materials.length - 1);
+    }
+    const attrs = { POSITION: addAcc(p.pos, 'VEC3', 5126, 34962, true) };
+    if (p.nrm) attrs.NORMAL = addAcc(p.nrm, 'VEC3', 5126, 34962);
+    if (p.col) { const lin = p.col.map(srgbToLin); attrs.COLOR_0 = addAcc(lin, 'VEC3', 5126, 34962); }
+    const prim = { attributes: attrs, material: matKey.get(k), mode: p.mode };
+    if (p.idx) prim.indices = addAcc(p.idx, 'SCALAR', 5125, 34963);
+    json.meshes.push({ name: p.name, primitives: [prim] });
+    const node = { name: p.info && p.info.zh ? p.name + ' ' + p.info.zh : p.name, mesh: json.meshes.length - 1 };
+    if (p.info) node.extras = p.info;
+    json.nodes.push(node); json.scenes[0].nodes.push(json.nodes.length - 1);
+  }
+  const binPad = (4 - (off % 4)) % 4; if (binPad) { chunks.push(new Uint8Array(binPad)); off += binPad; }
+  json.buffers.push({ byteLength: off });
+  let jb = new TextEncoder().encode(JSON.stringify(json)); const jp = (4 - (jb.length % 4)) % 4;
+  if (jp) { const t = new Uint8Array(jb.length + jp); t.set(jb); t.fill(0x20, jb.length); jb = t; }
+  const total = 12 + 8 + jb.length + 8 + off, head = new DataView(new ArrayBuffer(20));
+  head.setUint32(0, 0x46546C67, true); head.setUint32(4, 2, true); head.setUint32(8, total, true); head.setUint32(12, jb.length, true); head.setUint32(16, 0x4E4F534A, true);
+  const binHead = new DataView(new ArrayBuffer(8)); binHead.setUint32(0, off, true); binHead.setUint32(4, 0x004E4942, true);
+  return new Blob([head.buffer, jb, binHead.buffer, ...chunks], { type: 'model/gltf-binary' });
+}
+function b64Of(arr) { const u8 = new Uint8Array(arr.buffer, arr.byteOffset, arr.byteLength); let s = ''; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); }
+async function snapHTML(snap) {
+  const data = { title: snap.title, dist: snap.dist, sel: snap.sel, labels: snap.labels, when: new Date().toLocaleString('zh-TW'),
+    prims: snap.prims.map((p) => ({ name: p.name, mode: p.mode, color: p.color, opacity: p.opacity, wire: p.wire, size: p.size, info: p.info, pos: b64Of(p.pos), nrm: p.nrm ? b64Of(p.nrm) : null, idx: p.idx ? b64Of(p.idx) : null, col: p.col ? b64Of(p.col) : null })) };
+  const SC = '<' + '/script>';
+  let three = '';
+  try { const r = await fetch('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'); if (r.ok) three = (await r.text()).replace(/<\/script/gi, '<\\/script'); } catch (e) { /* 抓不到就用連結（打開時需要網路） */ }
+  const threeTag = three ? '<script>/* three.js r128, MIT, https://threejs.org */\n' + three + '\n' + SC : '<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">' + SC;
+  const css = 'html,body{margin:0;height:100%;font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;background:#e9ecf0;color:#1d2129}#v{position:fixed;inset:0;cursor:grab}#v canvas{display:block}#labs{position:fixed;inset:0;pointer-events:none;overflow:hidden}.lab{position:absolute;transform:translate(-50%,-50%);font:600 12px system-ui,sans-serif;background:rgba(255,255,255,.82);padding:1px 4px;border-radius:3px;white-space:nowrap}.lab.b{border:1px dashed #5d6572;font-weight:500}#top{position:fixed;left:12px;top:10px;font-size:13px;color:#5d6572;pointer-events:none}#top b{color:#1d2129;font-size:15px}#bar{position:fixed;left:12px;bottom:10px;display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:13px}#bar button{border:1px solid #c9ced6;background:#fff;border-radius:4px;padding:3px 9px;cursor:pointer}#info{position:fixed;right:12px;top:10px;width:min(340px,90vw);max-height:80vh;overflow:auto;background:#fff;border:1px solid #d9dde3;border-radius:6px;padding:10px 14px;font-size:13px;line-height:1.55;display:none}#info h2{margin:0;font-size:22px}#info .m{color:#5d6572;font-size:12px}#info dt{color:#5d6572;font-size:12px;margin-top:6px}#info dd{margin:0}';
+  const html = '<' + '!doctype html><' + 'html lang="zh-Hant"><' + 'head><' + 'meta charset="utf-8"><' + 'meta name="viewport" content="width=device-width,initial-scale=1"><title>果蠅腦區 3D：' + esc(data.title) + '</title><style>' + css + '</style></' + 'head><' + 'body><div id="v"></div><div id="labs"></div><div id="top"><b>' + esc(data.title) + '</b><br>' + esc(data.when) + '　左鍵旋轉｜滾輪縮放｜右鍵平移｜點區看資訊</div><div id="info"></div><div id="bar"></div>'
+    + threeTag + '<script type="application/json" id="snapData">' + JSON.stringify(data).replace(/</g, '\\u003c') + SC + '<script>(' + snapViewer.toString() + ')();' + SC + '</' + 'body></' + 'html>';
+  return new Blob([html], { type: 'text/html' });
+}
+// 存出來的網頁裡跑的程式（整段函式原樣寫進檔案，不能用到外面的變數）
+function snapViewer() {
+  const D = JSON.parse(document.getElementById('snapData').textContent), $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s || '').replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  const arr = (b, T) => { if (!b) return null; const bin = atob(b), u8 = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i); return new T(u8.buffer); };
+  const view = $('#v'), renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); view.appendChild(renderer.domElement);
+  const scene = new THREE.Scene(); scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const cam = new THREE.PerspectiveCamera(35, 1, D.dist / 200, D.dist * 20); scene.add(cam);
+  const key = new THREE.DirectionalLight(0xffffff, 0.75); key.position.set(1, 1.2, 1.5); cam.add(key);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.25); fill.position.set(-1, -0.5, -1); cam.add(fill);
+  const picks = [];
+  D.prims.forEach((p, i) => {
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(arr(p.pos, Float32Array), 3));
+    if (p.nrm) g.setAttribute('normal', new THREE.BufferAttribute(arr(p.nrm, Float32Array), 3));
+    if (p.col) g.setAttribute('color', new THREE.BufferAttribute(arr(p.col, Float32Array), 3));
+    if (p.idx) g.setIndex(new THREE.BufferAttribute(arr(p.idx, Uint32Array), 1));
+    const tr = p.opacity < 0.99, o = p.mode === 4
+      ? new THREE.Mesh(g, new THREE.MeshPhongMaterial({ color: p.color, shininess: 18, transparent: tr, opacity: p.opacity, side: THREE.DoubleSide, depthWrite: p.opacity >= 0.5, wireframe: !!p.wire }))
+      : p.mode === 0 ? new THREE.Points(g, new THREE.PointsMaterial({ color: p.col ? '#ffffff' : p.color, vertexColors: !!p.col, size: p.size || 2, sizeAttenuation: false, transparent: tr, opacity: p.opacity }))
+      : new (p.mode === 1 ? THREE.LineSegments : THREE.Line)(g, new THREE.LineBasicMaterial({ color: p.color, transparent: tr, opacity: p.opacity }));
+    o.userData.i = i; scene.add(o); if (p.info && p.mode !== 0) picks.push(o);
+  });
+  const C = { theta: 0, phi: Math.PI / 2, zoom: 1, target: new THREE.Vector3(), spin: false };
+  function place() { const d = D.dist * C.zoom; cam.position.set(C.target.x + d * Math.sin(C.phi) * Math.sin(C.theta), C.target.y + d * Math.cos(C.phi), C.target.z + d * Math.sin(C.phi) * Math.cos(C.theta)); cam.up.set(0, 1, 0); cam.lookAt(C.target); }
+  function resize() { renderer.setSize(innerWidth, innerHeight); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); }
+  addEventListener('resize', resize); resize(); place();
+  // 標籤
+  const labs = D.labels.map((L) => { const e = document.createElement('div'); e.className = 'lab' + (L.b ? ' b' : ''); e.textContent = L.t; $('#labs').appendChild(e); return { L, e, v: new THREE.Vector3(...L.p) }; });
+  let showLab = true; const t = new THREE.Vector3();
+  function drawLabels() {
+    const w = innerWidth, h = innerHeight, c = [];
+    for (const x of labs) { if (!showLab) { x.e.style.display = 'none'; continue; } t.copy(x.v).project(cam); if (t.z > 1 || Math.abs(t.x) > 1 || Math.abs(t.y) > 1) { x.e.style.display = 'none'; continue; } c.push({ x, sx: (t.x + 1) / 2 * w, sy: (1 - t.y) / 2 * h, z: t.z }); }
+    c.sort((a, b) => (b.x.L.pri - a.x.L.pri) || a.z - b.z); const placed = [];
+    for (const q of c) { const e = q.x.e; e.style.display = ''; const ww = e.offsetWidth, hh = e.offsetHeight; if (placed.some((p) => Math.abs(p.x - q.sx) < (p.w + ww) / 2 + 2 && Math.abs(p.y - q.sy) < (p.h + hh) / 2 + 1)) { e.style.display = 'none'; continue; } e.style.left = q.sx + 'px'; e.style.top = q.sy + 'px'; placed.push({ x: q.sx, y: q.sy, w: ww, h: hh }); }
+  }
+  // 資訊卡
+  let cur = null;
+  function show(i) {
+    const box = $('#info');
+    if (cur) cur.material.emissive && cur.material.emissive.set('#000000'); cur = null;
+    if (i == null) { box.style.display = 'none'; return; }
+    const p = D.prims[i], f = p.info || {}; const o = picks.find((x) => x.userData.i === i); if (o && o.material.emissive) { o.material.emissive.set('#552222'); cur = o; }
+    const row = (k, v) => (v ? '<dt>' + k + '</dt><dd>' + esc(v) + '</dd>' : '');
+    box.innerHTML = f.nid ? '<h2>神經元 ' + esc(f.nid) + '</h2><div class="m">' + esc(f.at) + '</div><dl>' + row('型別', f.t) + row('說明', f.d) + '</dl>'
+      : '<h2>' + esc(f.n) + '</h2><div class="m">' + esc(f.en) + (f.zh ? '　' + esc(f.zh) : '') + '　｜ ' + esc(f.at) + '</div><dl>' + row('功能', f.fn) + row('證據', f.ev) + row('LPU 分類', f.lpu) + row('小知識', f.tv) + row('備註', f.note) + row('出處', f.src) + '</dl>';
+    box.style.display = 'block';
+  }
+  // 滑鼠
+  const ray = new THREE.Raycaster(); ray.params.Line.threshold = D.dist / 400; let drag = null;
+  view.addEventListener('contextmenu', (e) => e.preventDefault());
+  view.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, b: e.button, sh: e.shiftKey, mv: 0 }; view.setPointerCapture(e.pointerId); });
+  view.addEventListener('pointermove', (e) => {
+    if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY; drag.mv += Math.abs(dx) + Math.abs(dy);
+    if (drag.b === 2 || drag.b === 1 || drag.sh) { const k = D.dist * C.zoom * 0.0018, r = new THREE.Vector3().setFromMatrixColumn(cam.matrix, 0), u = new THREE.Vector3().setFromMatrixColumn(cam.matrix, 1); C.target.addScaledVector(r, -dx * k).addScaledVector(u, dy * k); }
+    else { C.theta -= dx * 0.008; C.phi = Math.min(Math.PI - 0.02, Math.max(0.02, C.phi - dy * 0.008)); }
+    place();
+  });
+  view.addEventListener('pointerup', (e) => {
+    const d = drag; drag = null; if (!d || d.mv >= 4 || d.b !== 0) return;
+    ray.setFromCamera(new THREE.Vector2(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), cam);
+    const hit = ray.intersectObjects(picks.filter((o) => o.material.opacity > 0.05))[0]; show(hit && (!cur || hit.object !== cur) ? hit.object.userData.i : null);
+  });
+  view.addEventListener('wheel', (e) => { e.preventDefault(); C.zoom = Math.max(0.05, Math.min(6, C.zoom * Math.exp(e.deltaY * 0.0012))); place(); }, { passive: false });
+  // 按鈕
+  const V = { 前: [Math.PI / 2, 0], 背: [Math.PI / 2, Math.PI], 左: [Math.PI / 2, Math.PI / 2], 右: [Math.PI / 2, -Math.PI / 2], 上: [0.02, 0], 下: [Math.PI - 0.02, 0] };
+  const bar = $('#bar'); const btn = (txt, fn) => { const b = document.createElement('button'); b.textContent = txt; b.onclick = fn; bar.appendChild(b); return b; };
+  btn('存檔時的角度', () => { C.theta = 0; C.phi = Math.PI / 2; C.zoom = 1; C.target.set(0, 0, 0); place(); });
+  const sp = btn('自轉', () => { C.spin = !C.spin; sp.style.background = C.spin ? '#1e4b7a' : '#fff'; sp.style.color = C.spin ? '#fff' : ''; });
+  const lb = btn('標籤：開', () => { showLab = !showLab; lb.textContent = '標籤：' + (showLab ? '開' : '關'); });
+  if (D.sel != null) show(D.sel);
+  (function loop() { if (C.spin && !drag) { C.theta += 0.004; place(); } renderer.render(scene, cam); drawLabels(); requestAnimationFrame(loop); })();
+  window.__snap = { D, C, cam, show };
+}
+function snapDownload(blob, name) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 30000);
+}
+// artifact 裡網頁不能自己下載，要透過平台的 downloads（不收 .glb，所以 .glb 包成不壓縮的 .zip）
+let snapDl;
+async function snapSave(blob, name) {
+  if (snapDl === undefined) snapDl = (window.claude && window.claude.use) ? await window.claude.use('downloads').catch(() => null) : null;
+  if (!snapDl) { snapDownload(blob, name); return name; }
+  if (/\.glb$/.test(name)) { blob = await zipStore(name, blob); name = name.replace(/\.glb$/, '.zip'); }
+  await snapDl.save({ filename: name, data: blob }); return name;
+}
+const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+async function zipStore(fname, blob) {
+  const data = new Uint8Array(await blob.arrayBuffer()), fn = new TextEncoder().encode(fname);
+  let crc = 0xFFFFFFFF; for (let i = 0; i < data.length; i++) crc = CRC_T[(crc ^ data[i]) & 0xFF] ^ (crc >>> 8); crc = (crc ^ 0xFFFFFFFF) >>> 0;
+  const lh = new DataView(new ArrayBuffer(30)); [[0, 0x04034b50, 4], [4, 20, 2], [6, 0x0800, 2], [14, crc, 4], [18, data.length, 4], [22, data.length, 4], [26, fn.length, 2]].forEach(([o, v, n]) => (n === 4 ? lh.setUint32(o, v, true) : lh.setUint16(o, v, true)));
+  const cd = new DataView(new ArrayBuffer(46)); [[0, 0x02014b50, 4], [4, 20, 2], [6, 20, 2], [8, 0x0800, 2], [16, crc, 4], [20, data.length, 4], [24, data.length, 4], [28, fn.length, 2]].forEach(([o, v, n]) => (n === 4 ? cd.setUint32(o, v, true) : cd.setUint16(o, v, true)));
+  const cdOff = 30 + fn.length + data.length, ed = new DataView(new ArrayBuffer(22));
+  [[0, 0x06054b50, 4], [8, 1, 2], [10, 1, 2], [12, 46 + fn.length, 4], [16, cdOff, 4]].forEach(([o, v, n]) => (n === 4 ? ed.setUint32(o, v, true) : ed.setUint16(o, v, true)));
+  return new Blob([lh.buffer, fn, data, cd.buffer, fn, ed.buffer], { type: 'application/zip' });
+}
+$('#snapSel').addEventListener('change', async (e) => {
+  const kind = e.target.value; e.target.value = ''; if (!kind) return;
+  const snap = snapCollect(); if (!snap.prims.length) { statusEl.textContent = '畫面上沒有東西可存'; return; }
+  const d = new Date(), z = (n) => String(n).padStart(2, '0'), stamp = d.getFullYear() + z(d.getMonth() + 1) + z(d.getDate()) + '_' + z(d.getHours()) + z(d.getMinutes());
+  const name = '果蠅腦區_' + snap.title.replace(/[\s＋｜/\\:*?"<>|]+/g, '_') + '_' + stamp;
+  statusEl.textContent = '產生 3D 檔中…';
+  const blob = kind === 'glb' ? snapGLB(snap) : await snapHTML(snap);
+  window.__lastSnap = { kind, size: blob.size, name, blob };
+  let saved; try { saved = await snapSave(blob, name + '.' + kind); } catch (err) { statusEl.textContent = err && err.code === 'declined' ? '已取消存檔' : '存檔失敗：' + ((err && err.message) || err); return; }
+  statusEl.textContent = '已存 ' + saved + '（' + (blob.size / 1048576).toFixed(1) + ' MB）' + (kind === 'glb' ? (saved.endsWith('.zip') ? '：解壓縮後，PowerPoint「插入 → 3D 模型 → 此裝置」選 .glb' : '：PowerPoint「插入 → 3D 模型 → 此裝置」') : '：用瀏覽器打開即可旋轉、點區看資訊');
+});
+// 視角自動寫進網址（取代原本「複製視角連結」：直接複製網址列即可）
+function syncHash() { const h = buildHash(); if (h !== location.hash) { try { history.replaceState(null, '', h); } catch (e) { /* 忽略 */ } } }
+window.__bd.syncHash = syncHash; window.__bd.zipStore = zipStore;
+$('#swapBtn').addEventListener('click', async () => {
+  const a = $('#atlas').value, b = $('#atlasB').value; if (!b) return;
+  $('#atlas').value = b; await loadAtlas(slots[0], b); fillAtlasB(); $('#atlasB').value = a; await ensureB();
+});
+// ---------- 啟動
+(async function start() {
+  try {
+    const [atlases, colors, crosswalk, sources, abbr, pron, trivia, lpu, subMeshes, adj] = await Promise.all([fetchJSON('data/atlases.json'), fetchJSON('data/colors.json'), fetchJSON('data/crosswalk.json'), fetchJSON('data/sources.json').catch(() => ({})), fetchJSON('data/abbreviations.json').catch(() => []), fetchJSON('data/pronounce.json').catch(() => []), fetchJSON('data/trivia.json').catch(() => ({})), fetchJSON('data/lpu_class.json').catch(() => null), fetchJSON('data/sub_meshes.json').catch(() => ({})), fetchJSON('data/adjacency.json').catch(() => ({}))]);
+    state.atlases = atlases; state.colors = colors; state.crosswalk = crosswalk; state.sources = sources; state.abbr = abbr; state.pron = pron; state.trivia = trivia; state.lpu.data = lpu; state.subMeshes = subMeshes || {}; state.adj = adj || {}; buildAbbr();
+    const hash = parseHash();
+    const sel = $('#atlas');
+    for (const a of atlases.atlases) { const o = document.createElement('option'); o.value = a.id; o.textContent = a.name; sel.appendChild(o); }
+    let first = atlases.atlases[0].id;
+    try { const s = localStorage.getItem('bd.atlas'); if (s && atlases.atlases.some((a) => a.id === s)) first = s; } catch (e) { /* 忽略 */ }
+    if (hash.a && atlases.atlases.some((a) => a.id === hash.a)) first = hash.a;
+    sel.value = first;
+    sel.addEventListener('change', async () => {
+      try { localStorage.setItem('bd.atlas', sel.value); } catch (e) { /* 無法存就算了 */ }
+      await loadAtlas(slots[0], sel.value);
+      if (state.mode !== 'single') { fillAtlasB(); if ($('#atlasB').value === sel.value || !$('#atlasB').options.length) { if (slots[1].atlas) clearSlot(slots[1]); } await ensureB(); }
+    });
+    fillAtlasB();
+    resize(); applyCamera(); loop();
+    await loadAtlas(slots[0], first);
+    try { localStorage.setItem('bd.atlas', first); } catch (e) { /* 忽略 */ }
+    if (Object.keys(hash).length) await restoreFromHash(hash);
+    setInterval(syncHash, 800);
+  } catch (e) { statusEl.textContent = '載入失敗：' + e.message; console.error(e); }
+})();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+{
+ "AVLP_L.1": {
+  "name": "AVLP_L.1",
+  "parent": "AVLP_L",
+  "n_vert": 1017,
+  "n_face": 2000,
+  "centroid_um": [
+   173.3000030517578,
+   -93.0,
+   6.599999904632568
+  ],
+  "volume_um3": 524539,
+  "bytes": 24212,
+  "offset": 0,
+  "length": 24212
+ },
+ "AVLP_L.2": {
+  "name": "AVLP_L.2",
+  "parent": "AVLP_L",
+  "n_vert": 1016,
+  "n_face": 2000,
+  "centroid_um": [
+   200.89999389648438,
+   -40.400001525878906,
+   -5.599999904632568
+  ],
+  "volume_um3": 481878,
+  "bytes": 24200,
+  "offset": 24212,
+  "length": 24200
+ },
+ "FB.1": {
+  "name": "FB.1",
+  "parent": "FB",
+  "n_vert": 1003,
+  "n_face": 1998,
+  "centroid_um": [
+   14.399999618530273,
+   8.899999618530273,
+   -28.799999237060547
+  ],
+  "volume_um3": 223264,
+  "bytes": 24032,
+  "offset": 48412,
+  "length": 24032
+ },
+ "FB.2": {
+  "name": "FB.2",
+  "parent": "FB",
+  "n_vert": 1007,
+  "n_face": 2000,
+  "centroid_um": [
+   -43.099998474121094,
+   12.600000381469727,
+   -24.799999237060547
+  ],
+  "volume_um3": 128100,
+  "bytes": 24092,
+  "offset": 72444,
+  "length": 24092
+ },
+ "LOP_R.1": {
+  "name": "LOP_R.1",
+  "parent": "LOP_R",
+  "n_vert": 1032,
+  "n_face": 2000,
+  "centroid_um": [
+   -252.5,
+   -206.6999969482422,
+   -73.5999984741211
+  ],
+  "volume_um3": 235948,
+  "bytes": 24392,
+  "offset": 96536,
+  "length": 24392
+ },
+ "LOP_R.2": {
+  "name": "LOP_R.2",
+  "parent": "LOP_R",
+  "n_vert": 1005,
+  "n_face": 2000,
+  "centroid_um": [
+   -303.70001220703125,
+   -126.80000305175781,
+   -95.9000015258789
+  ],
+  "volume_um3": 338987,
+  "bytes": 24068,
+  "offset": 120928,
+  "length": 24068
+ },
+ "LOP_L.1": {
+  "name": "LOP_L.1",
+  "parent": "LOP_L",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   245.6999969482422,
+   -204.10000610351562,
+   -76.30000305175781
+  ],
+  "volume_um3": 265147,
+  "bytes": 24032,
+  "offset": 144996,
+  "length": 24032
+ },
+ "LOP_L.2": {
+  "name": "LOP_L.2",
+  "parent": "LOP_L",
+  "n_vert": 1007,
+  "n_face": 2000,
+  "centroid_um": [
+   290.1000061035156,
+   -142.6999969482422,
+   -101.4000015258789
+  ],
+  "volume_um3": 248773,
+  "bytes": 24092,
+  "offset": 169028,
+  "length": 24092
+ },
+ "LOP_L.3": {
+  "name": "LOP_L.3",
+  "parent": "LOP_L",
+  "n_vert": 1032,
+  "n_face": 2000,
+  "centroid_um": [
+   281.5,
+   -73.0999984741211,
+   -118.19999694824219
+  ],
+  "volume_um3": 136664,
+  "bytes": 24392,
+  "offset": 193120,
+  "length": 24392
+ },
+ "LO_R.1": {
+  "name": "LO_R.1",
+  "parent": "LO_R",
+  "n_vert": 985,
+  "n_face": 1998,
+  "centroid_um": [
+   -239.5,
+   -144.89999389648438,
+   -59.099998474121094
+  ],
+  "volume_um3": 785131,
+  "bytes": 23816,
+  "offset": 217512,
+  "length": 23816
+ },
+ "LO_R.2": {
+  "name": "LO_R.2",
+  "parent": "LO_R",
+  "n_vert": 1004,
+  "n_face": 2000,
+  "centroid_um": [
+   -262.5,
+   -73.4000015258789,
+   -77.5
+  ],
+  "volume_um3": 339095,
+  "bytes": 24056,
+  "offset": 241328,
+  "length": 24056
+ },
+ "LO_L.1": {
+  "name": "LO_L.1",
+  "parent": "LO_L",
+  "n_vert": 988,
+  "n_face": 1998,
+  "centroid_um": [
+   211.8000030517578,
+   -172.5,
+   -51.900001525878906
+  ],
+  "volume_um3": 438733,
+  "bytes": 23852,
+  "offset": 265384,
+  "length": 23852
+ },
+ "LO_L.2": {
+  "name": "LO_L.2",
+  "parent": "LO_L",
+  "n_vert": 990,
+  "n_face": 1998,
+  "centroid_um": [
+   237.10000610351562,
+   -113.80000305175781,
+   -74.30000305175781
+  ],
+  "volume_um3": 499428,
+  "bytes": 23876,
+  "offset": 289236,
+  "length": 23876
+ },
+ "LO_L.3": {
+  "name": "LO_L.3",
+  "parent": "LO_L",
+  "n_vert": 1015,
+  "n_face": 1998,
+  "centroid_um": [
+   242.89999389648438,
+   -58.20000076293945,
+   -89.5999984741211
+  ],
+  "volume_um3": 214744,
+  "bytes": 24176,
+  "offset": 313112,
+  "length": 24176
+ },
+ "ME_R.1": {
+  "name": "ME_R.1",
+  "parent": "ME_R",
+  "n_vert": 966,
+  "n_face": 1998,
+  "centroid_um": [
+   -351.5,
+   -194.0,
+   -31.299999237060547
+  ],
+  "volume_um3": 828803,
+  "bytes": 23588,
+  "offset": 337288,
+  "length": 23588
+ },
+ "ME_R.2": {
+  "name": "ME_R.2",
+  "parent": "ME_R",
+  "n_vert": 969,
+  "n_face": 1998,
+  "centroid_um": [
+   -313.20001220703125,
+   -245.5,
+   -29.399999618530273
+  ],
+  "volume_um3": 570931,
+  "bytes": 23624,
+  "offset": 360876,
+  "length": 23624
+ },
+ "ME_R.3": {
+  "name": "ME_R.3",
+  "parent": "ME_R",
+  "n_vert": 1014,
+  "n_face": 2000,
+  "centroid_um": [
+   -341.79998779296875,
+   -38.70000076293945,
+   -65.5999984741211
+  ],
+  "volume_um3": 428326,
+  "bytes": 24176,
+  "offset": 384500,
+  "length": 24176
+ },
+ "ME_R.4": {
+  "name": "ME_R.4",
+  "parent": "ME_R",
+  "n_vert": 990,
+  "n_face": 1998,
+  "centroid_um": [
+   -383.3999938964844,
+   -81.5,
+   -72.0
+  ],
+  "volume_um3": 438078,
+  "bytes": 23876,
+  "offset": 408676,
+  "length": 23876
+ },
+ "ME_R.5": {
+  "name": "ME_R.5",
+  "parent": "ME_R",
+  "n_vert": 1019,
+  "n_face": 2000,
+  "centroid_um": [
+   -281.70001220703125,
+   -163.60000610351562,
+   -7.099999904632568
+  ],
+  "volume_um3": 272368,
+  "bytes": 24236,
+  "offset": 432552,
+  "length": 24236
+ },
+ "ME_R.6": {
+  "name": "ME_R.6",
+  "parent": "ME_R",
+  "n_vert": 952,
+  "n_face": 1998,
+  "centroid_um": [
+   -411.20001220703125,
+   -142.39999389648438,
+   -58.29999923706055
+  ],
+  "volume_um3": 558096,
+  "bytes": 23420,
+  "offset": 456788,
+  "length": 23420
+ },
+ "ME_R.7": {
+  "name": "ME_R.7",
+  "parent": "ME_R",
+  "n_vert": 1005,
+  "n_face": 1998,
+  "centroid_um": [
+   -328.1000061035156,
+   -97.0999984741211,
+   -22.200000762939453
+  ],
+  "volume_um3": 356634,
+  "bytes": 24056,
+  "offset": 480208,
+  "length": 24056
+ },
+ "ME_L.1": {
+  "name": "ME_L.1",
+  "parent": "ME_L",
+  "n_vert": 990,
+  "n_face": 1998,
+  "centroid_um": [
+   322.20001220703125,
+   -112.19999694824219,
+   -44.20000076293945
+  ],
+  "volume_um3": 588348,
+  "bytes": 23876,
+  "offset": 504264,
+  "length": 23876
+ },
+ "ME_L.2": {
+  "name": "ME_L.2",
+  "parent": "ME_L",
+  "n_vert": 992,
+  "n_face": 2000,
+  "centroid_um": [
+   358.5,
+   -188.3000030517578,
+   -57.400001525878906
+  ],
+  "volume_um3": 1013494,
+  "bytes": 23912,
+  "offset": 528140,
+  "length": 23912
+ },
+ "ME_L.3": {
+  "name": "ME_L.3",
+  "parent": "ME_L",
+  "n_vert": 1011,
+  "n_face": 1998,
+  "centroid_um": [
+   315.5,
+   -44.0,
+   -66.0
+  ],
+  "volume_um3": 430237,
+  "bytes": 24128,
+  "offset": 552052,
+  "length": 24128
+ },
+ "ME_L.4": {
+  "name": "ME_L.4",
+  "parent": "ME_L",
+  "n_vert": 995,
+  "n_face": 1998,
+  "centroid_um": [
+   368.0,
+   -60.70000076293945,
+   -102.5
+  ],
+  "volume_um3": 591371,
+  "bytes": 23936,
+  "offset": 576180,
+  "length": 23936
+ },
+ "ME_L.5": {
+  "name": "ME_L.5",
+  "parent": "ME_L",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   273.0,
+   -218.1999969482422,
+   -22.100000381469727
+  ],
+  "volume_um3": 471486,
+  "bytes": 24032,
+  "offset": 600116,
+  "length": 24032
+ },
+ "ME_L.6": {
+  "name": "ME_L.6",
+  "parent": "ME_L",
+  "n_vert": 969,
+  "n_face": 2000,
+  "centroid_um": [
+   338.70001220703125,
+   -247.10000610351562,
+   -49.0
+  ],
+  "volume_um3": 410367,
+  "bytes": 23636,
+  "offset": 624148,
+  "length": 23636
+ },
+ "PRW.1": {
+  "name": "PRW.1",
+  "parent": "PRW",
+  "n_vert": 1003,
+  "n_face": 1998,
+  "centroid_um": [
+   -35.900001525878906,
+   -162.5,
+   49.400001525878906
+  ],
+  "volume_um3": 119476,
+  "bytes": 24032,
+  "offset": 647784,
+  "length": 24032
+ },
+ "PRW.2": {
+  "name": "PRW.2",
+  "parent": "PRW",
+  "n_vert": 1005,
+  "n_face": 1998,
+  "centroid_um": [
+   46.0,
+   -164.60000610351562,
+   45.20000076293945
+  ],
+  "volume_um3": 125389,
+  "bytes": 24056,
+  "offset": 671816,
+  "length": 24056
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "chiang": {
+  "split30": "chiang__split30"
+ },
+ "ito": {
+  "split30": "ito__split30",
+  "f_split30": "ito__f_split30",
+  "s_split30": "ito__s_split30"
+ },
+ "itoem": {
+  "f_split30": "itoem__f_split30",
+  "s_split30": "itoem__s_split30"
+ },
+ "malecns": {
+  "f_split30": "malecns__f_split30",
+  "s_split30": "malecns__s_split30"
+ }
+}

@@ -1,0 +1,324 @@
+{
+"groups": [
+{
+"group": "visual",
+"zh": "視覺",
+"hue": 215.0
+},
+{
+"group": "olfactory",
+"zh": "嗅覺與蕈狀體",
+"hue": 135.0
+},
+{
+"group": "mechano",
+"zh": "食道下與食道周圍：味覺、聽覺與機械感覺",
+"hue": 30.0
+},
+{
+"group": "central",
+"zh": "中央複合體與其出入口",
+"hue": 335.0
+},
+{
+"group": "integrative",
+"zh": "其他前腦整合區",
+"hue": 195.0
+},
+{
+"group": "other",
+"zh": "未分組",
+"hue": 0
+}
+],
+"bases": {
+"AB": {
+"group": "central",
+"color": "#962c78"
+},
+"BU": {
+"group": "central",
+"color": "#a22f7b"
+},
+"EB": {
+"group": "central",
+"color": "#ad327d"
+},
+"FB": {
+"group": "central",
+"color": "#b9367e"
+},
+"GA": {
+"group": "central",
+"color": "#c4397e"
+},
+"IDFP": {
+"group": "central",
+"color": "#c9437f"
+},
+"LAL": {
+"group": "central",
+"color": "#cc4f80"
+},
+"Lat_Tri": {
+"group": "central",
+"color": "#cf5a82"
+},
+"NO": {
+"group": "central",
+"color": "#d36684"
+},
+"Nod": {
+"group": "central",
+"color": "#d67188"
+},
+"PB": {
+"group": "central",
+"color": "#d97d8d"
+},
+"PCB": {
+"group": "central",
+"color": "#dd8892"
+},
+"AL": {
+"group": "olfactory",
+"color": "#31962c"
+},
+"Cal": {
+"group": "olfactory",
+"color": "#2fa12f"
+},
+"LH": {
+"group": "olfactory",
+"color": "#32ab38"
+},
+"MB": {
+"group": "olfactory",
+"color": "#35b642"
+},
+"MB_CA": {
+"group": "olfactory",
+"color": "#38c04c"
+},
+"MB_ML": {
+"group": "olfactory",
+"color": "#3fc75a"
+},
+"MB_PED": {
+"group": "olfactory",
+"color": "#49ca69"
+},
+"MB_VL": {
+"group": "olfactory",
+"color": "#54cd78"
+},
+"MB_aL": {
+"group": "olfactory",
+"color": "#5ed086"
+},
+"MB_apL": {
+"group": "olfactory",
+"color": "#69d393"
+},
+"MB_bL": {
+"group": "olfactory",
+"color": "#73d6a0"
+},
+"MB_bpL": {
+"group": "olfactory",
+"color": "#7edaac"
+},
+"MB_gL": {
+"group": "olfactory",
+"color": "#88ddb7"
+},
+"AME": {
+"group": "visual",
+"color": "#2c7896"
+},
+"AOTU": {
+"group": "visual",
+"color": "#2f7ba3"
+},
+"LA": {
+"group": "visual",
+"color": "#337daf"
+},
+"LO": {
+"group": "visual",
+"color": "#377ebc"
+},
+"LOP": {
+"group": "visual",
+"color": "#3d7ec7"
+},
+"LoP": {
+"group": "visual",
+"color": "#497fca"
+},
+"Lob": {
+"group": "visual",
+"color": "#5681ce"
+},
+"ME": {
+"group": "visual",
+"color": "#6283d2"
+},
+"Med": {
+"group": "visual",
+"color": "#6f87d5"
+},
+"OG": {
+"group": "visual",
+"color": "#7c8cd9"
+},
+"OPTU": {
+"group": "visual",
+"color": "#8892dd"
+},
+"AMMC": {
+"group": "mechano",
+"color": "#96412c"
+},
+"CAN": {
+"group": "mechano",
+"color": "#a85331"
+},
+"FLA": {
+"group": "mechano",
+"color": "#ba6736"
+},
+"GNG": {
+"group": "mechano",
+"color": "#c87e40"
+},
+"PRW": {
+"group": "mechano",
+"color": "#cd9552"
+},
+"SAD": {
+"group": "mechano",
+"color": "#d2a964"
+},
+"SOG": {
+"group": "mechano",
+"color": "#d7bc76"
+},
+"WED": {
+"group": "mechano",
+"color": "#ddcc88"
+},
+"ATL": {
+"group": "integrative",
+"color": "#2c9691"
+},
+"AVLP": {
+"group": "integrative",
+"color": "#2d9b98"
+},
+"CCP": {
+"group": "integrative",
+"color": "#2ea09f"
+},
+"CMP": {
+"group": "integrative",
+"color": "#30a2a4"
+},
+"CRE": {
+"group": "integrative",
+"color": "#31a4a9"
+},
+"CVLP": {
+"group": "integrative",
+"color": "#32a6ae"
+},
+"DLP": {
+"group": "integrative",
+"color": "#34a8b2"
+},
+"DMP": {
+"group": "integrative",
+"color": "#35a9b7"
+},
+"EPA": {
+"group": "integrative",
+"color": "#36abbc"
+},
+"FSPP": {
+"group": "integrative",
+"color": "#38acc0"
+},
+"GOR": {
+"group": "integrative",
+"color": "#39adc5"
+},
+"IB": {
+"group": "integrative",
+"color": "#3dacc7"
+},
+"ICL": {
+"group": "integrative",
+"color": "#42abc8"
+},
+"IDLP": {
+"group": "integrative",
+"color": "#47aaca"
+},
+"IPS": {
+"group": "integrative",
+"color": "#4caacb"
+},
+"PAN": {
+"group": "integrative",
+"color": "#50a9cc"
+},
+"PLP": {
+"group": "integrative",
+"color": "#55a9ce"
+},
+"PVLP": {
+"group": "integrative",
+"color": "#5aa8cf"
+},
+"SCL": {
+"group": "integrative",
+"color": "#5ea8d0"
+},
+"SDFP": {
+"group": "integrative",
+"color": "#63a8d2"
+},
+"SIP": {
+"group": "integrative",
+"color": "#68a9d3"
+},
+"SLP": {
+"group": "integrative",
+"color": "#6ca9d4"
+},
+"SMP": {
+"group": "integrative",
+"color": "#71aad6"
+},
+"SPP": {
+"group": "integrative",
+"color": "#76aad7"
+},
+"SPS": {
+"group": "integrative",
+"color": "#7aabd8"
+},
+"VES": {
+"group": "integrative",
+"color": "#7facda"
+},
+"VLP": {
+"group": "integrative",
+"color": "#84addb"
+},
+"VMP": {
+"group": "integrative",
+"color": "#88aedd"
+}
+}
+}
