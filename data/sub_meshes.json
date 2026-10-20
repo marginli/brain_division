@@ -1,0 +1,34 @@
+{
+ "chiang": {
+  "split30": "chiang__split30",
+  "split20": "chiang__split30",
+  "rsplit20": "chiang__rsplit20"
+ },
+ "ito": {
+  "split30": "ito__split30",
+  "split20": "ito__split30",
+  "rsplit20": "ito__rsplit20",
+  "f_split30": "ito__f_split30",
+  "f_split20": "ito__f_split30",
+  "f_rsplit20": "ito__f_rsplit20",
+  "s_split30": "ito__s_split30",
+  "s_split20": "ito__s_split30",
+  "s_rsplit20": "ito__s_rsplit20"
+ },
+ "itoem": {
+  "f_split30": "itoem__f_split30",
+  "f_split20": "itoem__f_split30",
+  "f_rsplit20": "itoem__f_rsplit20",
+  "s_split30": "itoem__s_split30",
+  "s_split20": "itoem__s_split30",
+  "s_rsplit20": "itoem__s_rsplit20"
+ },
+ "malecns": {
+  "f_split30": "malecns__f_split30",
+  "f_split20": "malecns__f_split30",
+  "f_rsplit20": "malecns__f_rsplit20",
+  "s_split30": "malecns__s_split30",
+  "s_split20": "malecns__s_split30",
+  "s_rsplit20": "malecns__s_rsplit20"
+ }
+}

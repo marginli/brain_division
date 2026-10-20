@@ -1,0 +1,347 @@
+[
+{
+"key": "E-PG",
+"zh": "EB–PB–gall 羅盤神經元",
+"desc": "樹突在 EB、軸突到 PB 與癭區（gall）；活動波峰代表頭向。Hulse 2021 寫作 EPG"
+},
+{
+"key": "P-EN",
+"zh": "PB–EB–NO 神經元",
+"desc": "樹突在 PB 與 NO1、軸突回 EB；依自身轉動把頭向波峰往左右推。Hulse 2021 寫作 PEN"
+},
+{
+"key": "P-EG",
+"zh": "PB–EB–gall 神經元",
+"desc": "從 PB 回投 EB 與癭周圍；穩定頭向波峰。Hulse 2021 寫作 PEG"
+},
+{
+"key": "PFN",
+"zh": "PB–FB–NO 神經元",
+"desc": "在 NO 收自身速度、在 PB 收頭向，送入 FB 做向量運算"
+},
+{
+"key": "PFL3",
+"zh": "PB–FB–LAL 神經元（第 3 型）",
+"desc": "把「目標方向減頭向」轉成左右轉向指令送到 LAL"
+},
+{
+"key": "PFGs",
+"zh": "PB–FB–gall surround 神經元",
+"desc": "連結 PB、FB 與癭周圍的神經元"
+},
+{
+"key": "hΔ",
+"zh": "FB 水平型神經元（h-delta）",
+"desc": "在 FB 中層把 PFN 的輸入合成以世界為座標的行進方向"
+},
+{
+"key": "FC2",
+"zh": "FB 柱狀神經元（第 2 型）",
+"desc": "在 FB 儲存目標方向"
+},
+{
+"key": "ER",
+"zh": "環形神經元（ring neuron）",
+"desc": "樹突在 BU 成微小球、軸突在 EB 成環；把視覺與自身運動訊號送入 EB。舊稱 R 神經元（R2、R4d 等）"
+},
+{
+"key": "TuBu",
+"zh": "AOTU→BU 神經元",
+"desc": "把 AOTU 的天空羅盤與地標訊號傳到 BU"
+},
+{
+"key": "MeTu",
+"zh": "ME→AOTU 神經元",
+"desc": "把髓質的偏振光、太陽方位訊號送到 AOTU"
+},
+{
+"key": "SpsP",
+"zh": "SPS→PB 神經元",
+"desc": "樹突在上後坡區、終端在 PB"
+},
+{
+"key": "IbSpsP",
+"zh": "IB＋SPS→PB 神經元",
+"desc": "樹突在下橋與上後坡區、終端在 PB"
+},
+{
+"key": "LC",
+"zh": "小葉柱狀神經元（lobula columnar）",
+"desc": "每一型偵測一種視覺特徵（逼近、小物體…），軸突各匯成一個視覺小球"
+},
+{
+"key": "LPLC",
+"zh": "小葉板–小葉柱狀神經元",
+"desc": "同時從小葉與小葉板取輸入的視覺投射神經元，如 LPLC2（逼近）"
+},
+{
+"key": "LPTC",
+"zh": "小葉板切線細胞（lobula plate tangential cell）",
+"desc": "HS、VS 等大型寬視野運動神經元，整合 T4/T5 的方向訊號"
+},
+{
+"key": "HS",
+"zh": "水平系統切線細胞",
+"desc": "LPTC 之一，對水平方向的寬視野運動反應"
+},
+{
+"key": "VS",
+"zh": "垂直系統切線細胞",
+"desc": "LPTC 之一，對垂直方向的寬視野運動反應"
+},
+{
+"key": "T4",
+"zh": "髓質→小葉板的方向選擇性神經元（ON 通道）",
+"desc": "四個亞型各偏好一個運動方向"
+},
+{
+"key": "T5",
+"zh": "小葉→小葉板的方向選擇性神經元（OFF 通道）",
+"desc": "四個亞型各偏好一個運動方向"
+},
+{
+"key": "L1",
+"zh": "視板單極細胞第 1 型",
+"desc": "接 R1–R6，ON 通道的起點"
+},
+{
+"key": "L2",
+"zh": "視板單極細胞第 2 型",
+"desc": "接 R1–R6，OFF 通道的起點"
+},
+{
+"key": "L3",
+"zh": "視板單極細胞第 3 型",
+"desc": "接 R1–R6"
+},
+{
+"key": "L4",
+"zh": "視板單極細胞第 4 型",
+"desc": "主要從 L2 取得輸入"
+},
+{
+"key": "L5",
+"zh": "視板單極細胞第 5 型",
+"desc": "不直接接感光細胞"
+},
+{
+"key": "R1–R6",
+"zh": "外側感光細胞",
+"desc": "複眼每個小眼的六顆寬頻感光細胞，投到視板"
+},
+{
+"key": "R7/R8",
+"zh": "內側感光細胞",
+"desc": "每個小眼的兩顆色覺感光細胞，直接投到髓質"
+},
+{
+"key": "Mi1",
+"zh": "髓質內在神經元第 1 型",
+"desc": "運動偵測前段，T4 的主要輸入之一"
+},
+{
+"key": "Tm3",
+"zh": "髓質→小葉跨髓質神經元第 3 型",
+"desc": "運動偵測前段，T4 的主要輸入之一"
+},
+{
+"key": "Mi4",
+"zh": "髓質內在神經元第 4 型",
+"desc": "運動偵測前段，T4 的抑制性輸入"
+},
+{
+"key": "Mi9",
+"zh": "髓質內在神經元第 9 型",
+"desc": "運動偵測前段，T4 的抑制性輸入"
+},
+{
+"key": "Dm",
+"zh": "髓質遠端無軸突細胞（distal medulla）",
+"desc": "處理顏色與對比的髓質局部神經元"
+},
+{
+"key": "Tm",
+"zh": "跨髓質神經元（transmedullary）",
+"desc": "從髓質投到小葉的神經元"
+},
+{
+"key": "KC",
+"zh": "Kenyon 細胞",
+"desc": "蕈狀體的本體神經元，約 2000 顆，樹突在萼、軸突經柄入葉"
+},
+{
+"key": "MBON",
+"zh": "蕈狀體輸出神經元（mushroom body output neuron）",
+"desc": "樹突在 MB 葉的特定隔間、軸突到 CRE、SIP、SMP、LH 等"
+},
+{
+"key": "DAN",
+"zh": "多巴胺神經元（dopaminergic neuron）",
+"desc": "PPL1、PAM 群依隔間給 MB 獎懲訊號"
+},
+{
+"key": "PPL1",
+"zh": "多巴胺神經元 PPL1 群",
+"desc": "主要給嫌惡訊號，投到 MB 垂直葉與柄"
+},
+{
+"key": "PAM",
+"zh": "多巴胺神經元 PAM 群",
+"desc": "主要給獎賞訊號，投到 MB 水平葉"
+},
+{
+"key": "APL",
+"zh": "前側成對外側神經元（anterior paired lateral）",
+"desc": "MB 的 GABA 性回饋神經元，遍布整個 MB"
+},
+{
+"key": "DPM",
+"zh": "背側成對內側神經元（dorsal paired medial）",
+"desc": "MB 的神經肽／血清素神經元，與記憶鞏固有關"
+},
+{
+"key": "PN",
+"zh": "投射神經元（projection neuron）",
+"desc": "把 AL 的嗅覺訊號送到 MB 萼與 LH"
+},
+{
+"key": "ORN",
+"zh": "嗅覺受器神經元（olfactory receptor neuron）",
+"desc": "觸角與下顎鬚上的嗅覺一級神經元，依受器型別投到同一個嗅小球"
+},
+{
+"key": "GRN",
+"zh": "味覺受器神經元（gustatory receptor neuron）",
+"desc": "投到 GNG，依甜／苦分區"
+},
+{
+"key": "JO",
+"zh": "Johnston 氏器（Johnston's organ）",
+"desc": "觸角第二節的機械感覺器，負責聽覺、重力、風感"
+},
+{
+"key": "LN",
+"zh": "局部神經元（local neuron）",
+"desc": "不離開所在腦區的神經元；在 AL 做側向抑制"
+},
+{
+"key": "DN",
+"zh": "下行神經元（descending neuron）",
+"desc": "細胞體在腦、軸突下到腹神經索的神經元；Namiki 2018 依細胞體位置分 DNa、DNb、DNp、DNg 等群"
+},
+{
+"key": "DNa02",
+"zh": "下行神經元 a02",
+"desc": "樹突在 LAL，驅動行走轉向"
+},
+{
+"key": "DNp",
+"zh": "下行神經元 p 群",
+"desc": "細胞體在腦後部，樹突多在後坡區"
+},
+{
+"key": "DNg",
+"zh": "下行神經元 g 群",
+"desc": "細胞體在 GNG"
+},
+{
+"key": "LNv",
+"zh": "腹外側時鐘神經元（ventral lateral neuron）",
+"desc": "分 s-LNv 與 l-LNv，多數表現 PDF"
+},
+{
+"key": "PDF",
+"zh": "色素擴散因子（pigment-dispersing factor）",
+"desc": "時鐘神經元的神經肽，節律輸出所必需"
+},
+{
+"key": "H-B 眼點",
+"zh": "Hofbauer–Buchner 眼點",
+"desc": "複眼後方的小型感光器，直接投到 AME"
+},
+{
+"key": "R5",
+"zh": "環形神經元 R5 型（ER5）",
+"desc": "編碼睡眠需求；Liu 2016 原稱 R2"
+},
+{
+"key": "γd",
+"zh": "γ 葉背側 Kenyon 細胞亞型",
+"desc": "樹突在腹側副萼接視覺輸入"
+},
+{
+"key": "γ1pedc",
+"zh": "γ 葉第 1 隔間（含柄核心）",
+"desc": "PPL1-γ1pedc 與 MBON-γ1pedc 所在"
+},
+{
+"key": "MB",
+"zh": "蕈狀體（mushroom body）",
+"desc": "學習與記憶中樞"
+},
+{
+"key": "CX",
+"zh": "中央複合體（central complex）",
+"desc": "PB、FB、EB、NO 合稱，負責導航與運動控制"
+},
+{
+"key": "PENP",
+"zh": "食道周圍神經髓（periesophageal neuropils）",
+"desc": "Ito 2014 的分群：SAD、CAN、AMMC、FLA、PRW"
+},
+{
+"key": "SEZ",
+"zh": "食道下區（subesophageal zone）",
+"desc": "Ito 2014 稱含 GNG 在內的整個食道下區"
+},
+{
+"key": "VX",
+"zh": "腹側複合體（ventral complex）",
+"desc": "Ito 2014 的分群：VES、EPA、GOR"
+},
+{
+"key": "FCWB",
+"zh": "FlyCircuit 全腦標準腦（FlyCircuit Whole Brain）",
+"desc": "Chiang 與 Ito 兩套分區所在的座標系"
+},
+{
+"key": "ROI",
+"zh": "感興趣區（region of interest）",
+"desc": "連結體資料裡的分區標籤"
+},
+{
+"key": "ACh",
+"zh": "乙醯膽鹼（acetylcholine）",
+"desc": "果蠅腦最常見的興奮性神經傳導物質；連結體用突觸影像預測（FlyWire Eckstein 2024；MaleCNS Berg 2025）"
+},
+{
+"key": "GABA",
+"zh": "γ-胺基丁酸",
+"desc": "主要的抑制性神經傳導物質"
+},
+{
+"key": "Glu",
+"zh": "麩胺酸（glutamate）",
+"desc": "果蠅腦內多半抑制性（經 GluCl），在神經肌肉接合處則興奮性"
+},
+{
+"key": "DA",
+"zh": "多巴胺（dopamine）",
+"desc": "調節性；MB 的 PAM／PPL1 等多巴胺神經元傳遞獎賞與懲罰"
+},
+{
+"key": "5-HT",
+"zh": "血清素（serotonin）",
+"desc": "調節性，神經元數少"
+},
+{
+"key": "OA",
+"zh": "章魚胺（octopamine）",
+"desc": "調節性，相當於哺乳類的正腎上腺素"
+},
+{
+"key": "His",
+"zh": "組織胺（histamine）",
+"desc": "光受器 R1–R8 的傳導物質；FlyWire 的預測模型沒有這一類"
+}
+]

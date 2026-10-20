@@ -1,0 +1,74 @@
+{
+ "frame": {
+  "_說明": "所有標籤體積都已放在 A1 管線的 FC12 µm 格裡：陣列為 [z, y, x]，座標 = origin + index × step（µm）。x=左右、y=背腹、z=前後。",
+  "origin_um": [
+   -480.0,
+   -410.0,
+   -175.0
+  ],
+  "step_um": 1.0,
+  "_方向": "每套用 up（背側朝哪個軸）與 front（前方朝哪個軸）描述，由各區質心實測（GNG 腹側、SMP 背側、AL 前、PB 後、X_R 在 −x）。MaleCNS 相對 D03 繞 x 軸轉 180°，不是鏡射。"
+ },
+ "atlases": [
+  {
+   "id": "chiang",
+   "name": "Chiang 55 區（FlyCircuit LPU＋hub）",
+   "short": "Chiang 55",
+   "space": "FCWB",
+   "overlay_group": "FCWB",
+   "year": 2011,
+   "source": "Chiang et al. 2011 Curr Biol；標籤體積由 CMU_research/A1 從 fruitflybrain/ffbo.lib 的 FlyCircuit mesh 轉成",
+   "up": "+y",
+   "front": "+z",
+   "note": "Lat Tri 原名含空格，本專案寫成 Lat_Tri",
+   "n_regions": 55,
+   "n_bases": 29,
+   "has_mesh": true
+  },
+  {
+   "id": "ito",
+   "name": "Ito 75 區（Ito et al. 2014 統一命名）",
+   "short": "Ito 75",
+   "space": "FCWB",
+   "overlay_group": "FCWB",
+   "year": 2014,
+   "source": "Ito et al. 2014 Neuron；標籤體積 = BSC_plan/D03（natverse FCWBNP.surf 轉入 FC12）",
+   "up": "+y",
+   "front": "+z",
+   "note": "左右用 D03 慣例（_L/_R）",
+   "n_regions": 75,
+   "n_bases": 41,
+   "has_mesh": true
+  },
+  {
+   "id": "itoem",
+   "name": "Ito 75 區（FlyWire v783 EM 版）",
+   "short": "Ito-EM 75",
+   "space": "FCWB",
+   "overlay_group": "FCWB",
+   "year": 2024,
+   "source": "FlyWire v783 的 Ito 2014 分區（Schlegel/Dorkenwald 2024 的 neuropil 標籤），由 CMU_research/A1 第 3 格以對調仿射轉進 FC12 框；標籤 = A1/em/d03_em/work/labels_fc_1um.npy",
+   "up": "+y",
+   "front": "+z",
+   "note": "與 Ito 75（光學 FCWB 版）同座標系可疊圖：同一套定義、兩種影像來源的差異。A1 的 EM 區名左右與 D03 相反，本表已對調成 D03 慣例。LA、OCG 沒有標籤。",
+   "n_regions": 75,
+   "n_bases": 41,
+   "has_mesh": true
+  },
+  {
+   "id": "malecns",
+   "name": "MaleCNS 80 區（fullbrain-roi-v5，v1.0 正式分區）",
+   "short": "MaleCNS 80",
+   "space": "MaleCNS 原生（只平移、未對位）",
+   "overlay_group": null,
+   "year": 2025,
+   "source": "Janelia FlyEM MaleCNS v1.0 fullbrain-roi-v5（正式分區）；標籤體積由 build/make_malecns_labels.py 以 A1_maleCNS v4 的座標框重切（512 nm → 1 µm）",
+   "up": "-y",
+   "front": "-z",
+   "note": "overlay_group 為 null：不能與 FCWB 的兩套疊圖，只能並排。v5 = v4 把 AMMC 併入 SAD、GA 併入 LAL、ROB／RUB 併入 CRE（2026-10-14 逐格驗證），再剔除 CRN、CV-anterior → 80 區。MB 七塊不併、LA 保留。",
+   "n_regions": 80,
+   "n_bases": 44,
+   "has_mesh": true
+  }
+ ]
+}

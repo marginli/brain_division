@@ -1,0 +1,152 @@
+{
+ "FB.1": {
+  "name": "FB.1",
+  "parent": "FB",
+  "n_vert": 1005,
+  "n_face": 2000,
+  "centroid_um": [
+   13.300000190734863,
+   14.100000381469727,
+   -33.29999923706055
+  ],
+  "volume_um3": 247279,
+  "bytes": 24068,
+  "offset": 0,
+  "length": 24068
+ },
+ "FB.2": {
+  "name": "FB.2",
+  "parent": "FB",
+  "n_vert": 1001,
+  "n_face": 1998,
+  "centroid_um": [
+   -47.400001525878906,
+   -1.0,
+   -26.700000762939453
+  ],
+  "volume_um3": 107712,
+  "bytes": 24008,
+  "offset": 24068,
+  "length": 24008
+ },
+ "Lob_L.1": {
+  "name": "Lob_L.1",
+  "parent": "Lob_L",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   251.5,
+   -103.69999694824219,
+   -66.69999694824219
+  ],
+  "volume_um3": 706792,
+  "bytes": 24032,
+  "offset": 48076,
+  "length": 24032
+ },
+ "Lob_L.2": {
+  "name": "Lob_L.2",
+  "parent": "Lob_L",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   223.1999969482422,
+   -157.6999969482422,
+   -53.20000076293945
+  ],
+  "volume_um3": 450177,
+  "bytes": 24032,
+  "offset": 72108,
+  "length": 24032
+ },
+ "Lob_R.1": {
+  "name": "Lob_R.1",
+  "parent": "Lob_R",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   -260.3999938964844,
+   -98.4000015258789,
+   -66.30000305175781
+  ],
+  "volume_um3": 614180,
+  "bytes": 24032,
+  "offset": 96140,
+  "length": 24032
+ },
+ "Lob_R.2": {
+  "name": "Lob_R.2",
+  "parent": "Lob_R",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   -233.60000610351562,
+   -151.0,
+   -58.79999923706055
+  ],
+  "volume_um3": 610589,
+  "bytes": 24032,
+  "offset": 120172,
+  "length": 24032
+ },
+ "VLP_L.1": {
+  "name": "VLP_L.1",
+  "parent": "VLP_L",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   172.3000030517578,
+   -54.5,
+   -13.399999618530273
+  ],
+  "volume_um3": 868967,
+  "bytes": 24032,
+  "offset": 144204,
+  "length": 24032
+ },
+ "VLP_L.2": {
+  "name": "VLP_L.2",
+  "parent": "VLP_L",
+  "n_vert": 1001,
+  "n_face": 1998,
+  "centroid_um": [
+   165.0,
+   -96.30000305175781,
+   22.100000381469727
+  ],
+  "volume_um3": 345282,
+  "bytes": 24008,
+  "offset": 168236,
+  "length": 24008
+ },
+ "VLP_R.1": {
+  "name": "VLP_R.1",
+  "parent": "VLP_R",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   -178.1999969482422,
+   -51.0,
+   -14.5
+  ],
+  "volume_um3": 798388,
+  "bytes": 24032,
+  "offset": 192244,
+  "length": 24032
+ },
+ "VLP_R.2": {
+  "name": "VLP_R.2",
+  "parent": "VLP_R",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   -171.0,
+   -93.30000305175781,
+   22.399999618530273
+  ],
+  "volume_um3": 342295,
+  "bytes": 24032,
+  "offset": 216276,
+  "length": 24032
+ }
+}
