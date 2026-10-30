@@ -1,0 +1,62 @@
+{
+ "CRE_L.1": {
+  "name": "CRE_L.1",
+  "parent": "CRE_L",
+  "n_vert": 995,
+  "n_face": 1998,
+  "centroid_um": [
+   -54.0,
+   -318.5,
+   -56.0
+  ],
+  "volume_um3": 566755,
+  "bytes": 23936,
+  "offset": 0,
+  "length": 23936
+ },
+ "CRE_L.2": {
+  "name": "CRE_L.2",
+  "parent": "CRE_L",
+  "n_vert": 997,
+  "n_face": 2000,
+  "centroid_um": [
+   -155.39999389648438,
+   -316.6000061035156,
+   -55.79999923706055
+  ],
+  "volume_um3": 622685,
+  "bytes": 23972,
+  "offset": 23936,
+  "length": 23972
+ },
+ "GNG.1": {
+  "name": "GNG.1",
+  "parent": "GNG",
+  "n_vert": 992,
+  "n_face": 1998,
+  "centroid_um": [
+   -122.69999694824219,
+   -106.19999694824219,
+   8.399999618530273
+  ],
+  "volume_um3": 824931,
+  "bytes": 23900,
+  "offset": 47908,
+  "length": 23900
+ },
+ "GNG.2": {
+  "name": "GNG.2",
+  "parent": "GNG",
+  "n_vert": 997,
+  "n_face": 1998,
+  "centroid_um": [
+   -66.30000305175781,
+   -116.0999984741211,
+   11.199999809265137
+  ],
+  "volume_um3": 564727,
+  "bytes": 23960,
+  "offset": 71808,
+  "length": 23960
+ }
+}

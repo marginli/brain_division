@@ -1,0 +1,152 @@
+{
+ "D16_AVLP_R.1": {
+  "name": "D16_AVLP_R.1",
+  "parent": "D16_AVLP_R",
+  "n_vert": 1006,
+  "n_face": 1998,
+  "centroid_um": [
+   -240.6999969482422,
+   -194.39999389648438,
+   -50.400001525878906
+  ],
+  "volume_um3": 278127,
+  "bytes": 24068,
+  "offset": 0,
+  "length": 24068
+ },
+ "D16_AVLP_R.2": {
+  "name": "D16_AVLP_R.2",
+  "parent": "D16_AVLP_R",
+  "n_vert": 1005,
+  "n_face": 1998,
+  "centroid_um": [
+   -239.3000030517578,
+   -260.79998779296875,
+   8.5
+  ],
+  "volume_um3": 600373,
+  "bytes": 24056,
+  "offset": 24068,
+  "length": 24056
+ },
+ "D24_GNG.1": {
+  "name": "D24_GNG.1",
+  "parent": "D24_GNG",
+  "n_vert": 1006,
+  "n_face": 2000,
+  "centroid_um": [
+   -138.60000610351562,
+   -107.19999694824219,
+   -27.700000762939453
+  ],
+  "volume_um3": 555329,
+  "bytes": 24080,
+  "offset": 48124,
+  "length": 24080
+ },
+ "D24_GNG.2": {
+  "name": "D24_GNG.2",
+  "parent": "D24_GNG",
+  "n_vert": 1003,
+  "n_face": 2000,
+  "centroid_um": [
+   -59.5,
+   -122.5,
+   -21.600000381469727
+  ],
+  "volume_um3": 501796,
+  "bytes": 24044,
+  "offset": 72204,
+  "length": 24044
+ },
+ "D28_SLP_L.1": {
+  "name": "D28_SLP_L.1",
+  "parent": "D28_SLP_L",
+  "n_vert": 1005,
+  "n_face": 1998,
+  "centroid_um": [
+   12.199999809265137,
+   -336.0,
+   -16.600000381469727
+  ],
+  "volume_um3": 536490,
+  "bytes": 24056,
+  "offset": 96248,
+  "length": 24056
+ },
+ "D28_SLP_L.2": {
+  "name": "D28_SLP_L.2",
+  "parent": "D28_SLP_L",
+  "n_vert": 1012,
+  "n_face": 2000,
+  "centroid_um": [
+   -62.099998474121094,
+   -320.70001220703125,
+   -56.599998474121094
+  ],
+  "volume_um3": 676760,
+  "bytes": 24152,
+  "offset": 120304,
+  "length": 24152
+ },
+ "D29_AVLP_L.1": {
+  "name": "D29_AVLP_L.1",
+  "parent": "D29_AVLP_L",
+  "n_vert": 996,
+  "n_face": 2000,
+  "centroid_um": [
+   -17.799999237060547,
+   -246.3000030517578,
+   6.300000190734863
+  ],
+  "volume_um3": 1279324,
+  "bytes": 23960,
+  "offset": 144456,
+  "length": 23960
+ },
+ "D29_AVLP_L.2": {
+  "name": "D29_AVLP_L.2",
+  "parent": "D29_AVLP_L",
+  "n_vert": 1007,
+  "n_face": 1998,
+  "centroid_um": [
+   20.100000381469727,
+   -185.6999969482422,
+   -56.099998474121094
+  ],
+  "volume_um3": 186301,
+  "bytes": 24080,
+  "offset": 168416,
+  "length": 24080
+ },
+ "D57_LA_L.1": {
+  "name": "D57_LA_L.1",
+  "parent": "D57_LA_L",
+  "n_vert": 1020,
+  "n_face": 1998,
+  "centroid_um": [
+   201.5,
+   -238.8000030517578,
+   -8.300000190734863
+  ],
+  "volume_um3": 153170,
+  "bytes": 24236,
+  "offset": 192496,
+  "length": 24236
+ },
+ "D57_LA_L.2": {
+  "name": "D57_LA_L.2",
+  "parent": "D57_LA_L",
+  "n_vert": 1014,
+  "n_face": 1998,
+  "centroid_um": [
+   206.39999389648438,
+   -89.0,
+   -14.800000190734863
+  ],
+  "volume_um3": 51705,
+  "bytes": 24164,
+  "offset": 216732,
+  "length": 24164
+ }
+}

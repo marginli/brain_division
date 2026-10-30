@@ -1,0 +1,1716 @@
+{
+"groups": [
+{
+"group": "visual",
+"zh": "視覺",
+"hue": 215.0
+},
+{
+"group": "olfactory",
+"zh": "嗅覺與蕈狀體",
+"hue": 135.0
+},
+{
+"group": "mechano",
+"zh": "食道下與食道周圍：味覺、聽覺與機械感覺",
+"hue": 30.0
+},
+{
+"group": "central",
+"zh": "中央複合體與其出入口",
+"hue": 335.0
+},
+{
+"group": "integrative",
+"zh": "其他前腦整合區",
+"hue": 195.0
+},
+{
+"group": "other",
+"zh": "未分組",
+"hue": 0
+}
+],
+"bases": {
+"AB": {
+"group": "central",
+"color": "#962c78"
+},
+"BU": {
+"group": "central",
+"color": "#992d79"
+},
+"D23_LAL": {
+"group": "central",
+"color": "#9d2d7a"
+},
+"D23_LAL_p1": {
+"group": "central",
+"color": "#a02e7b"
+},
+"D23_LAL_p2": {
+"group": "central",
+"color": "#a32f7b"
+},
+"D23_LAL_p3": {
+"group": "central",
+"color": "#a6307c"
+},
+"D23_LAL_p4": {
+"group": "central",
+"color": "#aa317c"
+},
+"D23_LAL_p5": {
+"group": "central",
+"color": "#ad327d"
+},
+"D25_FB": {
+"group": "central",
+"color": "#b0337d"
+},
+"D25_FB_p1": {
+"group": "central",
+"color": "#b3347e"
+},
+"D25_FB_p2": {
+"group": "central",
+"color": "#b7357e"
+},
+"D25_FB_p3": {
+"group": "central",
+"color": "#ba367e"
+},
+"D25_FB_p4": {
+"group": "central",
+"color": "#bd377e"
+},
+"D25_FB_p5": {
+"group": "central",
+"color": "#c0387e"
+},
+"D25_FB_p6": {
+"group": "central",
+"color": "#c4397e"
+},
+"D25_FB_p7": {
+"group": "central",
+"color": "#c63b7e"
+},
+"D33_LAL": {
+"group": "central",
+"color": "#c73e7e"
+},
+"D33_LAL_p1": {
+"group": "central",
+"color": "#c8417e"
+},
+"D33_LAL_p2": {
+"group": "central",
+"color": "#c9447f"
+},
+"D33_LAL_p3": {
+"group": "central",
+"color": "#ca487f"
+},
+"D33_LAL_p4": {
+"group": "central",
+"color": "#cb4b7f"
+},
+"D37_EB": {
+"group": "central",
+"color": "#cc4e7f"
+},
+"D37_EB_p1": {
+"group": "central",
+"color": "#cd5180"
+},
+"D37_EB_p2": {
+"group": "central",
+"color": "#ce5580"
+},
+"D37_EB_p3": {
+"group": "central",
+"color": "#ce5881"
+},
+"D37_EB_p4": {
+"group": "central",
+"color": "#cf5b82"
+},
+"D37_EB_p5": {
+"group": "central",
+"color": "#d05e82"
+},
+"D37_EB_p6": {
+"group": "central",
+"color": "#d16283"
+},
+"D37_EB_p7": {
+"group": "central",
+"color": "#d26584"
+},
+"D37_EB_p8": {
+"group": "central",
+"color": "#d36885"
+},
+"EB": {
+"group": "central",
+"color": "#d46b86"
+},
+"FB": {
+"group": "central",
+"color": "#d56e87"
+},
+"GA": {
+"group": "central",
+"color": "#d67288"
+},
+"IDFP": {
+"group": "central",
+"color": "#d77589"
+},
+"LAL": {
+"group": "central",
+"color": "#d8788b"
+},
+"Lat_Tri": {
+"group": "central",
+"color": "#d97b8c"
+},
+"NO": {
+"group": "central",
+"color": "#da7f8e"
+},
+"Nod": {
+"group": "central",
+"color": "#db828f"
+},
+"PB": {
+"group": "central",
+"color": "#dc8591"
+},
+"PCB": {
+"group": "central",
+"color": "#dd8892"
+},
+"AL": {
+"group": "olfactory",
+"color": "#31962c"
+},
+"Cal": {
+"group": "olfactory",
+"color": "#31972c"
+},
+"D05_CA": {
+"group": "olfactory",
+"color": "#31982c"
+},
+"D05_CA_p1": {
+"group": "olfactory",
+"color": "#30992c"
+},
+"D05_CA_p10": {
+"group": "olfactory",
+"color": "#309a2d"
+},
+"D05_CA_p2": {
+"group": "olfactory",
+"color": "#309a2d"
+},
+"D05_CA_p3": {
+"group": "olfactory",
+"color": "#309b2d"
+},
+"D05_CA_p4": {
+"group": "olfactory",
+"color": "#309c2d"
+},
+"D05_CA_p5": {
+"group": "olfactory",
+"color": "#309d2e"
+},
+"D05_CA_p6": {
+"group": "olfactory",
+"color": "#2f9e2e"
+},
+"D05_CA_p7": {
+"group": "olfactory",
+"color": "#2f9f2e"
+},
+"D05_CA_p8": {
+"group": "olfactory",
+"color": "#2fa02e"
+},
+"D05_CA_p9": {
+"group": "olfactory",
+"color": "#2fa02f"
+},
+"D06_AL": {
+"group": "olfactory",
+"color": "#2fa12f"
+},
+"D06_AL_p1": {
+"group": "olfactory",
+"color": "#2fa230"
+},
+"D06_AL_p10": {
+"group": "olfactory",
+"color": "#2fa331"
+},
+"D06_AL_p11": {
+"group": "olfactory",
+"color": "#30a431"
+},
+"D06_AL_p2": {
+"group": "olfactory",
+"color": "#30a532"
+},
+"D06_AL_p3": {
+"group": "olfactory",
+"color": "#30a533"
+},
+"D06_AL_p4": {
+"group": "olfactory",
+"color": "#30a633"
+},
+"D06_AL_p5": {
+"group": "olfactory",
+"color": "#31a734"
+},
+"D06_AL_p6": {
+"group": "olfactory",
+"color": "#31a835"
+},
+"D06_AL_p7": {
+"group": "olfactory",
+"color": "#31a936"
+},
+"D06_AL_p8": {
+"group": "olfactory",
+"color": "#31aa36"
+},
+"D06_AL_p9": {
+"group": "olfactory",
+"color": "#32ab37"
+},
+"D07_AL": {
+"group": "olfactory",
+"color": "#32ab38"
+},
+"D07_AL_p1": {
+"group": "olfactory",
+"color": "#32ac39"
+},
+"D07_AL_p10": {
+"group": "olfactory",
+"color": "#32ad39"
+},
+"D07_AL_p11": {
+"group": "olfactory",
+"color": "#33ae3a"
+},
+"D07_AL_p12": {
+"group": "olfactory",
+"color": "#33af3b"
+},
+"D07_AL_p13": {
+"group": "olfactory",
+"color": "#33b03c"
+},
+"D07_AL_p14": {
+"group": "olfactory",
+"color": "#33b13d"
+},
+"D07_AL_p15": {
+"group": "olfactory",
+"color": "#33b13d"
+},
+"D07_AL_p16": {
+"group": "olfactory",
+"color": "#34b23e"
+},
+"D07_AL_p17": {
+"group": "olfactory",
+"color": "#34b33f"
+},
+"D07_AL_p18": {
+"group": "olfactory",
+"color": "#34b440"
+},
+"D07_AL_p2": {
+"group": "olfactory",
+"color": "#34b541"
+},
+"D07_AL_p3": {
+"group": "olfactory",
+"color": "#35b641"
+},
+"D07_AL_p4": {
+"group": "olfactory",
+"color": "#35b642"
+},
+"D07_AL_p5": {
+"group": "olfactory",
+"color": "#35b743"
+},
+"D07_AL_p6": {
+"group": "olfactory",
+"color": "#35b844"
+},
+"D07_AL_p7": {
+"group": "olfactory",
+"color": "#36b945"
+},
+"D07_AL_p8": {
+"group": "olfactory",
+"color": "#36ba46"
+},
+"D07_AL_p9": {
+"group": "olfactory",
+"color": "#36bb47"
+},
+"D10_AL": {
+"group": "olfactory",
+"color": "#36bc47"
+},
+"D10_AL_p1": {
+"group": "olfactory",
+"color": "#37bc48"
+},
+"D10_AL_p10": {
+"group": "olfactory",
+"color": "#37bd49"
+},
+"D10_AL_p11": {
+"group": "olfactory",
+"color": "#37be4a"
+},
+"D10_AL_p12": {
+"group": "olfactory",
+"color": "#37bf4b"
+},
+"D10_AL_p13": {
+"group": "olfactory",
+"color": "#38c04c"
+},
+"D10_AL_p14": {
+"group": "olfactory",
+"color": "#38c14d"
+},
+"D10_AL_p15": {
+"group": "olfactory",
+"color": "#38c14e"
+},
+"D10_AL_p16": {
+"group": "olfactory",
+"color": "#38c24e"
+},
+"D10_AL_p17": {
+"group": "olfactory",
+"color": "#39c34f"
+},
+"D10_AL_p18": {
+"group": "olfactory",
+"color": "#39c450"
+},
+"D10_AL_p19": {
+"group": "olfactory",
+"color": "#39c551"
+},
+"D10_AL_p2": {
+"group": "olfactory",
+"color": "#39c652"
+},
+"D10_AL_p20": {
+"group": "olfactory",
+"color": "#3ac653"
+},
+"D10_AL_p21": {
+"group": "olfactory",
+"color": "#3bc655"
+},
+"D10_AL_p22": {
+"group": "olfactory",
+"color": "#3cc656"
+},
+"D10_AL_p23": {
+"group": "olfactory",
+"color": "#3dc757"
+},
+"D10_AL_p24": {
+"group": "olfactory",
+"color": "#3ec759"
+},
+"D10_AL_p25": {
+"group": "olfactory",
+"color": "#3fc75a"
+},
+"D10_AL_p26": {
+"group": "olfactory",
+"color": "#3fc75b"
+},
+"D10_AL_p27": {
+"group": "olfactory",
+"color": "#40c85c"
+},
+"D10_AL_p28": {
+"group": "olfactory",
+"color": "#41c85e"
+},
+"D10_AL_p29": {
+"group": "olfactory",
+"color": "#42c85f"
+},
+"D10_AL_p3": {
+"group": "olfactory",
+"color": "#43c860"
+},
+"D10_AL_p30": {
+"group": "olfactory",
+"color": "#44c961"
+},
+"D10_AL_p31": {
+"group": "olfactory",
+"color": "#45c963"
+},
+"D10_AL_p32": {
+"group": "olfactory",
+"color": "#45c964"
+},
+"D10_AL_p33": {
+"group": "olfactory",
+"color": "#46c965"
+},
+"D10_AL_p34": {
+"group": "olfactory",
+"color": "#47ca66"
+},
+"D10_AL_p35": {
+"group": "olfactory",
+"color": "#48ca68"
+},
+"D10_AL_p36": {
+"group": "olfactory",
+"color": "#49ca69"
+},
+"D10_AL_p37": {
+"group": "olfactory",
+"color": "#4aca6a"
+},
+"D10_AL_p38": {
+"group": "olfactory",
+"color": "#4acb6b"
+},
+"D10_AL_p39": {
+"group": "olfactory",
+"color": "#4bcb6c"
+},
+"D10_AL_p4": {
+"group": "olfactory",
+"color": "#4ccb6e"
+},
+"D10_AL_p40": {
+"group": "olfactory",
+"color": "#4dcb6f"
+},
+"D10_AL_p41": {
+"group": "olfactory",
+"color": "#4ecc70"
+},
+"D10_AL_p42": {
+"group": "olfactory",
+"color": "#4fcc71"
+},
+"D10_AL_p43": {
+"group": "olfactory",
+"color": "#50cc72"
+},
+"D10_AL_p44": {
+"group": "olfactory",
+"color": "#50cc74"
+},
+"D10_AL_p45": {
+"group": "olfactory",
+"color": "#51cd75"
+},
+"D10_AL_p46": {
+"group": "olfactory",
+"color": "#52cd76"
+},
+"D10_AL_p47": {
+"group": "olfactory",
+"color": "#53cd77"
+},
+"D10_AL_p48": {
+"group": "olfactory",
+"color": "#54cd78"
+},
+"D10_AL_p49": {
+"group": "olfactory",
+"color": "#55ce79"
+},
+"D10_AL_p5": {
+"group": "olfactory",
+"color": "#55ce7b"
+},
+"D10_AL_p6": {
+"group": "olfactory",
+"color": "#56ce7c"
+},
+"D10_AL_p7": {
+"group": "olfactory",
+"color": "#57ce7d"
+},
+"D10_AL_p8": {
+"group": "olfactory",
+"color": "#58cf7e"
+},
+"D10_AL_p9": {
+"group": "olfactory",
+"color": "#59cf7f"
+},
+"D30_LH": {
+"group": "olfactory",
+"color": "#5acf80"
+},
+"D30_LH_p1": {
+"group": "olfactory",
+"color": "#5bcf81"
+},
+"D35_AL": {
+"group": "olfactory",
+"color": "#5bd083"
+},
+"D35_AL_p1": {
+"group": "olfactory",
+"color": "#5cd084"
+},
+"D35_AL_p10": {
+"group": "olfactory",
+"color": "#5dd085"
+},
+"D35_AL_p11": {
+"group": "olfactory",
+"color": "#5ed086"
+},
+"D35_AL_p12": {
+"group": "olfactory",
+"color": "#5fd087"
+},
+"D35_AL_p13": {
+"group": "olfactory",
+"color": "#60d188"
+},
+"D35_AL_p14": {
+"group": "olfactory",
+"color": "#61d189"
+},
+"D35_AL_p15": {
+"group": "olfactory",
+"color": "#61d18a"
+},
+"D35_AL_p16": {
+"group": "olfactory",
+"color": "#62d18b"
+},
+"D35_AL_p17": {
+"group": "olfactory",
+"color": "#63d28c"
+},
+"D35_AL_p18": {
+"group": "olfactory",
+"color": "#64d28d"
+},
+"D35_AL_p19": {
+"group": "olfactory",
+"color": "#65d28e"
+},
+"D35_AL_p2": {
+"group": "olfactory",
+"color": "#66d290"
+},
+"D35_AL_p20": {
+"group": "olfactory",
+"color": "#66d391"
+},
+"D35_AL_p3": {
+"group": "olfactory",
+"color": "#67d392"
+},
+"D35_AL_p4": {
+"group": "olfactory",
+"color": "#68d393"
+},
+"D35_AL_p5": {
+"group": "olfactory",
+"color": "#69d394"
+},
+"D35_AL_p6": {
+"group": "olfactory",
+"color": "#6ad495"
+},
+"D35_AL_p7": {
+"group": "olfactory",
+"color": "#6bd496"
+},
+"D35_AL_p8": {
+"group": "olfactory",
+"color": "#6cd497"
+},
+"D35_AL_p9": {
+"group": "olfactory",
+"color": "#6cd498"
+},
+"D38_gL": {
+"group": "olfactory",
+"color": "#6dd599"
+},
+"D38_gL_p1": {
+"group": "olfactory",
+"color": "#6ed59a"
+},
+"D38_gL_p2": {
+"group": "olfactory",
+"color": "#6fd59b"
+},
+"D44_AL": {
+"group": "olfactory",
+"color": "#70d59c"
+},
+"D44_AL_p1": {
+"group": "olfactory",
+"color": "#71d69d"
+},
+"D44_AL_p2": {
+"group": "olfactory",
+"color": "#72d69e"
+},
+"D44_AL_p3": {
+"group": "olfactory",
+"color": "#72d69f"
+},
+"D44_AL_p4": {
+"group": "olfactory",
+"color": "#73d6a0"
+},
+"D44_AL_p5": {
+"group": "olfactory",
+"color": "#74d7a1"
+},
+"D44_AL_p6": {
+"group": "olfactory",
+"color": "#75d7a2"
+},
+"D44_AL_p7": {
+"group": "olfactory",
+"color": "#76d7a3"
+},
+"D47_AL": {
+"group": "olfactory",
+"color": "#77d7a4"
+},
+"D47_AL_p1": {
+"group": "olfactory",
+"color": "#77d8a5"
+},
+"D47_AL_p2": {
+"group": "olfactory",
+"color": "#78d8a6"
+},
+"D47_AL_p3": {
+"group": "olfactory",
+"color": "#79d8a7"
+},
+"D47_AL_p4": {
+"group": "olfactory",
+"color": "#7ad8a7"
+},
+"D47_AL_p5": {
+"group": "olfactory",
+"color": "#7bd9a8"
+},
+"D49_gL": {
+"group": "olfactory",
+"color": "#7cd9a9"
+},
+"D49_gL_p1": {
+"group": "olfactory",
+"color": "#7dd9aa"
+},
+"D50_CA": {
+"group": "olfactory",
+"color": "#7dd9ab"
+},
+"D50_CA_p1": {
+"group": "olfactory",
+"color": "#7edaac"
+},
+"D50_CA_p2": {
+"group": "olfactory",
+"color": "#7fdaad"
+},
+"LH": {
+"group": "olfactory",
+"color": "#80daae"
+},
+"MB": {
+"group": "olfactory",
+"color": "#81daaf"
+},
+"MB_CA": {
+"group": "olfactory",
+"color": "#82dbb0"
+},
+"MB_ML": {
+"group": "olfactory",
+"color": "#82dbb1"
+},
+"MB_PED": {
+"group": "olfactory",
+"color": "#83dbb1"
+},
+"MB_VL": {
+"group": "olfactory",
+"color": "#84dbb2"
+},
+"MB_aL": {
+"group": "olfactory",
+"color": "#85dcb3"
+},
+"MB_apL": {
+"group": "olfactory",
+"color": "#86dcb4"
+},
+"MB_bL": {
+"group": "olfactory",
+"color": "#87dcb5"
+},
+"MB_bpL": {
+"group": "olfactory",
+"color": "#88dcb6"
+},
+"MB_gL": {
+"group": "olfactory",
+"color": "#88ddb7"
+},
+"AME": {
+"group": "visual",
+"color": "#2c7896"
+},
+"AOTU": {
+"group": "visual",
+"color": "#2c7898"
+},
+"D00_ME": {
+"group": "visual",
+"color": "#2c7999"
+},
+"D00_ME_p1": {
+"group": "visual",
+"color": "#2d799a"
+},
+"D01_ME": {
+"group": "visual",
+"color": "#2d7a9c"
+},
+"D01_ME_p1": {
+"group": "visual",
+"color": "#2e7a9d"
+},
+"D02_ME": {
+"group": "visual",
+"color": "#2e7a9f"
+},
+"D02_ME_p1": {
+"group": "visual",
+"color": "#2e7ba0"
+},
+"D02_ME_p2": {
+"group": "visual",
+"color": "#2f7ba1"
+},
+"D02_ME_p3": {
+"group": "visual",
+"color": "#2f7ba3"
+},
+"D02_ME_p4": {
+"group": "visual",
+"color": "#307ba4"
+},
+"D02_ME_p5": {
+"group": "visual",
+"color": "#307ca6"
+},
+"D02_ME_p6": {
+"group": "visual",
+"color": "#317ca7"
+},
+"D02_ME_p7": {
+"group": "visual",
+"color": "#317ca8"
+},
+"D02_ME_p8": {
+"group": "visual",
+"color": "#317caa"
+},
+"D03_LO": {
+"group": "visual",
+"color": "#327dab"
+},
+"D03_LO_p1": {
+"group": "visual",
+"color": "#327dad"
+},
+"D03_LO_p2": {
+"group": "visual",
+"color": "#337dae"
+},
+"D03_LO_p3": {
+"group": "visual",
+"color": "#337daf"
+},
+"D04_LOP": {
+"group": "visual",
+"color": "#337db1"
+},
+"D04_LOP_p1": {
+"group": "visual",
+"color": "#347eb2"
+},
+"D04_LOP_p2": {
+"group": "visual",
+"color": "#347eb4"
+},
+"D04_LOP_p3": {
+"group": "visual",
+"color": "#357eb5"
+},
+"D12_AOTU": {
+"group": "visual",
+"color": "#357eb7"
+},
+"D12_AOTU_p1": {
+"group": "visual",
+"color": "#357eb8"
+},
+"D12_AOTU_p2": {
+"group": "visual",
+"color": "#367eb9"
+},
+"D12_AOTU_p3": {
+"group": "visual",
+"color": "#367ebb"
+},
+"D32_AOTU": {
+"group": "visual",
+"color": "#377ebc"
+},
+"D32_AOTU_p1": {
+"group": "visual",
+"color": "#377ebe"
+},
+"D32_AOTU_p2": {
+"group": "visual",
+"color": "#377ebf"
+},
+"D32_AOTU_p3": {
+"group": "visual",
+"color": "#387ec0"
+},
+"D32_AOTU_p4": {
+"group": "visual",
+"color": "#387ec2"
+},
+"D32_AOTU_p5": {
+"group": "visual",
+"color": "#397ec3"
+},
+"D51_ME": {
+"group": "visual",
+"color": "#397ec5"
+},
+"D51_ME_p1": {
+"group": "visual",
+"color": "#3a7ec6"
+},
+"D52_LO": {
+"group": "visual",
+"color": "#3b7ec6"
+},
+"D52_LO_p1": {
+"group": "visual",
+"color": "#3d7ec7"
+},
+"D52_LO_p2": {
+"group": "visual",
+"color": "#3e7ec7"
+},
+"D52_LO_p3": {
+"group": "visual",
+"color": "#3f7ec7"
+},
+"D53_ME": {
+"group": "visual",
+"color": "#417ec8"
+},
+"D53_ME_p1": {
+"group": "visual",
+"color": "#427ec8"
+},
+"D53_ME_p2": {
+"group": "visual",
+"color": "#447fc9"
+},
+"D53_ME_p3": {
+"group": "visual",
+"color": "#457fc9"
+},
+"D53_ME_p4": {
+"group": "visual",
+"color": "#467fc9"
+},
+"D53_ME_p5": {
+"group": "visual",
+"color": "#487fca"
+},
+"D53_ME_p6": {
+"group": "visual",
+"color": "#497fca"
+},
+"D53_ME_p7": {
+"group": "visual",
+"color": "#4b7fcb"
+},
+"D53_ME_p8": {
+"group": "visual",
+"color": "#4c7fcb"
+},
+"D54_LOP": {
+"group": "visual",
+"color": "#4d7fcb"
+},
+"D54_LOP_p1": {
+"group": "visual",
+"color": "#4f80cc"
+},
+"D54_LOP_p2": {
+"group": "visual",
+"color": "#5080cc"
+},
+"D55_LOP": {
+"group": "visual",
+"color": "#5280cd"
+},
+"D55_LOP_p1": {
+"group": "visual",
+"color": "#5380cd"
+},
+"D55_LOP_p2": {
+"group": "visual",
+"color": "#5480cd"
+},
+"D55_LOP_p3": {
+"group": "visual",
+"color": "#5681ce"
+},
+"D56_LA": {
+"group": "visual",
+"color": "#5781ce"
+},
+"D56_LA_p1": {
+"group": "visual",
+"color": "#5981cf"
+},
+"D56_LA_p2": {
+"group": "visual",
+"color": "#5a81cf"
+},
+"D56_LA_p3": {
+"group": "visual",
+"color": "#5b82d0"
+},
+"D56_LA_p4": {
+"group": "visual",
+"color": "#5d82d0"
+},
+"D57_LA": {
+"group": "visual",
+"color": "#5e82d0"
+},
+"D57_LA_p1": {
+"group": "visual",
+"color": "#6083d1"
+},
+"D57_LA_p2": {
+"group": "visual",
+"color": "#6183d1"
+},
+"D57_LA_p3": {
+"group": "visual",
+"color": "#6283d2"
+},
+"D57_LA_p4": {
+"group": "visual",
+"color": "#6484d2"
+},
+"D58_LA": {
+"group": "visual",
+"color": "#6584d2"
+},
+"D58_LA_p1": {
+"group": "visual",
+"color": "#6785d3"
+},
+"D59_LA": {
+"group": "visual",
+"color": "#6885d3"
+},
+"D59_LA_p1": {
+"group": "visual",
+"color": "#6a85d4"
+},
+"D60_LA": {
+"group": "visual",
+"color": "#6b86d4"
+},
+"D60_LA_p1": {
+"group": "visual",
+"color": "#6c86d4"
+},
+"D61_LA": {
+"group": "visual",
+"color": "#6e87d5"
+},
+"D61_LA_p1": {
+"group": "visual",
+"color": "#6f87d5"
+},
+"D62_LA": {
+"group": "visual",
+"color": "#7188d6"
+},
+"D62_LA_p1": {
+"group": "visual",
+"color": "#7288d6"
+},
+"D63_LA": {
+"group": "visual",
+"color": "#7389d6"
+},
+"D63_LA_p1": {
+"group": "visual",
+"color": "#7589d7"
+},
+"D63_LA_p2": {
+"group": "visual",
+"color": "#768ad7"
+},
+"D63_LA_p3": {
+"group": "visual",
+"color": "#788ad8"
+},
+"D63_LA_p4": {
+"group": "visual",
+"color": "#798bd8"
+},
+"D64_LA": {
+"group": "visual",
+"color": "#7a8cd8"
+},
+"D64_LA_p1": {
+"group": "visual",
+"color": "#7c8cd9"
+},
+"LA": {
+"group": "visual",
+"color": "#7d8dd9"
+},
+"LO": {
+"group": "visual",
+"color": "#7f8dda"
+},
+"LOP": {
+"group": "visual",
+"color": "#808eda"
+},
+"LoP": {
+"group": "visual",
+"color": "#818fdb"
+},
+"Lob": {
+"group": "visual",
+"color": "#838fdb"
+},
+"ME": {
+"group": "visual",
+"color": "#8490db"
+},
+"Med": {
+"group": "visual",
+"color": "#8691dc"
+},
+"OG": {
+"group": "visual",
+"color": "#8792dc"
+},
+"OPTU": {
+"group": "visual",
+"color": "#8892dd"
+},
+"AMMC": {
+"group": "mechano",
+"color": "#96412c"
+},
+"CAN": {
+"group": "mechano",
+"color": "#99432c"
+},
+"D08_GNG": {
+"group": "mechano",
+"color": "#9b462d"
+},
+"D08_GNG_p1": {
+"group": "mechano",
+"color": "#9e482e"
+},
+"D08_GNG_p2": {
+"group": "mechano",
+"color": "#a04b2e"
+},
+"D09_GNG": {
+"group": "mechano",
+"color": "#a34d2f"
+},
+"D09_GNG_p1": {
+"group": "mechano",
+"color": "#a55030"
+},
+"D09_GNG_p10": {
+"group": "mechano",
+"color": "#a85231"
+},
+"D09_GNG_p2": {
+"group": "mechano",
+"color": "#aa5531"
+},
+"D09_GNG_p3": {
+"group": "mechano",
+"color": "#ad5832"
+},
+"D09_GNG_p4": {
+"group": "mechano",
+"color": "#af5a33"
+},
+"D09_GNG_p5": {
+"group": "mechano",
+"color": "#b15d34"
+},
+"D09_GNG_p6": {
+"group": "mechano",
+"color": "#b46034"
+},
+"D09_GNG_p7": {
+"group": "mechano",
+"color": "#b66335"
+},
+"D09_GNG_p8": {
+"group": "mechano",
+"color": "#b96636"
+},
+"D09_GNG_p9": {
+"group": "mechano",
+"color": "#bb6836"
+},
+"D11_WED": {
+"group": "mechano",
+"color": "#be6b37"
+},
+"D11_WED_p1": {
+"group": "mechano",
+"color": "#c06e38"
+},
+"D11_WED_p2": {
+"group": "mechano",
+"color": "#c37139"
+},
+"D24_GNG": {
+"group": "mechano",
+"color": "#c57539"
+},
+"D24_GNG_p1": {
+"group": "mechano",
+"color": "#c6783c"
+},
+"D26_GNG": {
+"group": "mechano",
+"color": "#c77b3e"
+},
+"D26_GNG_p1": {
+"group": "mechano",
+"color": "#c87f41"
+},
+"D34_GNG": {
+"group": "mechano",
+"color": "#c88243"
+},
+"D34_GNG_p1": {
+"group": "mechano",
+"color": "#c98545"
+},
+"D34_GNG_p2": {
+"group": "mechano",
+"color": "#ca8848"
+},
+"D39_GNG": {
+"group": "mechano",
+"color": "#cb8b4a"
+},
+"D39_GNG_p1": {
+"group": "mechano",
+"color": "#cb8e4d"
+},
+"D39_GNG_p2": {
+"group": "mechano",
+"color": "#cc914f"
+},
+"D39_GNG_p3": {
+"group": "mechano",
+"color": "#cd9452"
+},
+"D39_GNG_p4": {
+"group": "mechano",
+"color": "#cd9754"
+},
+"D39_GNG_p5": {
+"group": "mechano",
+"color": "#ce9a57"
+},
+"D40_GNG": {
+"group": "mechano",
+"color": "#cf9d59"
+},
+"D40_GNG_p1": {
+"group": "mechano",
+"color": "#d0a05c"
+},
+"D41_GNG": {
+"group": "mechano",
+"color": "#d0a35e"
+},
+"D41_GNG_p1": {
+"group": "mechano",
+"color": "#d1a561"
+},
+"D42_GNG": {
+"group": "mechano",
+"color": "#d2a863"
+},
+"D42_GNG_p1": {
+"group": "mechano",
+"color": "#d2ab66"
+},
+"D43_GNG": {
+"group": "mechano",
+"color": "#d3ad68"
+},
+"D43_GNG_p1": {
+"group": "mechano",
+"color": "#d4b06b"
+},
+"D45_GNG": {
+"group": "mechano",
+"color": "#d5b36d"
+},
+"D45_GNG_p1": {
+"group": "mechano",
+"color": "#d5b570"
+},
+"D46_GNG": {
+"group": "mechano",
+"color": "#d6b872"
+},
+"D46_GNG_p1": {
+"group": "mechano",
+"color": "#d7ba75"
+},
+"D48_GNG": {
+"group": "mechano",
+"color": "#d8bc77"
+},
+"D48_GNG_p1": {
+"group": "mechano",
+"color": "#d8bf7a"
+},
+"FLA": {
+"group": "mechano",
+"color": "#d9c17c"
+},
+"GNG": {
+"group": "mechano",
+"color": "#dac37f"
+},
+"PRW": {
+"group": "mechano",
+"color": "#dac581"
+},
+"SAD": {
+"group": "mechano",
+"color": "#dbc883"
+},
+"SOG": {
+"group": "mechano",
+"color": "#dcca86"
+},
+"WED": {
+"group": "mechano",
+"color": "#ddcc88"
+},
+"ATL": {
+"group": "integrative",
+"color": "#2c9691"
+},
+"AVLP": {
+"group": "integrative",
+"color": "#2c9893"
+},
+"CCP": {
+"group": "integrative",
+"color": "#2c9995"
+},
+"CMP": {
+"group": "integrative",
+"color": "#2d9b97"
+},
+"CRE": {
+"group": "integrative",
+"color": "#2d9c9a"
+},
+"CVLP": {
+"group": "integrative",
+"color": "#2e9e9c"
+},
+"D13_SMP": {
+"group": "integrative",
+"color": "#2e9f9e"
+},
+"D13_SMP_p1": {
+"group": "integrative",
+"color": "#2fa0a0"
+},
+"D14_SPS": {
+"group": "integrative",
+"color": "#2fa1a2"
+},
+"D14_SPS_p1": {
+"group": "integrative",
+"color": "#2fa2a3"
+},
+"D15_AVLP": {
+"group": "integrative",
+"color": "#30a3a5"
+},
+"D15_AVLP_p1": {
+"group": "integrative",
+"color": "#30a3a6"
+},
+"D15_AVLP_p2": {
+"group": "integrative",
+"color": "#31a4a8"
+},
+"D16_AVLP": {
+"group": "integrative",
+"color": "#31a4a9"
+},
+"D16_AVLP_p1": {
+"group": "integrative",
+"color": "#32a5ab"
+},
+"D16_AVLP_p2": {
+"group": "integrative",
+"color": "#32a6ac"
+},
+"D17_PVLP": {
+"group": "integrative",
+"color": "#32a6ae"
+},
+"D17_PVLP_p1": {
+"group": "integrative",
+"color": "#33a7af"
+},
+"D17_PVLP_p2": {
+"group": "integrative",
+"color": "#33a7b1"
+},
+"D17_PVLP_p3": {
+"group": "integrative",
+"color": "#34a8b2"
+},
+"D17_PVLP_p4": {
+"group": "integrative",
+"color": "#34a8b4"
+},
+"D17_PVLP_p5": {
+"group": "integrative",
+"color": "#35a9b5"
+},
+"D18_PVLP": {
+"group": "integrative",
+"color": "#35a9b7"
+},
+"D18_PVLP_p1": {
+"group": "integrative",
+"color": "#35aab8"
+},
+"D18_PVLP_p2": {
+"group": "integrative",
+"color": "#36aab9"
+},
+"D18_PVLP_p3": {
+"group": "integrative",
+"color": "#36aabb"
+},
+"D19_SMP": {
+"group": "integrative",
+"color": "#37abbc"
+},
+"D19_SMP_p1": {
+"group": "integrative",
+"color": "#37abbe"
+},
+"D19_SMP_p2": {
+"group": "integrative",
+"color": "#38acbf"
+},
+"D20_ICL": {
+"group": "integrative",
+"color": "#38acc1"
+},
+"D20_ICL_p1": {
+"group": "integrative",
+"color": "#38acc2"
+},
+"D20_ICL_p2": {
+"group": "integrative",
+"color": "#39adc4"
+},
+"D21_SLP": {
+"group": "integrative",
+"color": "#39adc5"
+},
+"D21_SLP_p1": {
+"group": "integrative",
+"color": "#3aadc6"
+},
+"D22_PLP": {
+"group": "integrative",
+"color": "#3cacc6"
+},
+"D22_PLP_p1": {
+"group": "integrative",
+"color": "#3dacc7"
+},
+"D27_IB": {
+"group": "integrative",
+"color": "#3facc7"
+},
+"D27_IB_p1": {
+"group": "integrative",
+"color": "#40abc8"
+},
+"D27_IB_p10": {
+"group": "integrative",
+"color": "#42abc8"
+},
+"D27_IB_p11": {
+"group": "integrative",
+"color": "#43abc9"
+},
+"D27_IB_p12": {
+"group": "integrative",
+"color": "#45abc9"
+},
+"D27_IB_p2": {
+"group": "integrative",
+"color": "#46aac9"
+},
+"D27_IB_p3": {
+"group": "integrative",
+"color": "#48aaca"
+},
+"D27_IB_p4": {
+"group": "integrative",
+"color": "#49aaca"
+},
+"D27_IB_p5": {
+"group": "integrative",
+"color": "#4baacb"
+},
+"D27_IB_p6": {
+"group": "integrative",
+"color": "#4caacb"
+},
+"D27_IB_p7": {
+"group": "integrative",
+"color": "#4ea9cb"
+},
+"D27_IB_p8": {
+"group": "integrative",
+"color": "#4fa9cc"
+},
+"D27_IB_p9": {
+"group": "integrative",
+"color": "#51a9cc"
+},
+"D28_SLP": {
+"group": "integrative",
+"color": "#52a9cd"
+},
+"D28_SLP_p1": {
+"group": "integrative",
+"color": "#53a9cd"
+},
+"D28_SLP_p2": {
+"group": "integrative",
+"color": "#55a9ce"
+},
+"D29_AVLP": {
+"group": "integrative",
+"color": "#56a9ce"
+},
+"D29_AVLP_p1": {
+"group": "integrative",
+"color": "#58a9ce"
+},
+"D29_AVLP_p2": {
+"group": "integrative",
+"color": "#59a9cf"
+},
+"D29_AVLP_p3": {
+"group": "integrative",
+"color": "#5ba8cf"
+},
+"D31_PVLP": {
+"group": "integrative",
+"color": "#5ca8d0"
+},
+"D31_PVLP_p1": {
+"group": "integrative",
+"color": "#5ea8d0"
+},
+"D31_PVLP_p2": {
+"group": "integrative",
+"color": "#5fa8d1"
+},
+"D31_PVLP_p3": {
+"group": "integrative",
+"color": "#61a8d1"
+},
+"D31_PVLP_p4": {
+"group": "integrative",
+"color": "#62a8d1"
+},
+"D31_PVLP_p5": {
+"group": "integrative",
+"color": "#64a8d2"
+},
+"D31_PVLP_p6": {
+"group": "integrative",
+"color": "#65a9d2"
+},
+"D36_IPS": {
+"group": "integrative",
+"color": "#67a9d3"
+},
+"D36_IPS_p1": {
+"group": "integrative",
+"color": "#68a9d3"
+},
+"DLP": {
+"group": "integrative",
+"color": "#6aa9d4"
+},
+"DMP": {
+"group": "integrative",
+"color": "#6ba9d4"
+},
+"EPA": {
+"group": "integrative",
+"color": "#6ca9d4"
+},
+"FSPP": {
+"group": "integrative",
+"color": "#6ea9d5"
+},
+"GOR": {
+"group": "integrative",
+"color": "#6fa9d5"
+},
+"IB": {
+"group": "integrative",
+"color": "#71aad6"
+},
+"ICL": {
+"group": "integrative",
+"color": "#72aad6"
+},
+"IDLP": {
+"group": "integrative",
+"color": "#74aad7"
+},
+"IPS": {
+"group": "integrative",
+"color": "#75aad7"
+},
+"PAN": {
+"group": "integrative",
+"color": "#77aad7"
+},
+"PLP": {
+"group": "integrative",
+"color": "#78abd8"
+},
+"PVLP": {
+"group": "integrative",
+"color": "#7aabd8"
+},
+"SCL": {
+"group": "integrative",
+"color": "#7babd9"
+},
+"SDFP": {
+"group": "integrative",
+"color": "#7dabd9"
+},
+"SIP": {
+"group": "integrative",
+"color": "#7eacda"
+},
+"SLP": {
+"group": "integrative",
+"color": "#80acda"
+},
+"SMP": {
+"group": "integrative",
+"color": "#81acda"
+},
+"SPP": {
+"group": "integrative",
+"color": "#83addb"
+},
+"SPS": {
+"group": "integrative",
+"color": "#84addb"
+},
+"VES": {
+"group": "integrative",
+"color": "#85addc"
+},
+"VLP": {
+"group": "integrative",
+"color": "#87aedc"
+},
+"VMP": {
+"group": "integrative",
+"color": "#88aedd"
+}
+}
+}

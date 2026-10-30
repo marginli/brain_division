@@ -1,0 +1,167 @@
+{
+ "GNG.1": {
+  "name": "GNG.1",
+  "parent": "GNG",
+  "n_vert": 985,
+  "n_face": 1998,
+  "centroid_um": [
+   -82.69999694824219,
+   -111.0999984741211,
+   13.0
+  ],
+  "volume_um3": 798266,
+  "bytes": 23816,
+  "offset": 0,
+  "length": 23816
+ },
+ "GNG.2": {
+  "name": "GNG.2",
+  "parent": "GNG",
+  "n_vert": 1003,
+  "n_face": 2000,
+  "centroid_um": [
+   -139.8000030517578,
+   -104.69999694824219,
+   9.0
+  ],
+  "volume_um3": 591392,
+  "bytes": 24044,
+  "offset": 23816,
+  "length": 24044
+ },
+ "LA_L.1": {
+  "name": "LA_L.1",
+  "parent": "LA_L",
+  "n_vert": 998,
+  "n_face": 1998,
+  "centroid_um": [
+   201.89999389648438,
+   -232.1999969482422,
+   -6.900000095367432
+  ],
+  "volume_um3": 258372,
+  "bytes": 23972,
+  "offset": 47860,
+  "length": 23972
+ },
+ "LA_L.2": {
+  "name": "LA_L.2",
+  "parent": "LA_L",
+  "n_vert": 917,
+  "n_face": 1830,
+  "centroid_um": [
+   160.5,
+   -240.60000610351562,
+   -42.79999923706055
+  ],
+  "volume_um3": 42669,
+  "bytes": 21992,
+  "offset": 71832,
+  "length": 21992
+ },
+ "LA_L.3": {
+  "name": "LA_L.3",
+  "parent": "LA_L",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   199.3000030517578,
+   -90.0,
+   -18.399999618530273
+  ],
+  "volume_um3": 140119,
+  "bytes": 24032,
+  "offset": 93824,
+  "length": 24032
+ },
+ "LA_R.1": {
+  "name": "LA_R.1",
+  "parent": "LA_R",
+  "n_vert": 1003,
+  "n_face": 1998,
+  "centroid_um": [
+   -393.0,
+   -225.0,
+   -18.399999618530273
+  ],
+  "volume_um3": 123215,
+  "bytes": 24032,
+  "offset": 117856,
+  "length": 24032
+ },
+ "LA_R.2": {
+  "name": "LA_R.2",
+  "parent": "LA_R",
+  "n_vert": 1001,
+  "n_face": 1998,
+  "centroid_um": [
+   -429.8999938964844,
+   -207.39999389648438,
+   10.0
+  ],
+  "volume_um3": 93959,
+  "bytes": 24008,
+  "offset": 141888,
+  "length": 24008
+ },
+ "LA_R.3": {
+  "name": "LA_R.3",
+  "parent": "LA_R",
+  "n_vert": 1000,
+  "n_face": 2000,
+  "centroid_um": [
+   -419.8999938964844,
+   -84.80000305175781,
+   1.2000000476837158
+  ],
+  "volume_um3": 100188,
+  "bytes": 24008,
+  "offset": 165896,
+  "length": 24008
+ },
+ "LA_R.4": {
+  "name": "LA_R.4",
+  "parent": "LA_R",
+  "n_vert": 993,
+  "n_face": 1998,
+  "centroid_um": [
+   -371.5,
+   -50.20000076293945,
+   -22.299999237060547
+  ],
+  "volume_um3": 81688,
+  "bytes": 23912,
+  "offset": 189904,
+  "length": 23912
+ },
+ "SAD.1": {
+  "name": "SAD.1",
+  "parent": "SAD",
+  "n_vert": 998,
+  "n_face": 2000,
+  "centroid_um": [
+   -40.29999923706055,
+   -144.8000030517578,
+   -11.699999809265137
+  ],
+  "volume_um3": 271685,
+  "bytes": 23984,
+  "offset": 213816,
+  "length": 23984
+ },
+ "SAD.2": {
+  "name": "SAD.2",
+  "parent": "SAD",
+  "n_vert": 999,
+  "n_face": 1998,
+  "centroid_um": [
+   -165.10000610351562,
+   -135.0,
+   -9.800000190734863
+  ],
+  "volume_um3": 289545,
+  "bytes": 23984,
+  "offset": 237800,
+  "length": 23984
+ }
+}

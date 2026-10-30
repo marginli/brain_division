@@ -1,0 +1,32 @@
+{
+ "AVLP_L.1": {
+  "name": "AVLP_L.1",
+  "parent": "AVLP_L",
+  "n_vert": 1016,
+  "n_face": 2000,
+  "centroid_um": [
+   170.39999389648438,
+   -86.30000305175781,
+   7.400000095367432
+  ],
+  "volume_um3": 599779,
+  "bytes": 24200,
+  "offset": 0,
+  "length": 24200
+ },
+ "AVLP_L.2": {
+  "name": "AVLP_L.2",
+  "parent": "AVLP_L",
+  "n_vert": 1019,
+  "n_face": 2000,
+  "centroid_um": [
+   212.60000610351562,
+   -42.599998474121094,
+   -8.0
+  ],
+  "volume_um3": 406638,
+  "bytes": 24236,
+  "offset": 24200,
+  "length": 24236
+ }
+}

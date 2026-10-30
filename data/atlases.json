@@ -1,0 +1,104 @@
+{
+ "frame": {
+  "_說明": "所有標籤體積都已放在 A1 管線的 FC12 µm 格裡：陣列為 [z, y, x]，座標 = origin + index × step（µm）。x=左右、y=背腹、z=前後。",
+  "origin_um": [
+   -480.0,
+   -410.0,
+   -175.0
+  ],
+  "step_um": 1.0,
+  "_方向": "每套用 up（背側朝哪個軸）與 front（前方朝哪個軸）描述，由各區質心實測（GNG 腹側、SMP 背側、AL 前、PB 後、X_R 在 −x）。MaleCNS 相對 D03 繞 x 軸轉 180°，不是鏡射。"
+ },
+ "atlases": [
+  {
+   "id": "chiang",
+   "name": "Chiang 55 區（FlyCircuit LPU＋hub）",
+   "short": "Chiang 55",
+   "space": "FCWB",
+   "overlay_group": "FCWB",
+   "year": 2011,
+   "source": "Chiang et al. 2011 Curr Biol；標籤體積由 CMU_research/A1 從 fruitflybrain/ffbo.lib 的 FlyCircuit mesh 轉成",
+   "up": "+y",
+   "front": "+z",
+   "note": "Lat Tri 原名含空格，本專案寫成 Lat_Tri",
+   "n_regions": 55,
+   "n_bases": 29,
+   "has_mesh": true
+  },
+  {
+   "id": "ito",
+   "name": "Ito 75 區（Ito et al. 2014 統一命名）",
+   "short": "Ito 75",
+   "space": "FCWB",
+   "overlay_group": "FCWB",
+   "year": 2014,
+   "source": "Ito et al. 2014 Neuron；標籤體積 = BSC_plan/D03（natverse FCWBNP.surf 轉入 FC12）",
+   "up": "+y",
+   "front": "+z",
+   "note": "左右用 D03 慣例（_L/_R）",
+   "n_regions": 75,
+   "n_bases": 41,
+   "has_mesh": true
+  },
+  {
+   "id": "itoem",
+   "name": "Ito 75 區（FlyWire v783 EM 版）",
+   "short": "Ito-EM 75",
+   "space": "FCWB",
+   "overlay_group": "FCWB",
+   "year": 2024,
+   "source": "FlyWire v783 的 Ito 2014 分區（Schlegel/Dorkenwald 2024 的 neuropil 標籤），由 CMU_research/A1 第 3 格以對調仿射轉進 FC12 框；標籤 = A1/em/d03_em/work/labels_fc_1um.npy",
+   "up": "+y",
+   "front": "+z",
+   "note": "與 Ito 75（光學 FCWB 版）同座標系可疊圖：同一套定義、兩種影像來源的差異。A1 的 EM 區名左右與 D03 相反，本表已對調成 D03 慣例。LA、OCG 沒有標籤。",
+   "n_regions": 75,
+   "n_bases": 41,
+   "has_mesh": true
+  },
+  {
+   "id": "malecns",
+   "name": "MaleCNS 80 區（fullbrain-roi-v5，v1.0 正式分區）",
+   "short": "MaleCNS 80",
+   "space": "MaleCNS 原生（只平移、未對位）",
+   "overlay_group": "MCNS",
+   "year": 2025,
+   "source": "Janelia FlyEM MaleCNS v1.0 fullbrain-roi-v5（正式分區）；標籤體積由 build/make_malecns_labels.py 以 A1_maleCNS v4 的座標框重切（512 nm → 1 µm）",
+   "up": "-y",
+   "front": "-z",
+   "note": "overlay_group MCNS：與 FCWB 的三套只能並排；與「MaleCNS 密度模板 65」同框可疊圖（2026-10-29）。v5 = v4 把 AMMC 併入 SAD、GA 併入 LAL、ROB／RUB 併入 CRE（2026-10-14 逐格驗證），再剔除 CRN、CV-anterior → 80 區。MB 七塊不併、LA 保留。",
+   "n_regions": 80,
+   "n_bases": 44,
+   "has_mesh": true
+  },
+  {
+   "id": "mcnstpl",
+   "name": "MaleCNS 密度模板 65 區（同事以突觸密度切分，第一層）",
+   "short": "密度模板 65",
+   "space": "MaleCNS 原生（只平移、未對位）",
+   "overlay_group": "MCNS",
+   "year": 2026,
+   "source": "同事 2026-10-29 提供的 LPU_templates（模式四「兩層圖譜」第一層）：只用 MaleCNS v1.0 突觸密度（5 µm 方格、合併樹＋長回原形、6 鄰、最小區塊 3,000 µm³、密度落差 30%、目標區數 K＝Ito 區數）切出 65 區；標籤體積由 build/make_mcns_tpl_labels.py 重切成 1 µm（與 MaleCNS 80 同框）",
+   "up": "-y",
+   "front": "-z",
+   "note": "區名 D<編號>_<主要 Ito 區>：編號是同事模板的順序，後面是這一區突觸最多的 Ito 區。目標區數與參數都是對著 Ito 挑的（ARI 0.77），不是獨立分區；上部中央腦（SMP／SIP／SLP／CRE／SCL／ICL）沒有密度低谷、被併成大區，AL(R)、GNG、LA 則被切成幾塊。與 MaleCNS 80、密度模板 283 同框可疊圖。LPU 結果來自 CMU_research/A1_maleCNS_tpl（腦用模板、腹神經索沿用 MaleCNS 23 區）。",
+   "n_regions": 65,
+   "n_bases": 65,
+   "has_mesh": true
+  },
+  {
+   "id": "mcnstpl2",
+   "name": "MaleCNS 密度模板 283 塊（同事以突觸密度切分，第二層）",
+   "short": "密度模板 283",
+   "space": "MaleCNS 原生（只平移、未對位）",
+   "overlay_group": "MCNS",
+   "year": 2026,
+   "source": "同事 2026-10-29 提供的 LPU_templates（模式四「兩層圖譜」第二層）：把第一層 65 區各自依突觸來自哪些細胞型別再切成 1 到多塊，共 283 塊；標籤體積取自 CMU_research/A1_maleCNS_tpl2/tpl/d03_tpl，由 build/make_mcns_tpl2_labels.py 平移到網頁 MaleCNS 框（z +20 µm）",
+   "up": "-y",
+   "front": "-z",
+   "note": "塊名 <第一層區名>_p<k>：第一層那一區切出的第 k 塊（例如 D25_FB_p3 是扇形體那一區的第 3 塊）。每一塊都完整落在第一層母區裡。與 MaleCNS 80、密度模板 65 同框可疊圖。LPU 結果：舊規則來自 CMU_research/A1_maleCNS_tpl2，A1_syn 第二版（只用電顯突觸、併區規則 SYN-W18–W21）來自 CMU_research/A1_syn/v2。",
+   "n_regions": 283,
+   "n_bases": 283,
+   "has_mesh": true
+  }
+ ]
+}

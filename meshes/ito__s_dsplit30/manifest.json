@@ -1,0 +1,122 @@
+{
+ "AVLP_L.1": {
+  "name": "AVLP_L.1",
+  "parent": "AVLP_L",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   171.5,
+   -87.5,
+   8.800000190734863
+  ],
+  "volume_um3": 471282,
+  "bytes": 24032,
+  "offset": 0,
+  "length": 24032
+ },
+ "AVLP_L.2": {
+  "name": "AVLP_L.2",
+  "parent": "AVLP_L",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   198.6999969482422,
+   -40.900001525878906,
+   -3.299999952316284
+  ],
+  "volume_um3": 414549,
+  "bytes": 24032,
+  "offset": 24032,
+  "length": 24032
+ },
+ "LOP_R.1": {
+  "name": "LOP_R.1",
+  "parent": "LOP_R",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   -249.5,
+   -208.6999969482422,
+   -66.80000305175781
+  ],
+  "volume_um3": 320075,
+  "bytes": 24032,
+  "offset": 48064,
+  "length": 24032
+ },
+ "LOP_R.2": {
+  "name": "LOP_R.2",
+  "parent": "LOP_R",
+  "n_vert": 1001,
+  "n_face": 1998,
+  "centroid_um": [
+   -308.70001220703125,
+   -123.0999984741211,
+   -88.0999984741211
+  ],
+  "volume_um3": 441437,
+  "bytes": 24008,
+  "offset": 72096,
+  "length": 24008
+ },
+ "LOP_L.1": {
+  "name": "LOP_L.1",
+  "parent": "LOP_L",
+  "n_vert": 1001,
+  "n_face": 1998,
+  "centroid_um": [
+   273.29998779296875,
+   -183.6999969482422,
+   -82.0
+  ],
+  "volume_um3": 616107,
+  "bytes": 24008,
+  "offset": 96104,
+  "length": 24008
+ },
+ "LOP_L.2": {
+  "name": "LOP_L.2",
+  "parent": "LOP_L",
+  "n_vert": 1002,
+  "n_face": 2000,
+  "centroid_um": [
+   297.6000061035156,
+   -71.19999694824219,
+   -108.80000305175781
+  ],
+  "volume_um3": 125791,
+  "bytes": 24032,
+  "offset": 120112,
+  "length": 24032
+ },
+ "PRW.1": {
+  "name": "PRW.1",
+  "parent": "PRW",
+  "n_vert": 1001,
+  "n_face": 1998,
+  "centroid_um": [
+   -31.100000381469727,
+   -164.89999389648438,
+   46.400001525878906
+  ],
+  "volume_um3": 107629,
+  "bytes": 24008,
+  "offset": 144144,
+  "length": 24008
+ },
+ "PRW.2": {
+  "name": "PRW.2",
+  "parent": "PRW",
+  "n_vert": 1001,
+  "n_face": 1998,
+  "centroid_um": [
+   36.29999923706055,
+   -165.10000610351562,
+   41.79999923706055
+  ],
+  "volume_um3": 118327,
+  "bytes": 24008,
+  "offset": 168152,
+  "length": 24008
+ }
+}

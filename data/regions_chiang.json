@@ -1,0 +1,1707 @@
+[
+{
+"id": 1,
+"name": "AL_L",
+"base": "AL",
+"side": "L",
+"full_en": "antennal lobe",
+"zh": "觸角葉",
+"zh_short": "",
+"function": "嗅覺一級中樞。嗅覺受器神經元依受器型別匯入約 50 個嗅小球，局部神經元做側向抑制與增益控制，投射神經元再把訊號送往 MB 萼（學習）與 LH（先天反應）。",
+"evidence": "確立",
+"source": "Ito14; Wilson13; Jefferis07",
+"note": "",
+"centroid": [
+68.80000305175781,
+-56.70000076293945,
+68.19999694824219
+],
+"bbox": [
+[
+5.900000095367432,
+-136.1999969482422,
+17.299999237060547
+],
+[
+130.0,
+3.799999952316284,
+97.9000015258789
+]
+],
+"volume": 355509
+},
+{
+"id": 2,
+"name": "AL_R",
+"base": "AL",
+"side": "R",
+"full_en": "antennal lobe",
+"zh": "觸角葉",
+"zh_short": "",
+"function": "嗅覺一級中樞。嗅覺受器神經元依受器型別匯入約 50 個嗅小球，局部神經元做側向抑制與增益控制，投射神經元再把訊號送往 MB 萼（學習）與 LH（先天反應）。",
+"evidence": "確立",
+"source": "Ito14; Wilson13; Jefferis07",
+"note": "",
+"centroid": [
+-67.5,
+-59.79999923706055,
+64.5999984741211
+],
+"bbox": [
+[
+-125.19999694824219,
+-137.39999389648438,
+15.399999618530273
+],
+[
+-4.900000095367432,
+-2.5999999046325684,
+98.0
+]
+],
+"volume": 315384
+},
+{
+"id": 3,
+"name": "AMMC_L",
+"base": "AMMC",
+"side": "L",
+"full_en": "antennal mechanosensory and motor center",
+"zh": "觸角機械感覺與運動中樞",
+"zh_short": "觸角機械中樞",
+"function": "聽覺與觸角機械感覺的一級中樞：Johnston 氏器（JO）神經元依功能分群投射到此（求偶歌聽覺、重力、風感），並含觸角肌肉的運動神經元。",
+"evidence": "確立",
+"source": "Ito14; Kamikouchi09; Yorozu09",
+"note": "Chiang 2011 的 AMMC 範圍較大：Ito 2014 Table S13 把整個 SAD（含 AMMC）對到它；疊圖顯示 Chiang AMMC 體積四成在 SAD、三成在 Ito 的 AMMC、二成在 GNG，覆蓋 SAD 的四成（外側部），SAD 其餘落在 SOG、CVLP、VMP。比較模式會同時高亮 AMMC 與 SAD。",
+"centroid": [
+90.0,
+-168.39999389648438,
+-2.0
+],
+"bbox": [
+[
+-4.900000095367432,
+-208.1999969482422,
+-49.5
+],
+[
+156.0,
+-118.69999694824219,
+58.5
+]
+],
+"volume": 263758
+},
+{
+"id": 4,
+"name": "AMMC_R",
+"base": "AMMC",
+"side": "R",
+"full_en": "antennal mechanosensory and motor center",
+"zh": "觸角機械感覺與運動中樞",
+"zh_short": "觸角機械中樞",
+"function": "聽覺與觸角機械感覺的一級中樞：Johnston 氏器（JO）神經元依功能分群投射到此（求偶歌聽覺、重力、風感），並含觸角肌肉的運動神經元。",
+"evidence": "確立",
+"source": "Ito14; Kamikouchi09; Yorozu09",
+"note": "Chiang 2011 的 AMMC 範圍較大：Ito 2014 Table S13 把整個 SAD（含 AMMC）對到它；疊圖顯示 Chiang AMMC 體積四成在 SAD、三成在 Ito 的 AMMC、二成在 GNG，覆蓋 SAD 的四成（外側部），SAD 其餘落在 SOG、CVLP、VMP。比較模式會同時高亮 AMMC 與 SAD。",
+"centroid": [
+-94.9000015258789,
+-166.5,
+-2.5999999046325684
+],
+"bbox": [
+[
+-158.8000030517578,
+-210.39999389648438,
+-49.5
+],
+[
+-3.200000047683716,
+-114.80000305175781,
+55.5
+]
+],
+"volume": 285396
+},
+{
+"id": 5,
+"name": "Cal_L",
+"base": "Cal",
+"side": "L",
+"full_en": "calyx",
+"zh": "蕈狀體萼",
+"zh_short": "",
+"function": "即 Ito 的 CA（本表代號 MB_CA）：Kenyon 細胞樹突區，嗅覺投射神經元的輸入站。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Aso14; Shih15",
+"note": "Shih 2015 起併入 MB。",
+"centroid": [
+117.30000305175781,
+34.0,
+-93.0
+],
+"bbox": [
+[
+64.5999984741211,
+-4.5,
+-111.5
+],
+[
+169.5,
+70.5,
+-75.5
+]
+],
+"volume": 125501
+},
+{
+"id": 6,
+"name": "Cal_R",
+"base": "Cal",
+"side": "R",
+"full_en": "calyx",
+"zh": "蕈狀體萼",
+"zh_short": "",
+"function": "即 Ito 的 CA（本表代號 MB_CA）：Kenyon 細胞樹突區，嗅覺投射神經元的輸入站。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Aso14; Shih15",
+"note": "Shih 2015 起併入 MB。",
+"centroid": [
+-126.19999694824219,
+35.400001525878906,
+-96.19999694824219
+],
+"bbox": [
+[
+-177.0,
+-1.2000000476837158,
+-114.4000015258789
+],
+[
+-76.0999984741211,
+72.5,
+-80.5
+]
+],
+"volume": 96966
+},
+{
+"id": 7,
+"name": "CCP_L",
+"base": "CCP",
+"side": "L",
+"full_en": "caudalcentral protocerebrum",
+"zh": "尾中央前腦",
+"zh_short": "",
+"function": "腦後部中線附近的成對小區；功能未明確描述。",
+"evidence": "未知",
+"source": "Chiang11; Ito14",
+"note": "對應 Ito 的 IB（CCP 腹側，占 CCP 體積七成）加 ATL（CCP 背側，不到一成；ATL 大半落在 SDFP）；依 Ito 2014 Table S13 與疊圖。",
+"centroid": [
+31.0,
+-22.600000381469727,
+-68.0999984741211
+],
+"bbox": [
+[
+-5.5,
+-70.4000015258789,
+-89.5
+],
+[
+68.4000015258789,
+56.099998474121094,
+-43.5
+]
+],
+"volume": 129128
+},
+{
+"id": 8,
+"name": "CCP_R",
+"base": "CCP",
+"side": "R",
+"full_en": "caudalcentral protocerebrum",
+"zh": "尾中央前腦",
+"zh_short": "",
+"function": "腦後部中線附近的成對小區；功能未明確描述。",
+"evidence": "未知",
+"source": "Chiang11; Ito14",
+"note": "對應 Ito 的 IB（CCP 腹側，占 CCP 體積七成）加 ATL（CCP 背側，不到一成；ATL 大半落在 SDFP）；依 Ito 2014 Table S13 與疊圖。",
+"centroid": [
+-38.5,
+-22.799999237060547,
+-68.5999984741211
+],
+"bbox": [
+[
+-77.30000305175781,
+-69.5,
+-91.5
+],
+[
+-2.5999999046325684,
+53.5,
+-41.5
+]
+],
+"volume": 126132
+},
+{
+"id": 9,
+"name": "CMP_L",
+"base": "CMP",
+"side": "L",
+"full_en": "caudalmedial protocerebrum",
+"zh": "尾內側前腦",
+"zh_short": "",
+"function": "食道後方、GNG 與後坡區交界的運動前區，下行神經元樹突密集；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Namiki18",
+"note": "Ito 2014 Table S12 把 CMP 對到後坡區大部分；本站疊圖（同一 1 µm 格）顯示 CMP 體積 75% 落在 Ito 的 GNG、12% 在 IPS、未碰到 SPS；Ito 的後坡區主要被 Chiang 的 VMP、DMP、CVLP 覆蓋。",
+"centroid": [
+77.30000305175781,
+-178.89999389648438,
+-73.0
+],
+"bbox": [
+[
+27.600000381469727,
+-223.10000610351562,
+-99.5
+],
+[
+132.3000030517578,
+-139.60000610351562,
+-49.5
+]
+],
+"volume": 177352
+},
+{
+"id": 10,
+"name": "CMP_R",
+"base": "CMP",
+"side": "R",
+"full_en": "caudalmedial protocerebrum",
+"zh": "尾內側前腦",
+"zh_short": "",
+"function": "食道後方、GNG 與後坡區交界的運動前區，下行神經元樹突密集；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Namiki18",
+"note": "Ito 2014 Table S12 把 CMP 對到後坡區大部分；本站疊圖（同一 1 µm 格）顯示 CMP 體積 75% 落在 Ito 的 GNG、12% 在 IPS、未碰到 SPS；Ito 的後坡區主要被 Chiang 的 VMP、DMP、CVLP 覆蓋。",
+"centroid": [
+-83.9000015258789,
+-177.3000030517578,
+-72.9000015258789
+],
+"bbox": [
+[
+-133.5,
+-217.5,
+-101.5
+],
+[
+-37.5,
+-141.1999969482422,
+-49.5
+]
+],
+"volume": 156272
+},
+{
+"id": 11,
+"name": "CVLP_L",
+"base": "CVLP",
+"side": "L",
+"full_en": "caudal ventrolateral protocerebrum",
+"zh": "尾腹外側前腦",
+"zh_short": "",
+"function": "聽覺二級中樞（Ito 的楔區 WED 約半落在此）與下行神經元樹突密集的運動前區（IPS 的大半），並含 PLP 下部的少數視覺小球；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Patella18; Namiki18",
+"note": "Ito 2014 補充材料把 wedge 對應到 Chiang 2011 的 CVLP；疊圖：CVLP 體積 48% 在 IPS、19% 在 WED、12% 在 PLP。",
+"centroid": [
+114.69999694824219,
+-132.39999389648438,
+-52.29999923706055
+],
+"bbox": [
+[
+48.099998474121094,
+-182.6999969482422,
+-101.5
+],
+[
+181.6999969482422,
+-73.19999694824219,
+2.4000000953674316
+]
+],
+"volume": 399310
+},
+{
+"id": 12,
+"name": "CVLP_R",
+"base": "CVLP",
+"side": "R",
+"full_en": "caudal ventrolateral protocerebrum",
+"zh": "尾腹外側前腦",
+"zh_short": "",
+"function": "聽覺二級中樞（Ito 的楔區 WED 約半落在此）與下行神經元樹突密集的運動前區（IPS 的大半），並含 PLP 下部的少數視覺小球；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Patella18; Namiki18",
+"note": "Ito 2014 補充材料把 wedge 對應到 Chiang 2011 的 CVLP；疊圖：CVLP 體積 48% 在 IPS、19% 在 WED、12% 在 PLP。",
+"centroid": [
+-127.5999984741211,
+-129.10000610351562,
+-52.79999923706055
+],
+"bbox": [
+[
+-185.60000610351562,
+-188.60000610351562,
+-99.5
+],
+[
+-58.79999923706055,
+-68.4000015258789,
+-0.5
+]
+],
+"volume": 423298
+},
+{
+"id": 13,
+"name": "DLP_L",
+"base": "DLP",
+"side": "L",
+"full_en": "dorsolateral protocerebrum",
+"zh": "背外側前腦",
+"zh_short": "",
+"function": "LH 輸出神經元與 MB 輸出神經元（MBON）匯合的嗅覺高階整合區；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Dolan19",
+"note": "DLP 外側部對應 Ito 的 SLP、內側部對應 SIP（Ito 2014 Table S13：SLP＝DLP 外側＋IDLP 外側；SIP＝DLP 內側＋FSPP）。",
+"centroid": [
+158.6999969482422,
+82.5999984741211,
+-37.20000076293945
+],
+"bbox": [
+[
+86.5,
+10.199999809265137,
+-84.5
+],
+[
+230.60000610351562,
+137.1999969482422,
+5.5
+]
+],
+"volume": 435348
+},
+{
+"id": 14,
+"name": "DLP_R",
+"base": "DLP",
+"side": "R",
+"full_en": "dorsolateral protocerebrum",
+"zh": "背外側前腦",
+"zh_short": "",
+"function": "LH 輸出神經元與 MB 輸出神經元（MBON）匯合的嗅覺高階整合區；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Dolan19",
+"note": "DLP 外側部對應 Ito 的 SLP、內側部對應 SIP（Ito 2014 Table S13：SLP＝DLP 外側＋IDLP 外側；SIP＝DLP 內側＋FSPP）。",
+"centroid": [
+-166.1999969482422,
+85.5999984741211,
+-34.900001525878906
+],
+"bbox": [
+[
+-235.6999969482422,
+16.5,
+-87.5
+],
+[
+-95.80000305175781,
+139.5,
+6.699999809265137
+]
+],
+"volume": 457550
+},
+{
+"id": 15,
+"name": "DMP_L",
+"base": "DMP",
+"side": "L",
+"full_en": "dorsomedial protocerebrum",
+"zh": "背內側前腦",
+"zh_short": "",
+"function": "MB 輸出神經元（MBON）終端與下行神經元樹突所在（對應 ICL 的部分）；疊圖顯示 Chiang 的 DMP 還涵蓋 LAL 的一半（中央複合體的轉向輸出站）與腹側複合體的 EPA、GOR 大部分、VES 三成；功能由對應的 Ito 區推論。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Westeinde24",
+"note": "名稱雖是「背內側」，Ito 2014 Table S13 把它對到 ICL（下夾區）；但 DMP 體積近 ICL 三倍，疊圖只 26% 在 ICL，另 20% 在 LAL、14% 在 SPS、11% 在 VES，並覆蓋 EPA 91%、GOR 69%。",
+"centroid": [
+88.30000305175781,
+-43.29999923706055,
+-40.29999923706055
+],
+"bbox": [
+[
+21.600000381469727,
+-118.80000305175781,
+-102.5
+],
+[
+165.6999969482422,
+24.700000762939453,
+24.5
+]
+],
+"volume": 538567
+},
+{
+"id": 16,
+"name": "DMP_R",
+"base": "DMP",
+"side": "R",
+"full_en": "dorsomedial protocerebrum",
+"zh": "背內側前腦",
+"zh_short": "",
+"function": "MB 輸出神經元（MBON）終端與下行神經元樹突所在（對應 ICL 的部分）；疊圖顯示 Chiang 的 DMP 還涵蓋 LAL 的一半（中央複合體的轉向輸出站）與腹側複合體的 EPA、GOR 大部分、VES 三成；功能由對應的 Ito 區推論。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Westeinde24",
+"note": "名稱雖是「背內側」，Ito 2014 Table S13 把它對到 ICL（下夾區）；但 DMP 體積近 ICL 三倍，疊圖只 26% 在 ICL，另 20% 在 LAL、14% 在 SPS、11% 在 VES，並覆蓋 EPA 91%、GOR 69%。",
+"centroid": [
+-96.80000305175781,
+-45.20000076293945,
+-42.400001525878906
+],
+"bbox": [
+[
+-179.10000610351562,
+-122.30000305175781,
+-103.5999984741211
+],
+[
+-23.299999237060547,
+30.0,
+27.299999237060547
+]
+],
+"volume": 592883
+},
+{
+"id": 17,
+"name": "EB",
+"base": "EB",
+"side": "M",
+"full_en": "ellipsoid body",
+"zh": "橢圓體",
+"zh_short": "",
+"function": "中央複合體的環狀結構。E-PG 神經元的活動波峰代表頭向，隨視覺地標與自身轉動更新；環形神經元（ER）把視覺與自身運動訊號輸入；R5（ER5，Liu 2016 原稱 R2）環形神經元的活動隨清醒時間累積，編碼睡眠需求；也參與視覺位置記憶。",
+"evidence": "確立",
+"source": "Ito14; Seelig15; Liu16; Ofstad11",
+"note": "",
+"centroid": [
+-2.5999999046325684,
+2.299999952316284,
+-1.2000000476837158
+],
+"bbox": [
+[
+-48.5,
+-34.5,
+-25.399999618530273
+],
+[
+42.400001525878906,
+37.79999923706055,
+20.5
+]
+],
+"volume": 110028
+},
+{
+"id": 18,
+"name": "FB",
+"base": "FB",
+"side": "M",
+"full_en": "fan-shaped body",
+"zh": "扇形體",
+"zh_short": "",
+"function": "中央複合體最大的結構，分 9 層。中層把頭向與自身速度結合成以世界為座標的行進方向（PFN→hΔ），並儲存目標方向（FC2），供路徑整合與導航使用；背側層（dFB）長期被視為睡眠恆定的開關，但 2023 年起有研究指出原先證據部分來自腹神經索的神經元，仍有爭議；腹側層的神經元與行走速度、內在狀態的調控有關（多為連結體推論）。",
+"evidence": "確立",
+"source": "Ito14; Hulse21; Lu22; Westeinde24; Donlea11; De23",
+"note": "「確立」指導航功能；dFB 睡眠功能有爭議。",
+"centroid": [
+-3.5999999046325684,
+9.600000381469727,
+-30.899999618530273
+],
+"bbox": [
+[
+-85.9000015258789,
+-38.79999923706055,
+-60.5
+],
+[
+77.5,
+68.4000015258789,
+-2.5
+]
+],
+"volume": 354991
+},
+{
+"id": 19,
+"name": "FSPP_L",
+"base": "FSPP",
+"side": "L",
+"full_en": "frontal superpeduncular protocerebrum",
+"zh": "額上柄前腦",
+"zh_short": "",
+"function": "MB 輸出神經元（MBON）與多巴胺神經元的分支區；功能與證據沿用對應的 Ito SIP。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Aso14; Shih15",
+"note": "對應 Ito 的 SIP 後部（Ito 2014 Table S12：posterior part of SIP；S13：SIP＝DLP 內側＋FSPP）。Shih 2015 的更新清單裡不再出現。",
+"centroid": [
+121.69999694824219,
+58.900001525878906,
+-15.300000190734863
+],
+"bbox": [
+[
+82.5999984741211,
+19.600000381469727,
+-34.5
+],
+[
+160.1999969482422,
+105.5,
+1.5
+]
+],
+"volume": 59348
+},
+{
+"id": 20,
+"name": "FSPP_R",
+"base": "FSPP",
+"side": "R",
+"full_en": "frontal superpeduncular protocerebrum",
+"zh": "額上柄前腦",
+"zh_short": "",
+"function": "MB 輸出神經元（MBON）與多巴胺神經元的分支區；功能與證據沿用對應的 Ito SIP。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Aso14; Shih15",
+"note": "對應 Ito 的 SIP 後部（Ito 2014 Table S12：posterior part of SIP；S13：SIP＝DLP 內側＋FSPP）。Shih 2015 的更新清單裡不再出現。",
+"centroid": [
+-123.80000305175781,
+58.5,
+-16.399999618530273
+],
+"bbox": [
+[
+-158.3000030517578,
+19.700000762939453,
+-33.5
+],
+[
+-79.9000015258789,
+114.30000305175781,
+-1.5
+]
+],
+"volume": 64553
+},
+{
+"id": 21,
+"name": "IDFP_L",
+"base": "IDFP",
+"side": "L",
+"full_en": "inferior dorsofrontal protocerebrum",
+"zh": "下背額前腦",
+"zh_short": "",
+"function": "中央複合體的轉向輸出站（LAL）與 MB 輸出神經元的整合區（CRE 後部）；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Westeinde24; Hulse21",
+"note": "對應 Ito 的 LAL（IDFP 腹側）加 CRE 後部（IDFP 背側）；GA 在 LAL 內，一併落在此區。依 Ito 2014 Table S13。",
+"centroid": [
+74.9000015258789,
+-22.799999237060547,
+29.600000381469727
+],
+"bbox": [
+[
+26.5,
+-100.5999984741211,
+7.5
+],
+[
+121.5,
+31.600000381469727,
+60.5
+]
+],
+"volume": 131941
+},
+{
+"id": 22,
+"name": "IDFP_R",
+"base": "IDFP",
+"side": "R",
+"full_en": "inferior dorsofrontal protocerebrum",
+"zh": "下背額前腦",
+"zh_short": "",
+"function": "中央複合體的轉向輸出站（LAL）與 MB 輸出神經元的整合區（CRE 後部）；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Westeinde24; Hulse21",
+"note": "對應 Ito 的 LAL（IDFP 腹側）加 CRE 後部（IDFP 背側）；GA 在 LAL 內，一併落在此區。依 Ito 2014 Table S13。",
+"centroid": [
+-75.30000305175781,
+-20.799999237060547,
+26.600000381469727
+],
+"bbox": [
+[
+-126.5,
+-92.19999694824219,
+4.5
+],
+[
+-25.399999618530273,
+39.70000076293945,
+56.5
+]
+],
+"volume": 139043
+},
+{
+"id": 23,
+"name": "IDLP_L",
+"base": "IDLP",
+"side": "L",
+"full_en": "inner dorsolateral protocerebrum",
+"zh": "內背外側前腦",
+"zh_short": "",
+"function": "嗅覺高階整合（SLP 側）與神經調節匯集（SMP 側）的交界區；功能與證據沿用對應的 Ito 區。Chiang 2011 正文把它列為缺乏局部神經元的四對區之一（hub）。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Dolan19; Aso14; Shih15",
+"note": "IDLP 外側部對應 Ito 的 SLP、內側部對應 SMP（Ito 2014 Table S13）；疊圖：IDLP 體積 66% 在 SLP、19% 在 SIP、8% 在 SMP。Shih 2015 的更新清單（含 6 個 hub）裡不再出現。",
+"centroid": [
+136.60000610351562,
+85.19999694824219,
+-48.79999923706055
+],
+"bbox": [
+[
+74.0,
+59.5,
+-71.5
+],
+[
+219.3000030517578,
+135.1999969482422,
+-27.399999618530273
+]
+],
+"volume": 42392
+},
+{
+"id": 24,
+"name": "IDLP_R",
+"base": "IDLP",
+"side": "R",
+"full_en": "inner dorsolateral protocerebrum",
+"zh": "內背外側前腦",
+"zh_short": "",
+"function": "嗅覺高階整合（SLP 側）與神經調節匯集（SMP 側）的交界區；功能與證據沿用對應的 Ito 區。Chiang 2011 正文把它列為缺乏局部神經元的四對區之一（hub）。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Dolan19; Aso14; Shih15",
+"note": "IDLP 外側部對應 Ito 的 SLP、內側部對應 SMP（Ito 2014 Table S13）；疊圖：IDLP 體積 66% 在 SLP、19% 在 SIP、8% 在 SMP。Shih 2015 的更新清單（含 6 個 hub）裡不再出現。",
+"centroid": [
+-146.1999969482422,
+82.5,
+-51.79999923706055
+],
+"bbox": [
+[
+-225.39999389648438,
+50.0,
+-82.5999984741211
+],
+[
+-85.9000015258789,
+136.5,
+-27.399999618530273
+]
+],
+"volume": 53042
+},
+{
+"id": 25,
+"name": "Lat_Tri_L",
+"base": "Lat_Tri",
+"side": "L",
+"full_en": "lateral triangle",
+"zh": "側三角",
+"zh_short": "",
+"function": "即 Ito 的 BU：ER 神經元樹突形成的微小球群，前視覺路徑（AOTU→BU→EB）的中繼站。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Omoto17; Sun17; Shih15",
+"note": "Shih 2015 的清單裡不再出現。",
+"centroid": [
+81.0,
+15.600000381469727,
+-9.600000381469727
+],
+"bbox": [
+[
+71.9000015258789,
+-6.0,
+-16.399999618530273
+],
+[
+91.30000305175781,
+32.29999923706055,
+-4.5
+]
+],
+"volume": 4200
+},
+{
+"id": 26,
+"name": "Lat_Tri_R",
+"base": "Lat_Tri",
+"side": "R",
+"full_en": "lateral triangle",
+"zh": "側三角",
+"zh_short": "",
+"function": "即 Ito 的 BU：ER 神經元樹突形成的微小球群，前視覺路徑（AOTU→BU→EB）的中繼站。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Omoto17; Sun17; Shih15",
+"note": "Shih 2015 的清單裡不再出現。",
+"centroid": [
+-91.0999984741211,
+15.100000381469727,
+-11.800000190734863
+],
+"bbox": [
+[
+-104.19999694824219,
+-5.300000190734863,
+-18.5
+],
+[
+-80.5999984741211,
+31.200000762939453,
+-6.5
+]
+],
+"volume": 4624
+},
+{
+"id": 27,
+"name": "LH_L",
+"base": "LH",
+"side": "L",
+"full_en": "lateral horn",
+"zh": "側角",
+"zh_short": "",
+"function": "嗅覺二級中樞之一，負責先天（不需學習）的嗅覺偏好與迴避；接收 AL 投射神經元依氣味類別排布的輸入，輸出到 SLP、SIP 等整合區；部分 LH 神經元也接收 MB 輸出神經元的輸入，參與學得記憶的讀出。",
+"evidence": "確立",
+"source": "Ito14; Jefferis07; Dolan19; Dolan18",
+"note": "",
+"centroid": [
+207.5,
+33.400001525878906,
+-53.0
+],
+"bbox": [
+[
+148.3000030517578,
+-20.100000381469727,
+-88.5
+],
+[
+267.5,
+78.9000015258789,
+-21.5
+]
+],
+"volume": 338536
+},
+{
+"id": 28,
+"name": "LH_R",
+"base": "LH",
+"side": "R",
+"full_en": "lateral horn",
+"zh": "側角",
+"zh_short": "",
+"function": "嗅覺二級中樞之一，負責先天（不需學習）的嗅覺偏好與迴避；接收 AL 投射神經元依氣味類別排布的輸入，輸出到 SLP、SIP 等整合區；部分 LH 神經元也接收 MB 輸出神經元的輸入，參與學得記憶的讀出。",
+"evidence": "確立",
+"source": "Ito14; Jefferis07; Dolan19; Dolan18",
+"note": "",
+"centroid": [
+-214.60000610351562,
+39.70000076293945,
+-55.400001525878906
+],
+"bbox": [
+[
+-272.5,
+-13.300000190734863,
+-92.5999984741211
+],
+[
+-155.6999969482422,
+89.4000015258789,
+-22.5
+]
+],
+"volume": 339591
+},
+{
+"id": 29,
+"name": "Lob_L",
+"base": "Lob",
+"side": "L",
+"full_en": "lobula",
+"zh": "小葉",
+"zh_short": "",
+"function": "即 Ito 的 LO：視覺三級中樞，小葉柱狀神經元偵測特定視覺特徵。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Wu16",
+"note": "",
+"centroid": [
+240.0,
+-120.5999984741211,
+-62.20000076293945
+],
+"bbox": [
+[
+158.6999969482422,
+-221.60000610351562,
+-117.69999694824219
+],
+[
+315.6000061035156,
+-16.5,
+-9.5
+]
+],
+"volume": 1156969
+},
+{
+"id": 30,
+"name": "Lob_R",
+"base": "Lob",
+"side": "R",
+"full_en": "lobula",
+"zh": "小葉",
+"zh_short": "",
+"function": "即 Ito 的 LO：視覺三級中樞，小葉柱狀神經元偵測特定視覺特徵。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Wu16",
+"note": "",
+"centroid": [
+-244.89999389648438,
+-122.9000015258789,
+-64.0
+],
+"bbox": [
+[
+-319.3999938964844,
+-229.5,
+-126.5
+],
+[
+-166.5,
+-17.399999618530273,
+-13.5
+]
+],
+"volume": 1224769
+},
+{
+"id": 31,
+"name": "LoP_L",
+"base": "LoP",
+"side": "L",
+"full_en": "lobula plate",
+"zh": "小葉板",
+"zh_short": "",
+"function": "即 Ito 的 LOP：T4/T5 方向選擇性訊號與寬視野運動整合。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Maisak13",
+"note": "",
+"centroid": [
+280.3999938964844,
+-148.89999389648438,
+-88.0
+],
+"bbox": [
+[
+186.39999389648438,
+-253.5,
+-125.5
+],
+[
+357.79998779296875,
+-29.600000381469727,
+-48.5
+]
+],
+"volume": 634581
+},
+{
+"id": 32,
+"name": "LoP_R",
+"base": "LoP",
+"side": "R",
+"full_en": "lobula plate",
+"zh": "小葉板",
+"zh_short": "",
+"function": "即 Ito 的 LOP：T4/T5 方向選擇性訊號與寬視野運動整合。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Maisak13",
+"note": "",
+"centroid": [
+-290.1000061035156,
+-158.1999969482422,
+-80.5999984741211
+],
+"bbox": [
+[
+-365.79998779296875,
+-262.5,
+-122.5
+],
+[
+-198.39999389648438,
+-34.599998474121094,
+-41.5
+]
+],
+"volume": 680360
+},
+{
+"id": 33,
+"name": "MB_L",
+"base": "MB",
+"side": "L",
+"full_en": "mushroom body",
+"zh": "蕈狀體",
+"zh_short": "",
+"function": "聯合學習與記憶中樞：Kenyon 細胞在萼（Chiang 另立為 Cal）接收嗅覺（及少量視覺等非嗅覺）輸入，軸突經柄進入葉；多巴胺神經元依「隔間」給予獎懲訊號，改變 Kenyon 細胞對輸出神經元的突觸，形成短期到長期記憶。",
+"evidence": "確立",
+"source": "Chiang11; Aso14",
+"note": "Chiang 的 MB 不含 Cal（另立）；Ito 的 MB 含 CA、PED、VL、ML。",
+"centroid": [
+79.30000305175781,
+36.099998474121094,
+17.200000762939453
+],
+"bbox": [
+[
+-4.400000095367432,
+-16.600000381469727,
+-73.5
+],
+[
+148.0,
+138.39999389648438,
+70.4000015258789
+]
+],
+"volume": 336471
+},
+{
+"id": 34,
+"name": "MB_R",
+"base": "MB",
+"side": "R",
+"full_en": "mushroom body",
+"zh": "蕈狀體",
+"zh_short": "",
+"function": "聯合學習與記憶中樞：Kenyon 細胞在萼（Chiang 另立為 Cal）接收嗅覺（及少量視覺等非嗅覺）輸入，軸突經柄進入葉；多巴胺神經元依「隔間」給予獎懲訊號，改變 Kenyon 細胞對輸出神經元的突觸，形成短期到長期記憶。",
+"evidence": "確立",
+"source": "Chiang11; Aso14",
+"note": "Chiang 的 MB 不含 Cal（另立）；Ito 的 MB 含 CA、PED、VL、ML。",
+"centroid": [
+-84.5999984741211,
+38.29999923706055,
+11.600000381469727
+],
+"bbox": [
+[
+-152.0,
+-14.800000190734863,
+-78.5
+],
+[
+-4.5,
+133.39999389648438,
+62.20000076293945
+]
+],
+"volume": 297579
+},
+{
+"id": 35,
+"name": "Med_L",
+"base": "Med",
+"side": "L",
+"full_en": "medulla",
+"zh": "髓質",
+"zh_short": "",
+"function": "即 Ito 的 ME：視覺二級中樞，顏色處理與運動偵測前段。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Takemura13; Behnia14",
+"note": "",
+"centroid": [
+328.29998779296875,
+-143.39999389648438,
+-31.0
+],
+"bbox": [
+[
+209.89999389648438,
+-294.5,
+-109.0999984741211
+],
+[
+439.5,
+23.399999618530273,
+35.29999923706055
+]
+],
+"volume": 3540669
+},
+{
+"id": 36,
+"name": "Med_R",
+"base": "Med",
+"side": "R",
+"full_en": "medulla",
+"zh": "髓質",
+"zh_short": "",
+"function": "即 Ito 的 ME：視覺二級中樞，顏色處理與運動偵測前段。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Takemura13; Behnia14",
+"note": "",
+"centroid": [
+-333.8999938964844,
+-146.39999389648438,
+-23.700000762939453
+],
+"bbox": [
+[
+-444.29998779296875,
+-300.6000061035156,
+-98.4000015258789
+],
+[
+-215.5,
+22.299999237060547,
+41.5
+]
+],
+"volume": 3523824
+},
+{
+"id": 37,
+"name": "Nod_L",
+"base": "Nod",
+"side": "L",
+"full_en": "noduli",
+"zh": "小結",
+"zh_short": "",
+"function": "即 Ito 的 NO：中央複合體的三對小單位，自身轉動與平移速度訊號進入羅盤迴路與 FB 的入口。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Green17; Lu22; Shih15",
+"note": "Chiang 2011 左右各切一塊；Ito 合為一個中線區。Shih 2015 列為 hub。",
+"centroid": [
+10.899999618530273,
+-41.20000076293945,
+-14.600000381469727
+],
+"bbox": [
+[
+-3.5,
+-62.400001525878906,
+-33.5
+],
+[
+28.5,
+-19.600000381469727,
+-1.5
+]
+],
+"volume": 19342
+},
+{
+"id": 38,
+"name": "Nod_R",
+"base": "Nod",
+"side": "R",
+"full_en": "noduli",
+"zh": "小結",
+"zh_short": "",
+"function": "即 Ito 的 NO：中央複合體的三對小單位，自身轉動與平移速度訊號進入羅盤迴路與 FB 的入口。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Green17; Lu22; Shih15",
+"note": "Chiang 2011 左右各切一塊；Ito 合為一個中線區。Shih 2015 列為 hub。",
+"centroid": [
+-14.199999809265137,
+-43.099998474121094,
+-15.600000381469727
+],
+"bbox": [
+[
+-30.5,
+-64.5,
+-31.5
+],
+[
+-0.5,
+-21.600000381469727,
+-1.5
+]
+],
+"volume": 19397
+},
+{
+"id": 39,
+"name": "OG_L",
+"base": "OG",
+"side": "L",
+"full_en": "optic glomerulus",
+"zh": "視覺小球",
+"zh_short": "",
+"function": "一群球狀的小區，各自是一種小葉柱狀神經元（LC4、LC6、LPLC2 等）的軸突終端；每個小球代表一種視覺特徵（逼近、小物體運動等），下游接下行神經元與巨大纖維。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Wu16; Ache19; Shih15",
+"note": "Chiang 2011 原名為單數 optic glomerulus，實為一群視覺小球；Ito 2014 不另立此區，Table S12 把它列為 VLP 的次區（疊圖主要在 PVLP、少數在 AVLP），本表對 PVLP 與 AVLP。Shih 2015 列為 hub。",
+"centroid": [
+214.10000610351562,
+-101.5,
+-19.5
+],
+"bbox": [
+[
+177.60000610351562,
+-126.4000015258789,
+-40.5
+],
+[
+250.39999389648438,
+-76.80000305175781,
+1.5
+]
+],
+"volume": 50425
+},
+{
+"id": 40,
+"name": "OG_R",
+"base": "OG",
+"side": "R",
+"full_en": "optic glomerulus",
+"zh": "視覺小球",
+"zh_short": "",
+"function": "一群球狀的小區，各自是一種小葉柱狀神經元（LC4、LC6、LPLC2 等）的軸突終端；每個小球代表一種視覺特徵（逼近、小物體運動等），下游接下行神經元與巨大纖維。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Wu16; Ache19; Shih15",
+"note": "Chiang 2011 原名為單數 optic glomerulus，實為一群視覺小球；Ito 2014 不另立此區，Table S12 把它列為 VLP 的次區（疊圖主要在 PVLP、少數在 AVLP），本表對 PVLP 與 AVLP。Shih 2015 列為 hub。",
+"centroid": [
+-212.60000610351562,
+-100.19999694824219,
+-22.600000381469727
+],
+"bbox": [
+[
+-249.3000030517578,
+-126.4000015258789,
+-44.5
+],
+[
+-176.5,
+-74.9000015258789,
+-2.5
+]
+],
+"volume": 49893
+},
+{
+"id": 41,
+"name": "OPTU_L",
+"base": "OPTU",
+"side": "L",
+"full_en": "optic tubercle",
+"zh": "視結節",
+"zh_short": "",
+"function": "即 Ito 的 AOTU（前視結節）：前視覺路徑的中繼站，把 ME 來的天空羅盤與偏振光訊號送往 BU → EB。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Omoto17; Shih15",
+"note": "Shih 2015 列為 hub。",
+"centroid": [
+155.5,
+44.70000076293945,
+19.299999237060547
+],
+"bbox": [
+[
+115.5,
+6.5,
+3.5
+],
+[
+202.3000030517578,
+91.0999984741211,
+36.5
+]
+],
+"volume": 86243
+},
+{
+"id": 42,
+"name": "OPTU_R",
+"base": "OPTU",
+"side": "R",
+"full_en": "optic tubercle",
+"zh": "視結節",
+"zh_short": "",
+"function": "即 Ito 的 AOTU（前視結節）：前視覺路徑的中繼站，把 ME 來的天空羅盤與偏振光訊號送往 BU → EB。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Omoto17; Shih15",
+"note": "Shih 2015 列為 hub。",
+"centroid": [
+-162.1999969482422,
+46.29999923706055,
+15.0
+],
+"bbox": [
+[
+-207.6999969482422,
+13.5,
+-1.5
+],
+[
+-120.5,
+81.0999984741211,
+31.5
+]
+],
+"volume": 90354
+},
+{
+"id": 43,
+"name": "PAN_L",
+"base": "PAN",
+"side": "L",
+"full_en": "proximal antennal protocerebrum",
+"zh": "近觸角前腦",
+"zh_short": "",
+"function": "運動前區；功能與證據沿用對應的 Ito VES。",
+"evidence": "推測",
+"source": "Chiang11; Ito14",
+"note": "對應 Ito 的 VES 前部（Ito 2014 Table S13：VX＝VMP 大部分＋PAN）。",
+"centroid": [
+72.0999984741211,
+-121.0999984741211,
+17.399999618530273
+],
+"bbox": [
+[
+36.0,
+-170.5,
+8.5
+],
+[
+105.5,
+-79.69999694824219,
+25.5
+]
+],
+"volume": 35014
+},
+{
+"id": 44,
+"name": "PAN_R",
+"base": "PAN",
+"side": "R",
+"full_en": "proximal antennal protocerebrum",
+"zh": "近觸角前腦",
+"zh_short": "",
+"function": "運動前區；功能與證據沿用對應的 Ito VES。",
+"evidence": "推測",
+"source": "Chiang11; Ito14",
+"note": "對應 Ito 的 VES 前部（Ito 2014 Table S13：VX＝VMP 大部分＋PAN）。",
+"centroid": [
+-69.69999694824219,
+-116.30000305175781,
+17.899999618530273
+],
+"bbox": [
+[
+-96.5999984741211,
+-165.10000610351562,
+9.5
+],
+[
+-35.900001525878906,
+-76.19999694824219,
+25.5
+]
+],
+"volume": 24261
+},
+{
+"id": 45,
+"name": "PCB",
+"base": "PCB",
+"side": "M",
+"full_en": "protocerebral bridge",
+"zh": "前腦橋",
+"zh_short": "",
+"function": "即 Ito 的 PB：中央複合體的頭向表徵（左右各一個活動波峰），與 EB 共同構成內在羅盤。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Green17",
+"note": "",
+"centroid": [
+-2.5,
+13.800000190734863,
+-88.5999984741211
+],
+"bbox": [
+[
+-82.4000015258789,
+-29.299999237060547,
+-104.30000305175781
+],
+[
+79.19999694824219,
+45.70000076293945,
+-72.5
+]
+],
+"volume": 49212
+},
+{
+"id": 46,
+"name": "SDFP_L",
+"base": "SDFP",
+"side": "L",
+"full_en": "superior dorsofrontal protocerebrum",
+"zh": "上背額前腦",
+"zh_short": "",
+"function": "神經調節與神經內分泌細胞的分支區；功能與證據沿用對應的 Ito SMP。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Aso14",
+"note": "對應 Ito 的 SMP 前部（Ito 2014 Table S13：SMP＝SDFP＋IDLP 內側）。",
+"centroid": [
+57.900001525878906,
+71.5999984741211,
+-16.200000762939453
+],
+"bbox": [
+[
+0.699999988079071,
+11.100000381469727,
+-73.5
+],
+[
+111.0,
+135.3000030517578,
+59.5
+]
+],
+"volume": 670554
+},
+{
+"id": 47,
+"name": "SDFP_R",
+"base": "SDFP",
+"side": "R",
+"full_en": "superior dorsofrontal protocerebrum",
+"zh": "上背額前腦",
+"zh_short": "",
+"function": "神經調節與神經內分泌細胞的分支區；功能與證據沿用對應的 Ito SMP。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Aso14",
+"note": "對應 Ito 的 SMP 前部（Ito 2014 Table S13：SMP＝SDFP＋IDLP 內側）。",
+"centroid": [
+-63.5,
+74.69999694824219,
+-18.200000762939453
+],
+"bbox": [
+[
+-126.80000305175781,
+11.600000381469727,
+-78.5
+],
+[
+-3.5,
+135.6999969482422,
+56.400001525878906
+]
+],
+"volume": 684653
+},
+{
+"id": 48,
+"name": "SOG_L",
+"base": "SOG",
+"side": "L",
+"full_en": "subesophageal ganglion",
+"zh": "食道下神經節",
+"zh_short": "",
+"function": "即 Ito 的 GNG 加上 FLA、PRW：味覺一級中樞與攝食運動中樞，下行神經元的通道。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Wang04",
+"note": "Chiang 2011 左右各切一塊；Ito 的 GNG 為單一中線區。",
+"centroid": [
+42.400001525878906,
+-209.5,
+-16.100000381469727
+],
+"bbox": [
+[
+-17.299999237060547,
+-288.5,
+-103.5
+],
+[
+115.0999984741211,
+-86.5999984741211,
+79.5999984741211
+]
+],
+"volume": 1396646
+},
+{
+"id": 49,
+"name": "SOG_R",
+"base": "SOG",
+"side": "R",
+"full_en": "subesophageal ganglion",
+"zh": "食道下神經節",
+"zh_short": "",
+"function": "即 Ito 的 GNG 加上 FLA、PRW：味覺一級中樞與攝食運動中樞，下行神經元的通道。",
+"evidence": "確立",
+"source": "Chiang11; Ito14; Wang04",
+"note": "Chiang 2011 左右各切一塊；Ito 的 GNG 為單一中線區。",
+"centroid": [
+-42.900001525878906,
+-209.60000610351562,
+-16.700000762939453
+],
+"bbox": [
+[
+-119.0999984741211,
+-291.5,
+-103.5999984741211
+],
+[
+4.400000095367432,
+-84.0999984741211,
+79.5
+]
+],
+"volume": 1391394
+},
+{
+"id": 50,
+"name": "SPP_L",
+"base": "SPP",
+"side": "L",
+"full_en": "superpeduncular protocerebrum",
+"zh": "上柄前腦",
+"zh_short": "",
+"function": "視覺小球的一部分與 MB 輸出終端；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Wu16",
+"note": "對應 Ito 的 PLP 上部加 SCL（Ito 2014 Table S13：PLP＝CVLP＋SPP 外側；SCL＝SPP 內側）。",
+"centroid": [
+146.5,
+11.899999618530273,
+-54.099998474121094
+],
+"bbox": [
+[
+60.400001525878906,
+-65.80000305175781,
+-94.5
+],
+[
+218.1999969482422,
+61.099998474121094,
+-17.5
+]
+],
+"volume": 249875
+},
+{
+"id": 51,
+"name": "SPP_R",
+"base": "SPP",
+"side": "R",
+"full_en": "superpeduncular protocerebrum",
+"zh": "上柄前腦",
+"zh_short": "",
+"function": "視覺小球的一部分與 MB 輸出終端；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Wu16",
+"note": "對應 Ito 的 PLP 上部加 SCL（Ito 2014 Table S13：PLP＝CVLP＋SPP 外側；SCL＝SPP 內側）。",
+"centroid": [
+-157.8000030517578,
+10.699999809265137,
+-55.900001525878906
+],
+"bbox": [
+[
+-222.39999389648438,
+-62.29999923706055,
+-99.5
+],
+[
+-71.4000015258789,
+65.5999984741211,
+-14.5
+]
+],
+"volume": 258956
+},
+{
+"id": 52,
+"name": "VLP_L",
+"base": "VLP",
+"side": "L",
+"full_en": "ventrolateral protocerebrum",
+"zh": "腹外側前腦",
+"zh_short": "",
+"function": "視覺小球所在、聽覺高階（接收 AMMC／WED 的二級神經元）與多感覺整合區；功能沿用對應的 Ito AVLP 與 PVLP。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Wu16",
+"note": "Chiang 2011 文中把 VLP 再分背／腹（VLP-D／VLP-V），Ito 改切前／後（AVLP／PVLP）；Chiang 另立的 CVLP 則對應 Ito 的 WED，不在此區。本表的 Chiang 網格只有一塊 VLP，比較模式同時高亮 AVLP 與 PVLP。",
+"centroid": [
+170.8000030517578,
+-63.5,
+-8.0
+],
+"bbox": [
+[
+103.4000015258789,
+-160.60000610351562,
+-85.4000015258789
+],
+[
+260.3999938964844,
+17.600000381469727,
+66.5
+]
+],
+"volume": 1214249
+},
+{
+"id": 53,
+"name": "VLP_R",
+"base": "VLP",
+"side": "R",
+"full_en": "ventrolateral protocerebrum",
+"zh": "腹外側前腦",
+"zh_short": "",
+"function": "視覺小球所在、聽覺高階（接收 AMMC／WED 的二級神經元）與多感覺整合區；功能沿用對應的 Ito AVLP 與 PVLP。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Wu16",
+"note": "Chiang 2011 文中把 VLP 再分背／腹（VLP-D／VLP-V），Ito 改切前／後（AVLP／PVLP）；Chiang 另立的 CVLP 則對應 Ito 的 WED，不在此區。本表的 Chiang 網格只有一塊 VLP，比較模式同時高亮 AVLP 與 PVLP。",
+"centroid": [
+-177.0,
+-64.4000015258789,
+-7.300000190734863
+],
+"bbox": [
+[
+-257.20001220703125,
+-161.1999969482422,
+-74.5
+],
+[
+-106.5999984741211,
+23.5,
+61.5
+]
+],
+"volume": 1140683
+},
+{
+"id": 54,
+"name": "VMP_L",
+"base": "VMP",
+"side": "L",
+"full_en": "ventromedial protocerebrum",
+"zh": "腹內側前腦",
+"zh_short": "",
+"function": "下行神經元樹突密集的運動前區；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Namiki18",
+"note": "對應 Ito 的 SPS、VES、IPS 與 CAN（疊圖）；Ito 2014 Table S12 寫 VX（VES＋EPA＋GOR）大部分加一部分後坡區，但疊圖顯示 EPA、GOR 落在 DMP，SPS（VMP 體積 39%）才是 VMP 最大的成分。",
+"centroid": [
+58.70000076293945,
+-107.5,
+-50.599998474121094
+],
+"bbox": [
+[
+7.5,
+-171.0,
+-103.5
+],
+[
+131.39999389648438,
+-32.70000076293945,
+10.600000381469727
+]
+],
+"volume": 492782
+},
+{
+"id": 55,
+"name": "VMP_R",
+"base": "VMP",
+"side": "R",
+"full_en": "ventromedial protocerebrum",
+"zh": "腹內側前腦",
+"zh_short": "",
+"function": "下行神經元樹突密集的運動前區；功能與證據沿用對應的 Ito 區。",
+"evidence": "部分",
+"source": "Chiang11; Ito14; Namiki18",
+"note": "對應 Ito 的 SPS、VES、IPS 與 CAN（疊圖）；Ito 2014 Table S12 寫 VX（VES＋EPA＋GOR）大部分加一部分後坡區，但疊圖顯示 EPA、GOR 落在 DMP，SPS（VMP 體積 39%）才是 VMP 最大的成分。",
+"centroid": [
+-64.5,
+-106.19999694824219,
+-50.79999923706055
+],
+"bbox": [
+[
+-141.60000610351562,
+-167.10000610351562,
+-103.5
+],
+[
+-14.600000381469727,
+-40.79999923706055,
+10.5
+]
+],
+"volume": 470110
+}
+]

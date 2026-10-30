@@ -1,0 +1,2460 @@
+{
+"_說明": "傳導路徑（手寫資料）。站（stations）的 k 用 Ito 2014 的底名；alias 寫其他分區用什麼區代表（沒寫的：Chiang 用 crosswalk 的文獻對應、MaleCNS 同名、密度模板用 crosswalk 對 MaleCNS）。stage 是站序（同一站序的區同時亮）；virtual=true 的站不在腦內（例如 VNC），只在卡片與文件裡列出。edges 的 ev：確立／推定／有爭議。build_site.py 會驗證並把各分區解析後的區名寫進 site/data/pathways.json 的 resolved。",
+"version": "2026-10-29",
+"groups": [
+{
+"id": "sense",
+"zh": "感覺輸入",
+"color": "#e39b00",
+"intro": "外界刺激（氣味、光、聲音、味道、溫濕度）被感覺神經元偵測後，進到腦的第一站，再一站一站往上傳。這一組七條路徑都從感覺神經元的終端開始。"
+},
+{
+"id": "nav",
+"zh": "導航與中央複合體",
+"color": "#c2187a",
+"intro": "「中央複合體」是腦正中央的四個區：橢圓體（EB）、前腦橋（PB）、扇形體（FB）、小結（NO），加上旁邊的球區（BU）與側副葉（LAL）當出入口。它負責方向感：知道自己頭朝哪、要往哪走。這一組三條路徑分別講方向感的兩種輸入（天空、風）與中央複合體內部怎麼算出轉向指令。中央複合體神經元的名字由它連到的區的字母組成：E＝EB、P＝PB、F＝FB、N＝NO、L＝LAL、G＝gall（EB 旁的小區）；例如 E-PG 連 EB、PB 與 gall，PFN 連 PB、FB 與 NO，PFL3 連 PB、FB 與 LAL（第 3 型）。字母順序不一定是「樹突在前、軸突在後」（P-EN 的樹突在 PB 與 NO、軸突到 EB），各型收訊號與送訊號的方向以各站的說明為準；hΔ、FC2 這兩型不照這個規則命名。"
+},
+{
+"id": "motor",
+"zh": "下行與運動輸出",
+"color": "#c8102e",
+"intro": "腦算好的指令要經「下行神經元」送到胸腹神經節才能動手動腳。這一組只有一條路徑，但有五個入口：後坡區的 SPS 與 IPS（視覺運動的出口）、PVLP（逼近逃避的出口）、LAL（中央複合體的出口），加上 GNG 自己的 DNg 類；嗅覺、味覺等路徑的輸出最後也要經過這些區才下得去。"
+},
+{
+"id": "state",
+"zh": "內在狀態與調節",
+"color": "#0f8b8d",
+"intro": "這一組不是感覺輸入，而是腦內部的狀態（時間、睡意、求偶動機、學習時的獎懲）怎麼經由特定腦區影響行為。"
+}
+],
+"alias": {
+"MB_CA": {
+"chiang": [
+"Cal"
+]
+},
+"MB_PED": {
+"chiang": [
+"MB"
+]
+},
+"MB_VL": {
+"chiang": [
+"MB"
+],
+"malecns": [
+"MB_aL",
+"MB_apL"
+]
+},
+"MB_ML": {
+"chiang": [
+"MB"
+],
+"malecns": [
+"MB_bL",
+"MB_bpL",
+"MB_gL"
+]
+},
+"AMMC": {
+"chiang": [
+"AMMC"
+],
+"malecns": [
+"SAD"
+]
+},
+"SAD": {
+"chiang": [
+"AMMC"
+]
+},
+"AME": {
+"chiang": [
+"Med"
+]
+},
+"LA": {
+"chiang": [],
+"ito": [],
+"itoem": []
+},
+"SLP": {
+"chiang": [
+"DLP"
+]
+},
+"SIP": {
+"chiang": [
+"DLP"
+]
+},
+"SMP": {
+"chiang": [
+"IDLP",
+"SDFP"
+]
+},
+"CRE": {
+"chiang": [
+"IDFP"
+]
+},
+"LAL": {
+"chiang": [
+"IDFP"
+]
+},
+"PVLP": {
+"chiang": [
+"OG",
+"VLP"
+]
+},
+"AVLP": {
+"chiang": [
+"VLP"
+]
+},
+"PLP": {
+"chiang": [
+"CVLP",
+"SPP"
+]
+},
+"WED": {
+"chiang": [
+"CVLP"
+]
+},
+"GNG": {
+"chiang": [
+"SOG"
+]
+},
+"PRW": {
+"chiang": [
+"SOG"
+]
+},
+"SPS": {
+"chiang": [
+"DMP"
+]
+},
+"IPS": {
+"chiang": [
+"VMP"
+]
+},
+"AOTU": {
+"chiang": [
+"OPTU"
+]
+},
+"BU": {
+"chiang": [
+"Lat_Tri"
+]
+},
+"PB": {
+"chiang": [
+"PCB"
+]
+},
+"NO": {
+"chiang": [
+"Nod"
+]
+},
+"LO": {
+"chiang": [
+"Lob"
+]
+},
+"LOP": {
+"chiang": [
+"LoP"
+]
+},
+"ME": {
+"chiang": [
+"Med"
+]
+}
+},
+"virtual": {
+"VNC": {
+"zh": "胸腹神經節（VNC）",
+"note": "腦以下的神經節，本網站的五套分區都沒有畫出。下行神經元經頸連結到這裡，驅動腿與翅的運動神經元。"
+},
+"VNC_out": {
+"zh": "胸腹神經節（VNC，歌唱迴路）",
+"note": "與第 ① 站的 VNC 是同一個神經節，這裡指的是裡面另一批神經元：胸部的歌唱節律產生器（dPR1、vPR6、vMS11 等）。本網站未畫出。"
+},
+"LAB": {
+"zh": "唇瓣（口器前端）",
+"note": "果蠅吻部前端的一對「唇瓣」，上面布滿味覺受器神經元；它們的軸突經唇神經直接進腦，不經過胸腹神經節。和 VNC 一樣不是腦區，只在文字出現，3D 不畫。"
+}
+},
+"pathways": [
+{
+"id": "olf",
+"zh": "嗅覺",
+"en": "olfaction",
+"group": "sense",
+"summary": "氣味分子被觸角與下顎鬚上的嗅覺受器神經元偵測，先匯到觸角葉（AL），再分兩路：一路到蕈狀體（MB，負責學習與記憶），一路到側角（LH，負責先天的喜好與厭惡）。兩路最後都匯到上方前腦的 SLP、SIP、SMP 與緊鄰蕈狀體葉的褶緣區（CRE），再轉成行為指令。",
+"stations": [
+{
+"k": "AL",
+"stage": 1,
+"cells": "嗅覺受器神經元（ORN；在觸角與下顎鬚——口器旁一對短短的感覺附肢——上）的軸突終端。觸角葉由約 50 個「嗅小球」組成（嗅小球＝許多軸突終端與樹突纏成的一顆球），一球對一種受器。局部神經元（LN）在球與球之間做抑制與增益控制（依整體氣味濃度調整敏感度）。"
+},
+{
+"k": "MB_CA",
+"stage": 2,
+"cells": "投射神經元（PN）的終端 → 肯氏細胞（KC）的樹突；每顆 KC 隨機接約 6 個嗅小球的 PN。KC 是蕈狀體的主要細胞。蕈狀體從萼經柄分出兩大葉：垂直葉（往上，裡面有 α、α′ 兩條）與內側葉（往內，裡面有 β、β′、γ 三條）。KC 依軸突走哪幾條分三型：αβ 型（軸突分兩支，一支進 α、一支進 β）、α′β′ 型（α′、β′）、γ 型（只進 γ）。"
+},
+{
+"k": "LH",
+"stage": 2,
+"cells": "PN 終端 → 側角神經元（LHN）；接線固定、不靠學習，負責先天反應。"
+},
+{
+"k": "MB_PED",
+"stage": 3,
+"cells": "KC 的軸突在這裡並成一束，像蘑菇的柄。"
+},
+{
+"k": "MB_VL",
+"stage": 4,
+"cells": "垂直葉＝α 葉＋α′ 葉（αβ 與 α′β′ 型 KC 往上折的那一支）。葉沿長軸切成一段一段的「隔間」，以葉名加編號命名：垂直葉有 α1–α3、α′1–α′3，內側葉有 β1–β2、β′1–β′2、γ1–γ5，全部共 15 個。每個隔間有自己的蕈狀體輸出神經元（MBON）在此接收 KC 的訊號。"
+},
+{
+"k": "MB_ML",
+"stage": 4,
+"cells": "內側葉＝β 葉＋β′ 葉＋γ 葉；MBON 在這裡的隔間接收。"
+},
+{
+"k": "SLP",
+"stage": 5,
+"cells": "側角輸出神經元（LHON）與部分 MBON 的終端。"
+},
+{
+"k": "SIP",
+"stage": 5,
+"cells": "LHON 的終端（MBON 也有少數到這裡，表裡未列）。"
+},
+{
+"k": "SMP",
+"stage": 5,
+"cells": "MBON 的終端。多巴胺神經元也在這裡接收回饋（見「學習的獎懲調節」）。"
+},
+{
+"k": "CRE",
+"stage": 5,
+"cells": "MBON 終端；CRE 是蕈狀體葉旁邊的小區。"
+}
+],
+"edges": [
+{
+"a": "AL",
+"b": "MB_CA",
+"via": "投射神經元（PN）。每顆 PN 的樹突只在一個嗅小球裡，軸突走「內側觸角葉束」（mALT）；釋放乙醯膽鹼（ACh），興奮性",
+"ev": "確立",
+"src": "Ito14; Wilson13; Jefferis07",
+"types": {
+"em": [
+"DA1_lPN"
+],
+"mcns": [
+"DA1_lPN"
+]
+}
+},
+{
+"a": "AL",
+"b": "LH",
+"via": "同一批 PN 的軸突分支（走 mALT，到 MB 萼後繼續往 LH），加上走「中外側觸角葉束」（mlALT）的另一群 PN（釋放 GABA，抑制性）。觸角葉束＝從觸角葉出發的幾條軸突大道，依位置分內側 mALT、中外側 mlALT、外側 lALT",
+"ev": "確立",
+"src": "Jefferis07; Wilson13",
+"types": {
+"em": [
+"DA1_lPN"
+],
+"mcns": [
+"DA1_lPN"
+]
+}
+},
+{
+"a": "MB_CA",
+"b": "MB_PED",
+"via": "KC 的軸突",
+"ev": "確立",
+"src": "Aso14",
+"types": {
+"em": [
+"KCg-m"
+],
+"mcns": [
+"KCg-m"
+]
+}
+},
+{
+"a": "MB_PED",
+"b": "MB_VL",
+"via": "αβ、α′β′ 型 KC 的軸突",
+"ev": "確立",
+"src": "Aso14",
+"types": {
+"em": [
+"KCab"
+],
+"mcns": [
+"KCab-"
+]
+}
+},
+{
+"a": "MB_PED",
+"b": "MB_ML",
+"via": "αβ、α′β′ 型 KC 的另一分支與 γ 型 KC 的軸突",
+"ev": "確立",
+"src": "Aso14",
+"types": {
+"em": [
+"KCg-m"
+],
+"mcns": [
+"KCg-m"
+]
+}
+},
+{
+"a": "MB_VL",
+"b": "SMP",
+"via": "垂直葉各隔間的 MBON",
+"ev": "確立",
+"src": "Aso14; Li20",
+"types": {
+"em": [
+"MBON07"
+],
+"mcns": [
+"MBON07"
+]
+}
+},
+{
+"a": "MB_ML",
+"b": "CRE",
+"via": "內側葉各隔間的 MBON",
+"ev": "確立",
+"src": "Aso14; Li20",
+"types": {
+"em": [
+"MBON01"
+],
+"mcns": [
+"MBON01"
+]
+}
+},
+{
+"a": "MB_ML",
+"b": "SLP",
+"via": "γ 葉部分隔間的 MBON",
+"ev": "確立",
+"src": "Aso14; Li20",
+"types": {
+"em": [
+"MBON11"
+],
+"mcns": [
+"MBON11"
+]
+}
+},
+{
+"a": "LH",
+"b": "SLP",
+"via": "側角輸出神經元（LHON）",
+"ev": "確立",
+"src": "Dolan19; Frechter19",
+"types": {
+"em": [
+"LHAV4a4"
+],
+"mcns": [
+"LHAV4a4"
+]
+}
+},
+{
+"a": "LH",
+"b": "SIP",
+"via": "LHON",
+"ev": "確立",
+"src": "Frechter19",
+"types": {
+"em": [
+"LHPV5b1"
+],
+"mcns": [
+"LHPV5b1"
+]
+}
+}
+],
+"caveat": "側角輸出神經元也到 SMP、前腹外側前腦（AVLP）與後腹外側前腦（PVLP）；MBON 也到側副葉（LAL）。圖上只畫主要的幾條，免得太亂。"
+},
+{
+"id": "vis_motion",
+"zh": "視覺：運動偵測與自身運動",
+"en": "visual motion",
+"group": "sense",
+"summary": "光線在視板（LA）進入視覺系統。髓質（ME）把「變亮」（ON）與「變暗」（OFF）的訊號分成兩路，各自算出影像移動的方向：ON 路靠 T4 神經元直接送到小葉板（LOP），OFF 路先經小葉（LO）的 T5 神經元再到小葉板。小葉板依四個方向分四層接收，再由大型「切線細胞」（tangential cell，樹突橫向鋪滿整個小葉板，故名；HS 管水平、VS 管垂直方向的影像流動）送到腦後方的後坡區（上半 SPS、下半 IPS），交給下行神經元，經顎神經節（GNG）進入胸腹神經節，果蠅自己轉彎或前進時整個視野會一起流動，這種「自身運動」造成的影像流動就是 HS／VS 讀的訊號，用來穩定飛行與走路時的轉向。",
+"stations": [
+{
+"k": "LA",
+"stage": 1,
+"cells": "複眼由約 750 個「小眼」組成，每個小眼有 8 顆感光細胞 R1–R8：R1–R6 管亮暗與運動，軸突終端在視板；R7／R8 管顏色與偏振光，穿過視板直接到髓質。視板分成約 750 個「匣」（cartridge，一小束神經元），一匣對一個小眼；匣裡的二級神經元叫「單極細胞」，有 L1–L5 五型。Ito 75 與 Chiang 55 沒有切出這一區。"
+},
+{
+"k": "ME",
+"stage": 2,
+"cells": "髓質分 10 層（M1–M10），是 ON、OFF 兩路分流的地方。ON 路：L1 的訊號經兩種中繼細胞（Mi1、Tm3）交給 T4；OFF 路：L2 的訊號經另外幾種中繼細胞（Tm1、Tm2、Tm4、Tm9）交給小葉的 T5。Mi、Tm 是髓質中繼細胞的兩個家族名，後面的數字是型別編號。T4 的樹突在第 10 層，算 ON 路的運動方向。"
+},
+{
+"k": "LO",
+"stage": 3,
+"cells": "T5 神經元的樹突（算 OFF 路的運動方向）。ON 路不經過這裡。"
+},
+{
+"k": "LOP",
+"stage": 4,
+"cells": "T4／T5 軸突依偏好方向（前、後、上、下）各停一層；HS、VS 切線細胞的樹突鋪在這裡。"
+},
+{
+"k": "SPS",
+"stage": 5,
+"cells": "HS／VS 等切線細胞的軸突終端（後坡區），下行神經元的樹突。"
+},
+{
+"k": "IPS",
+"stage": 5,
+"cells": "同上，後坡區的下半。"
+},
+{
+"k": "GNG",
+"stage": 6,
+"cells": "下行神經元的軸突穿過這裡進入頸連結（頸連結＝連接腦與胸腹神經節的神經束）。"
+},
+{
+"k": "VNC",
+"stage": 7,
+"virtual": true
+}
+],
+"edges": [
+{
+"a": "LA",
+"b": "ME",
+"via": "L1（ON 路）、L2（OFF 路）單極細胞",
+"ev": "確立",
+"src": "Joesch10; Takemura13",
+"types": {
+"em": [
+"L1"
+],
+"mcns": [
+"L1"
+]
+}
+},
+{
+"a": "ME",
+"b": "LOP",
+"via": "T4 神經元（ON 路；在 ME 內先經 Mi1、Tm3 中繼，T4 再直接到小葉板）",
+"ev": "確立",
+"src": "Maisak13; Takemura13",
+"types": {
+"em": [
+"T4"
+],
+"mcns": [
+"T4a"
+]
+}
+},
+{
+"a": "ME",
+"b": "LO",
+"via": "Tm1、Tm2、Tm4、Tm9（OFF 路；把 L2 的訊號接給小葉的 T5）",
+"ev": "確立",
+"src": "Behnia14",
+"types": {
+"em": [
+"Tm1"
+],
+"mcns": [
+"Tm1"
+]
+}
+},
+{
+"a": "LO",
+"b": "LOP",
+"via": "T5 神經元（OFF 路的運動方向）",
+"ev": "確立",
+"src": "Maisak13",
+"types": {
+"em": [
+"T5"
+],
+"mcns": [
+"T5a"
+]
+}
+},
+{
+"a": "LOP",
+"b": "SPS",
+"via": "小葉板切線細胞（LPTC，包括 HS、VS）的軸突",
+"ev": "確立",
+"src": "Namiki18",
+"types": {
+"em": [
+"HS"
+],
+"mcns": [
+"HS"
+]
+}
+},
+{
+"a": "LOP",
+"b": "IPS",
+"via": "LPTC 軸突",
+"ev": "確立",
+"src": "Namiki18",
+"types": {
+"em": [
+"VS"
+],
+"mcns": [
+"VS"
+]
+}
+},
+{
+"a": "SPS",
+"b": "GNG",
+"via": "下行神經元（DNp 類；p＝胞體在腦後方，DN 的命名規則見「下行與運動輸出」）",
+"ev": "確立",
+"src": "Namiki18",
+"types": {
+"em": [
+"DNp"
+],
+"mcns": [
+"DNp"
+]
+}
+},
+{
+"a": "IPS",
+"b": "GNG",
+"via": "下行神經元（DNp 類）",
+"ev": "確立",
+"src": "Namiki18"
+},
+{
+"a": "GNG",
+"b": "VNC",
+"via": "同一批下行神經元的軸突，穿過頸連結",
+"ev": "確立",
+"src": "Namiki18"
+}
+]
+},
+{
+"id": "vis_feature",
+"zh": "視覺：特徵偵測與逼近逃避",
+"en": "visual features / looming escape",
+"group": "sense",
+"summary": "小葉（LO）裡有二十幾種「特徵偵測器」神經元（LC、LPLC），每一種只對一類影像反應（逼近的物體、小黑點、特定方向的移動），軸突各自捲成一顆「視覺小球」，多數落在 PVLP 與 PLP 兩區（少數例外，如求偶用的 LC10 落在前視結節 AOTU）。偵測逼近物的 LC4（小球在 PVLP）與 LPLC2（小球在 PLP）直接接到「巨大纖維」（GF，一對特別粗的下行神經元），中間只隔一個突觸，就能觸發起跳逃走。",
+"stations": [
+{
+"k": "LA",
+"stage": 1,
+"cells": "感光細胞 R1–R6 的終端 → L1–L5 單極細胞（運動路徑只用到 L1／L2，特徵偵測用到更多型）。"
+},
+{
+"k": "ME",
+"stage": 2,
+"cells": "Tm 類神經元把局部的亮暗變化送往小葉。"
+},
+{
+"k": "LO",
+"stage": 3,
+"cells": "LC／LPLC「柱狀神經元」的樹突。柱狀（columnar）＝每一顆只管視野裡一小塊，很多顆同型的排成一片才鋪滿整個小葉；與樹突橫向鋪滿整區的「切線細胞」相對。"
+},
+{
+"k": "PVLP",
+"stage": 4,
+"cells": "多數 LC 型（含 LC4）的視覺小球所在；巨大纖維（GF）的樹突在這裡接收。"
+},
+{
+"k": "PLP",
+"stage": 4,
+"cells": "LPLC 類（含 LPLC2）的視覺小球，緊鄰 PVLP；巨大纖維的樹突也伸到這裡。"
+},
+{
+"k": "GNG",
+"stage": 5,
+"cells": "巨大纖維與其他下行神經元的軸突經此下行。"
+},
+{
+"k": "VNC",
+"stage": 6,
+"virtual": true
+}
+],
+"edges": [
+{
+"a": "LA",
+"b": "ME",
+"via": "L1–L5 單極細胞",
+"ev": "確立",
+"src": "Takemura13"
+},
+{
+"a": "ME",
+"b": "LO",
+"via": "Tm 類神經元",
+"ev": "確立",
+"src": "Takemura13"
+},
+{
+"a": "LO",
+"b": "PVLP",
+"via": "LC4 等多數 LC 型柱狀神經元 → 視覺小球",
+"ev": "確立",
+"src": "Wu16; Klapoetke17",
+"types": {
+"em": [
+"LC4"
+],
+"mcns": [
+"LC4"
+]
+}
+},
+{
+"a": "LO",
+"b": "PLP",
+"via": "LPLC1、LPLC2 等柱狀神經元 → 視覺小球",
+"ev": "確立",
+"src": "Wu16",
+"types": {
+"em": [
+"LPLC2"
+],
+"mcns": [
+"LPLC2"
+]
+}
+},
+{
+"a": "PLP",
+"b": "GNG",
+"via": "巨大纖維（收 LPLC2）與其他下行神經元",
+"ev": "確立",
+"src": "Ache19; Namiki18",
+"types": {
+"em": [
+"DNp01"
+],
+"mcns": [
+"DNp01"
+]
+}
+},
+{
+"a": "PVLP",
+"b": "GNG",
+"via": "巨大纖維（GF）",
+"ev": "確立",
+"src": "Ache19; vonReyn14",
+"types": {
+"em": [
+"DNp01"
+],
+"mcns": [
+"DNp01"
+]
+}
+},
+{
+"a": "GNG",
+"b": "VNC",
+"via": "巨大纖維的軸突穿過頸連結 → 胸部的 TTM 運動神經元（TTM＝中足的起跳肌）",
+"ev": "確立",
+"src": "vonReyn14"
+}
+]
+},
+{
+"id": "hear",
+"zh": "聽覺（求偶歌）",
+"en": "hearing / courtship song",
+"group": "sense",
+"summary": "雄蠅靠振翅發出求偶歌，歌由一串短促的「脈衝」組成，脈衝之間的間隔就是歌的節拍；聲音讓雌蠅（或旁邊其他雄蠅）的觸角跟著振動，觸角就是果蠅的耳朵。觸角第二節裡的「強生氏器」（JO）是一群感覺神經元，依軸突終端落在 AMMC（觸角機械感覺與運動中樞，觸角神經進腦的第一站）的位置分 A–E 五群：A、B 群對振動（聲音）敏感，C、E 群對靜態偏轉（重力、風）敏感，D 群功能不明。聲音訊號從 AMMC 經楔區（WED）、前腹外側前腦（AVLP）逐級處理歌的頻率與節拍，最後抵達上方前腦的 pC1／pC2 神經元群：在雌蠅決定要不要接受求偶，在雄蠅也參與唱歌的決定（雄蠅 pC1 群的主要成員就是「求偶」那節的 P1 神經元）。",
+"stations": [
+{
+"k": "AMMC",
+"stage": 1,
+"cells": "JO-A／JO-B 神經元（一級，即感覺神經元本身）的終端。MaleCNS 沒有切出 AMMC，用包含它的 SAD 代表。"
+},
+{
+"k": "WED",
+"stage": 2,
+"cells": "二級聽覺神經元（AMMC-B1、aPN1 等）的終端，以及三級神經元 vPN1 的樹突。Lai 2012 把這一帶叫 IVLP，是舊名，網頁上沒有這個區。"
+},
+{
+"k": "AVLP",
+"stage": 3,
+"cells": "vPN1 的終端與再下一級的神經元，在此偵測歌的脈衝間隔等特徵。"
+},
+{
+"k": "SIP",
+"stage": 4,
+"cells": "pC1／pC2 神經元群的樹突（推定；這兩群的突起跨 SIP、SMP 一帶）。"
+},
+{
+"k": "SMP",
+"stage": 4,
+"cells": "pC1／pC2 神經元群的樹突（推定）。"
+}
+],
+"edges": [
+{
+"a": "AMMC",
+"b": "WED",
+"via": "AMMC-B1 等二級聽覺投射神經元",
+"ev": "確立",
+"src": "Lai12; Kamikouchi09",
+"types": {
+"em": [
+"JO-B"
+],
+"mcns": [
+"JO-B"
+]
+}
+},
+{
+"a": "WED",
+"b": "AVLP",
+"via": "vPN1（三級；樹突在 WED、軸突到 AVLP）",
+"ev": "確立",
+"src": "Lai12; Baker22"
+},
+{
+"a": "AVLP",
+"b": "SIP",
+"via": "vPN1 下游的 AVLP 神經元（第四級）→ pC1／pC2 群",
+"ev": "推定",
+"src": "Baker22"
+},
+{
+"a": "AVLP",
+"b": "SMP",
+"via": "vPN1 下游的 AVLP 神經元（第四級）→ pC1／pC2 群",
+"ev": "推定",
+"src": "Baker22"
+}
+]
+},
+{
+"id": "mech",
+"zh": "重力、風與頭部觸覺",
+"en": "gravity / wind / head mechanosensation",
+"group": "sense",
+"summary": "強生氏器的 C／E 群神經元感受觸角被重力或穩定氣流壓住的偏轉，頭部與吻部（口器，會伸出去舔食的那一根）的剛毛（體表的感覺毛）感受碰觸。這些訊號集中到 AMMC 與鞍區（SAD），再到顎神經節（GNG）：一部分在那裡接到吻部與頸部的運動神經元，一部分下行到胸腹神經節；另一支到楔區（WED），接著進導航系統（見「風向進羅盤」）。",
+"stations": [
+{
+"k": "AMMC",
+"stage": 1,
+"cells": "JO-C／JO-E 神經元終端（重力、風造成的靜態偏轉）。"
+},
+{
+"k": "SAD",
+"stage": 1,
+"cells": "頭部剛毛機械感覺神經元的終端。在 Ito 75 裡 AMMC 與 SAD 是相鄰的兩區（SAD 從外側與後側包著 AMMC）。"
+},
+{
+"k": "WED",
+"stage": 2,
+"cells": "JO-C／E 的部分二級神經元。接下去的路見「風向進羅盤」。"
+},
+{
+"k": "GNG",
+"stage": 2,
+"cells": "二級神經元；吻部與頸部的運動神經元也在這裡。"
+},
+{
+"k": "VNC",
+"stage": 3,
+"virtual": true
+}
+],
+"edges": [
+{
+"a": "AMMC",
+"b": "GNG",
+"via": "JO-C／E 的二級神經元",
+"ev": "確立",
+"src": "Kamikouchi09",
+"types": {
+"em": [
+"JO-C"
+],
+"mcns": [
+"JO-C"
+]
+}
+},
+{
+"a": "AMMC",
+"b": "WED",
+"via": "JO-C／E 的二級神經元",
+"ev": "確立",
+"src": "Kamikouchi09; Patella18",
+"types": {
+"em": [
+"JO-E"
+],
+"mcns": [
+"JO-E"
+]
+}
+},
+{
+"a": "SAD",
+"b": "GNG",
+"via": "頭部剛毛的二級神經元",
+"ev": "推定",
+"src": "Ito14"
+},
+{
+"a": "GNG",
+"b": "VNC",
+"via": "下行神經元（DNg 類）。下行神經元依胞體位置命名：DNa 胞體在腦的前面（樹突多在側副葉 LAL 等）、DNp 胞體在腦的後面（樹突多在後坡區）、DNg 胞體在顎神經節",
+"ev": "確立",
+"src": "Namiki18"
+}
+],
+"caveat": "Chiang 55 只畫 AMMC 一區，範圍涵蓋到 SAD；MaleCNS 只畫 SAD 一區，範圍涵蓋 AMMC。所以在這兩套分區上第 ① 站的 AMMC 與 SAD 亮的是同一塊。"
+},
+{
+"id": "taste",
+"zh": "味覺與進食",
+"en": "taste / feeding",
+"group": "sense",
+"summary": "唇瓣、咽部與腳上的味覺受器神經元（GRN）偵測糖、苦、鹽等。唇瓣的 GRN 直接送到顎神經節（GNG），咽部的送到船首區（PRW），腳上的多數停在胸腹神經節、少數上行到 GNG。GNG 裡幾個突觸內就接到吻伸出與吞嚥的運動神經元；另有少數味覺投射神經元把訊號送到上外側前腦（SLP），再轉給蕈狀體做味覺學習。",
+"stations": [
+{
+"k": "LAB",
+"stage": 1,
+"virtual": true,
+"cells": "唇瓣味覺受器神經元（GRN）的胞體與樹突在唇瓣，軸突直接進顎神經節。"
+},
+{
+"k": "VNC",
+"stage": 1,
+"virtual": true,
+"cells": "腳部 GRN 的終端多數停在胸腹神經節裡靠胸部的部分，部分甜味 GRN 直接上行到 GNG。"
+},
+{
+"k": "GNG",
+"stage": 2,
+"cells": "唇瓣 GRN 的終端進這裡；二級神經元；吻伸出的運動神經元（MN9）也在這裡。"
+},
+{
+"k": "PRW",
+"stage": 1,
+"cells": "咽部 GRN 的終端。"
+},
+{
+"k": "SLP",
+"stage": 3,
+"cells": "味覺投射神經元（TPN2、TPN3）與 mlSEZt 神經元（另一群從 GNG 投到 SLP 的二級味覺神經元）的終端。"
+},
+{
+"k": "MB_CA",
+"stage": 4,
+"cells": "味覺訊號進蕈狀體做學習的入口（推定）。"
+}
+],
+"edges": [
+{
+"a": "LAB",
+"b": "GNG",
+"via": "唇瓣 GRN 的軸突（經唇神經直接進腦）",
+"ev": "確立",
+"src": "Wang04",
+"types": {
+"em": [
+"GRN"
+],
+"mcns": [
+"GRN"
+]
+}
+},
+{
+"a": "VNC",
+"b": "GNG",
+"via": "腳部甜味 GRN 的上行軸突",
+"ev": "確立",
+"src": "Wang04; Kim17"
+},
+{
+"a": "GNG",
+"b": "SLP",
+"via": "味覺投射神經元（TPN2／TPN3、mlSEZt）",
+"ev": "確立",
+"src": "Kim17; Snell22"
+},
+{
+"a": "PRW",
+"b": "GNG",
+"via": "咽部味覺的二級神經元",
+"ev": "推定",
+"src": "Shiu22"
+},
+{
+"a": "SLP",
+"b": "MB_CA",
+"via": "SLP 的三級神經元",
+"ev": "推定",
+"src": "Kim17"
+}
+],
+"caveat": "路線是把各段連線接起來畫的，不表示咽部或腳的味覺一定送到 SLP；目前只確定唇瓣的甜味與苦味有 GNG → SLP 這條投射。大部分的進食迴路（甜味 GRN → 幾個中介神經元 → MN9）都在 GNG 裡面，3D 上看不出方向，請看卡片文字。"
+},
+{
+"id": "thermo",
+"zh": "溫度與濕度",
+"en": "thermo- / hygrosensation",
+"group": "sense",
+"summary": "觸角上的溫度感受細胞（熱、冷）與「囊」（觸角第三節內的小腔）裡的濕度感受細胞（乾、濕），把軸突送到觸角葉最後方（靠腦後）的一小群「VP 嗅小球」（名字沿用嗅覺的「嗅小球」，但收的是溫濕度；舊文獻叫 PAL 區）。第二級的溫度與濕度投射神經元再分送到蕈狀體萼的外側副萼、側角（LH）、後外側前腦（PLP）與後坡區上半（SPS）。",
+"stations": [
+{
+"k": "AL",
+"stage": 1,
+"cells": "VP1–VP5 五個嗅小球，連結體研究又多找到兩個，共七個：熱、冷、乾、濕感受細胞的終端。下表四段連線都是這七個球的投射神經元發出的。"
+},
+{
+"k": "MB_CA",
+"stage": 2,
+"cells": "外側副萼（lACA）是萼的一小塊附屬部分，分區上算在 MB_CA 裡面，所以網頁亮的是整個 MB_CA。溫度投射神經元的終端在此，接少數專收溫度的 KC。補充（不在表內）：有些溫度投射神經元也把訊號送給生理時鐘的 DN1a 神經元（DN1a 是時鐘神經元的一群，這裡的 DN 是「背側神經元」，不是下行神經元）。"
+},
+{
+"k": "LH",
+"stage": 2,
+"cells": "溫度與濕度投射神經元的終端。"
+},
+{
+"k": "PLP",
+"stage": 2,
+"cells": "「快適應」（溫度一變就反應、溫度不變時反應很快消退）的溫度投射神經元的終端，走外側觸角葉束（lALT）。"
+},
+{
+"k": "SPS",
+"stage": 2,
+"cells": "部分溫濕度投射神經元的終端（後坡區的上半；下半 IPS 沒有）。"
+}
+],
+"edges": [
+{
+"a": "AL",
+"b": "MB_CA",
+"via": "溫度投射神經元到外側副萼",
+"ev": "確立",
+"src": "Frank15; Marin20",
+"types": {
+"em": [
+"VP"
+],
+"mcns": [
+"VP"
+]
+}
+},
+{
+"a": "AL",
+"b": "LH",
+"via": "溫度與濕度投射神經元",
+"ev": "確立",
+"src": "Liu15; Marin20",
+"types": {
+"em": [
+"VP"
+],
+"mcns": [
+"VP"
+]
+}
+},
+{
+"a": "AL",
+"b": "PLP",
+"via": "快適應的溫度投射神經元（lALT）",
+"ev": "確立",
+"src": "Frank15; Marin20"
+},
+{
+"a": "AL",
+"b": "SPS",
+"via": "部分 VP 嗅小球的投射神經元",
+"ev": "確立",
+"src": "Marin20"
+}
+]
+},
+{
+"id": "sky",
+"zh": "天空羅盤輸入（偏振光與太陽方位）",
+"en": "sky compass input",
+"group": "nav",
+"summary": "複眼背側邊緣（「背緣區」，朝上看天空的那一排小眼）的 R7／R8 感光細胞偵測天空偏振光與太陽位置（天空各處的偏振方向與太陽位置有固定的幾何關係，所以看偏振就能推出太陽在哪，連太陽被擋住時也行），髓質（ME）的 MeTu 神經元把這些訊號送到前視結節（AOTU），再經球區（BU）接進橢圓體（EB）的環形神經元，變成中央複合體用的「羅盤」輸入。所謂羅盤：橢圓體裡的 E-PG 神經元排成一圈，任何時刻只有一小段在放電，這一段（「活動波峰」）的位置就代表頭朝哪個方向，像羅盤的指針；同一個波峰也出現在前腦橋（PB）上。",
+"stations": [
+{
+"k": "ME",
+"stage": 1,
+"cells": "背緣區 R7／R8 的終端（R7／R8 穿過視板直接到髓質，所以這條路從 ME 起算）；MeTu 神經元的樹突。"
+},
+{
+"k": "AOTU",
+"stage": 2,
+"cells": "前視結節分大、小兩個單位；MeTu 的終端在小單位，接 TuBu 神經元的樹突。"
+},
+{
+"k": "BU",
+"stage": 3,
+"cells": "TuBu 終端與環形神經元（ER）的樹突纏成一顆顆「微小球」（和嗅小球、視覺小球一樣是突觸聚集的團）。"
+},
+{
+"k": "EB",
+"stage": 4,
+"cells": "ER 的軸突成環 → E-PG 羅盤神經元的樹突；活動波峰在這裡。"
+},
+{
+"k": "PB",
+"stage": 5,
+"cells": "E-PG 的終端；活動波峰也投射到這裡。"
+}
+],
+"edges": [
+{
+"a": "ME",
+"b": "AOTU",
+"via": "MeTu 神經元",
+"ev": "確立",
+"src": "Omoto17; Hardcastle21",
+"types": {
+"em": [
+"MeTu1"
+],
+"mcns": [
+"MeTu1"
+]
+}
+},
+{
+"a": "AOTU",
+"b": "BU",
+"via": "TuBu 神經元",
+"ev": "確立",
+"src": "Omoto17; Hulse21",
+"types": {
+"em": [
+"TuBu01"
+],
+"mcns": [
+"TuBu01"
+]
+}
+},
+{
+"a": "BU",
+"b": "EB",
+"via": "環形神經元（ER）",
+"ev": "確立",
+"src": "Seelig15; Hulse21",
+"types": {
+"em": [
+"ER4d"
+],
+"mcns": [
+"ER4d"
+]
+}
+},
+{
+"a": "EB",
+"b": "PB",
+"via": "E-PG 羅盤神經元",
+"ev": "確立",
+"src": "Seelig15; Green17",
+"types": {
+"em": [
+"EPG"
+],
+"mcns": [
+"EPG"
+]
+}
+}
+]
+},
+{
+"id": "wind",
+"zh": "風向進羅盤",
+"en": "wind direction to compass",
+"group": "nav",
+"summary": "風吹動兩根觸角，強生氏器感受到偏轉，訊號經 AMMC 到楔區（WED）比較左右，再投到側副葉（LAL），由 ER1／ER3a 環形神經元送進橢圓體（EB），風向就併進同一個羅盤座標：風向改變時會推動同一個活動波峰（指針跟著轉），而不是另存一套方向。環形神經元有十幾型，多數的樹突在球區（BU），ER1／ER3a 這兩型的樹突在側副葉。另一條支線由側副葉經小結（NO）到扇形體（FB）的 PFNa 神經元。",
+"stations": [
+{
+"k": "AMMC",
+"stage": 1,
+"cells": "JO 神經元終端（風造成的偏轉）。"
+},
+{
+"k": "WED",
+"stage": 2,
+"cells": "楔區投射神經元（WPN），比較左右兩根觸角的偏轉。"
+},
+{
+"k": "LAL",
+"stage": 3,
+"cells": "ER1／ER3a 環形神經元的樹突。"
+},
+{
+"k": "EB",
+"stage": 4,
+"cells": "ER1／ER3a 的終端 → E-PG。"
+},
+{
+"k": "PB",
+"stage": 5,
+"cells": "E-PG 終端。"
+}
+],
+"edges": [
+{
+"a": "AMMC",
+"b": "WED",
+"via": "AMMC 的二級神經元（APN，樹突在 AMMC、軸突到楔區）→ 楔區的 WPN（三級）",
+"ev": "確立",
+"src": "Patella18; Suver19"
+},
+{
+"a": "WED",
+"b": "LAL",
+"via": "WPN 的下游中繼神經元（細胞型未逐一確定）",
+"ev": "推定",
+"src": "Okubo20"
+},
+{
+"a": "LAL",
+"b": "EB",
+"via": "ER1／ER3a 環形神經元",
+"ev": "確立",
+"src": "Okubo20; Hulse21",
+"types": {
+"em": [
+"ER1"
+],
+"mcns": [
+"ER1"
+]
+}
+},
+{
+"a": "EB",
+"b": "PB",
+"via": "E-PG",
+"ev": "確立",
+"src": "Green17",
+"types": {
+"em": [
+"EPG"
+],
+"mcns": [
+"EPG"
+]
+}
+}
+],
+"caveat": "Currier 等人 2020 另外證明扇形體（FB）的 PFNa 神經元也編碼氣流方向（經側副葉 LAL 與小結 NO 進入）；圖上沒畫這條支線。"
+},
+{
+"id": "cx",
+"zh": "中央複合體：頭向、自身運動與轉向指令",
+"en": "central complex navigation",
+"group": "nav",
+"summary": "橢圓體（EB）上的活動波峰代表果蠅目前的頭向。前腦橋（PB）與橢圓體來回對話：果蠅轉身時 P-EN 神經元把波峰推到新的方向，P-EG 把它穩住。小結（NO）送進自身轉動與行進速度（這些訊號從側副葉一帶進入小結）。扇形體（FB）做兩件事：hΔ 神經元把頭向與速度合成「現在正往哪個方向移動」的向量（用來記路，即路徑整合）；FC2 神經元存「目標方向」。PFL3 神經元的樹突同時在 PB（讀目前頭向）與 FB（讀目標方向），把「目標方向減目前頭向」的差送到側副葉（LAL），轉成左轉或右轉的指令往下行。",
+"stations": [
+{
+"k": "EB",
+"stage": 1,
+"cells": "E-PG 樹突；P-EN／P-EG 的回饋終端。"
+},
+{
+"k": "PB",
+"stage": 2,
+"cells": "E-PG 終端；P-EN、PFN、PFL3 的樹突。"
+},
+{
+"k": "NO",
+"stage": 1,
+"cells": "小結分三對小塊（NO1–NO3）。P-EN 神經元在 NO1 接自身轉動，PFN 神經元在 NO2–3 接行進速度。這些自身運動訊號來自運動指令的副本（腦發出運動指令時抄一份回來，讓自己知道正在動）與感覺回饋（包括「視覺運動」那條路算出的影像流動），由樹突在側副葉一帶的 LNO 類神經元送進來（圖上不畫這一段，否則 LAL 會同時是起點與終點）。"
+},
+{
+"k": "FB",
+"stage": 3,
+"cells": "PFN 的終端；FB 內部的 hΔ 神經元把頭向與速度合成目前的移動向量，FC2 神經元存目標方向（兩者只在 FB 裡接線，所以不在傳遞表）；PFL3 的樹突在此讀目標方向（它的另一組樹突在 PB 讀頭向）。"
+},
+{
+"k": "LAL",
+"stage": 4,
+"cells": "PFL3 終端 → 下行神經元（DNa）樹突。"
+},
+{
+"k": "GNG",
+"stage": 5,
+"cells": "下行神經元軸突通過。"
+},
+{
+"k": "VNC",
+"stage": 6,
+"virtual": true
+}
+],
+"edges": [
+{
+"a": "EB",
+"b": "PB",
+"via": "E-PG",
+"ev": "確立",
+"src": "Seelig15; Green17",
+"types": {
+"em": [
+"EPG"
+],
+"mcns": [
+"EPG"
+]
+}
+},
+{
+"a": "PB",
+"b": "EB",
+"via": "P-EN、P-EG 神經元（回饋：果蠅轉身時，P-EN 依自身轉動的訊號把波峰往左或右推，讓指針跟著頭轉；P-EG 把它穩住）",
+"ev": "確立",
+"src": "Green17",
+"types": {
+"em": [
+"PEN_a"
+],
+"mcns": [
+"PEN_a"
+]
+}
+},
+{
+"a": "PB",
+"b": "FB",
+"via": "PFN 神經元（同一顆 PFN 的樹突同時在 PB 收頭向、在 NO 收速度，軸突到 FB；所以這一段與下一段是同一批細胞的兩個輸入）",
+"ev": "確立",
+"src": "Hulse21; Lu22",
+"types": {
+"em": [
+"PFNa"
+],
+"mcns": [
+"PFNa"
+]
+}
+},
+{
+"a": "NO",
+"b": "FB",
+"via": "PFN 神經元（同上，在 NO 收速度）",
+"ev": "確立",
+"src": "Hulse21; Lu22",
+"types": {
+"em": [
+"PFNd"
+],
+"mcns": [
+"PFNd"
+]
+}
+},
+{
+"a": "FB",
+"b": "LAL",
+"via": "PFL3 神經元",
+"ev": "確立",
+"src": "Rayshubskiy20; Westeinde24",
+"types": {
+"em": [
+"PFL3"
+],
+"mcns": [
+"PFL3"
+]
+}
+},
+{
+"a": "LAL",
+"b": "GNG",
+"via": "下行神經元（DNa02 等）",
+"ev": "確立",
+"src": "Rayshubskiy20; Namiki18",
+"types": {
+"em": [
+"DNa02"
+],
+"mcns": [
+"DNa02"
+]
+}
+},
+{
+"a": "GNG",
+"b": "VNC",
+"via": "同一批下行神經元的軸突，穿過頸連結",
+"ev": "確立",
+"src": "Namiki18"
+}
+],
+"caveat": "自身運動訊號進小結的那一段（LAL 一帶 → NO）沒有畫，見第 ① 站小結的說明。"
+},
+{
+"id": "descend",
+"zh": "下行與運動輸出",
+"en": "descending output",
+"group": "motor",
+"summary": "腦裡約 350 對下行神經元（DN）是腦往胸腹神經節的唯一下行通道（反方向另有上行神經元）。它們依胞體位置命名：DNa 的胞體在腦的前面、樹突多在側副葉（LAL）；DNp 的胞體在腦的後面、樹突多在後坡區（SPS、IPS）；DNg 的胞體在顎神經節（GNG）；另有一些（例如巨大纖維）的樹突在後腹外側前腦（PVLP）收視覺小球。軸突一律經 GNG 進入頸連結，到胸部的腿與翅神經纖維網驅動運動神經元。",
+"stations": [
+{
+"k": "SPS",
+"stage": 1,
+"cells": "最多 DN 樹突的區（DNp 類）：收視覺運動（HS／VS）與其他自身運動訊號。"
+},
+{
+"k": "IPS",
+"stage": 1,
+"cells": "DNp 類的樹突（後坡區下半）。"
+},
+{
+"k": "LAL",
+"stage": 1,
+"cells": "DNa 類樹突：收中央複合體的轉向指令。"
+},
+{
+"k": "PVLP",
+"stage": 1,
+"cells": "巨大纖維等 DN 的樹突：收視覺小球的逼近訊號。"
+},
+{
+"k": "GNG",
+"stage": 2,
+"cells": "DNg 類的樹突在這裡，收味覺、機械感覺等食道下區的訊號，等於第五個入口；同時所有 DN 的軸突都經此進入頸連結，所以路線把它列為匯合站。"
+},
+{
+"k": "VNC",
+"stage": 3,
+"virtual": true
+}
+],
+"edges": [
+{
+"a": "SPS",
+"b": "GNG",
+"via": "DNp 類下行神經元",
+"ev": "確立",
+"src": "Namiki18",
+"types": {
+"em": [
+"DNp"
+],
+"mcns": [
+"DNp"
+]
+}
+},
+{
+"a": "IPS",
+"b": "GNG",
+"via": "DNp 類下行神經元",
+"ev": "確立",
+"src": "Namiki18"
+},
+{
+"a": "LAL",
+"b": "GNG",
+"via": "DNa 類下行神經元",
+"ev": "確立",
+"src": "Namiki18; Rayshubskiy20",
+"types": {
+"em": [
+"DNa02"
+],
+"mcns": [
+"DNa02"
+]
+}
+},
+{
+"a": "PVLP",
+"b": "GNG",
+"via": "巨大纖維等",
+"ev": "確立",
+"src": "Ache19; Namiki18",
+"types": {
+"em": [
+"DNp01"
+],
+"mcns": [
+"DNp01"
+]
+}
+},
+{
+"a": "GNG",
+"b": "VNC",
+"via": "同一批下行神經元的軸突，穿過頸連結",
+"ev": "確立",
+"src": "Namiki18",
+"types": {
+"em": [
+"DNg"
+],
+"mcns": [
+"DNg"
+]
+}
+}
+]
+},
+{
+"id": "clock",
+"zh": "生理時鐘的輸出",
+"en": "circadian output",
+"group": "state",
+"summary": "「時鐘神經元」是腦裡約 150 顆帶有分子時鐘的神經元，分成幾群。其中 LNv（側腹神經元）又分小型的 s-LNv 與大型的 l-LNv，兩群的樹突都在副髓質（AME），接收 H–B 眼點（視網膜後面一小簇額外的感光細胞）的直接光輸入，以及複眼經髓質（ME）轉來的光訊號。s-LNv 把軸突送到腦的上方（背側），在那裡釋放神經肽 PDF（色素擴散因子）給另一群時鐘神經元 DN1（背側神經元第 1 群；這個 DN 是「背側」，不是下行神經元）。DN1 再接到腦間部（PI，腦正中上方一群「神經分泌細胞」——會把激素釋放進體液的神經元——落在 SMP 區）裡分泌 DH44 的神經元（DH44 叫「利尿激素 44」是因為它在其他組織的作用，在這條路裡它是傳遞節律訊號的神經肽）。DH44 神經元再接到顎神經節（GNG）裡會製造神經肽 hugin 的神經元，由它們下行到胸腹神經節，調節一天中活動與休息的節律。",
+"stations": [
+{
+"k": "ME",
+"stage": 1,
+"cells": "複眼的光訊號經髓質神經元轉送到 l-LNv 與 s-LNv 的樹突（間接）。"
+},
+{
+"k": "AME",
+"stage": 2,
+"cells": "s-LNv 與 l-LNv 的樹突都在這裡；H-B 眼點直接輸入；l-LNv 在此釋放 PDF，作用在同區的 s-LNv 等時鐘神經元上。Chiang 55 沒切出 AME，用 Med 代表。"
+},
+{
+"k": "SLP",
+"stage": 3,
+"cells": "s-LNv 軸突的背側（腦上方）終端（釋放 PDF）與 DN1 群的突起所在。這兩群細胞之間的連線確立，但它們落在哪個 Ito 區沒有正式對過，這裡歸到 SLP／SMP 交界是推定，所以下表牽涉 SLP 的兩段都標「推定」。"
+},
+{
+"k": "SMP",
+"stage": 4,
+"cells": "腦間部（PI）裡分泌 DH44 的神經元。"
+},
+{
+"k": "GNG",
+"stage": 5,
+"cells": "會製造神經肽 hugin 的神經元（在顎神經節）。"
+},
+{
+"k": "VNC",
+"stage": 6,
+"virtual": true,
+"cells": "hugin 神經元的軸突終端。hugin 神經元也是那約 350 對下行神經元之一（DNg 類；這裡的 DN 是下行神經元，與 DN1 的「背側神經元」不同），只是它傳的是節律訊號，不是直接的運動指令。"
+}
+],
+"edges": [
+{
+"a": "ME",
+"b": "AME",
+"via": "髓質神經元 → LNv 的樹突",
+"ev": "確立",
+"src": "HF07",
+"types": {
+"em": [
+"l-LNv"
+],
+"mcns": [
+"l-LNv"
+]
+}
+},
+{
+"a": "AME",
+"b": "SLP",
+"via": "s-LNv 的軸突（釋放 PDF；細胞間連線確立，終端所在的區是推定）",
+"ev": "推定",
+"src": "HF07; Renn99",
+"types": {
+"em": [
+"s-LNv"
+],
+"mcns": [
+"s-LNv"
+]
+}
+},
+{
+"a": "SLP",
+"b": "SMP",
+"via": "DN1 → 腦間部的 DH44 神經元（多突觸：中間還隔了幾顆尚未逐一確認的神經元；兩群之間有連線是確定的，DN1 所在的區是推定）",
+"ev": "推定",
+"src": "Cavanaugh14",
+"types": {
+"em": [
+"DN1a"
+],
+"mcns": [
+"DN1a"
+]
+}
+},
+{
+"a": "SMP",
+"b": "GNG",
+"via": "DH44 神經元 → hugin 神經元",
+"ev": "確立",
+"src": "King17",
+"types": {
+"em": [
+"DH44"
+],
+"mcns": [
+"DH44"
+]
+}
+},
+{
+"a": "GNG",
+"b": "VNC",
+"via": "hugin 神經元的下行軸突",
+"ev": "確立",
+"src": "King17"
+}
+],
+"caveat": "時鐘神經元的胞體在腦區外的皮質層，這裡標的是它們突起所在的區。H–B 眼點不是腦區，所以它到 AME 的直接光輸入沒有列成一段。"
+},
+{
+"id": "sleep",
+"zh": "睡眠恆定",
+"en": "sleep homeostasis",
+"group": "state",
+"summary": "「睡眠恆定」＝醒得越久睡眠需求越高、睡過就消退的平衡機制。橢圓體（EB）的 ER5 環形神經元（文獻常寫 R5，是環形神經元的第 5 型）累積「睡眠需求」：醒得越久，這群神經元放電越強。它們經 helicon 細胞（樹突在球區與橢圓體、軸突到扇形體背層的神經元）把訊號傳到扇形體（FB）背層的促睡神經元。這群促睡神經元簡稱 dFB（dorsal FB，借區名稱呼），也常用 23E10 稱呼（研究者用來標記它們的一個基因工具株的編號；基因工具株＝帶有特定基因開關、可以讓某群細胞發光或被操控的果蠅品系）。生理時鐘的 DN1 神經元也經前視結節（AOTU）、球區（BU）接到 ER5。這條路的接線是確定的，但 dFB 神經元是否真的促睡，2023 年起有研究反駁。",
+"stations": [
+{
+"k": "AOTU",
+"stage": 1,
+"cells": "DN1 時鐘神經元（突起在 SLP／SMP 一帶，見「生理時鐘的輸出」）把軸突伸到前視結節，在這裡接 TuBu 神經元。DN1 所在的區沒有列成站，因為 DN1 → TuBu 這一步本身是推定。"
+},
+{
+"k": "BU",
+"stage": 2,
+"cells": "TuBu 終端 → ER5 的樹突。"
+},
+{
+"k": "EB",
+"stage": 3,
+"cells": "ER5 環形神經元：睡眠需求在這裡累積。"
+},
+{
+"k": "FB",
+"stage": 4,
+"cells": "扇形體背層（dFB）的促睡神經元（23E10 標記）；helicon 細胞的終端。"
+}
+],
+"edges": [
+{
+"a": "AOTU",
+"b": "BU",
+"via": "TuBu 神經元（TuBu 這段確立；它上游接 DN1 是推定）",
+"ev": "確立",
+"src": "Lamaze18",
+"types": {
+"em": [
+"TuBu01"
+],
+"mcns": [
+"TuBu01"
+]
+}
+},
+{
+"a": "BU",
+"b": "EB",
+"via": "ER5 環形神經元",
+"ev": "確立",
+"src": "Liu16; Lamaze18",
+"types": {
+"em": [
+"ER5"
+],
+"mcns": [
+"ER5"
+]
+}
+},
+{
+"a": "EB",
+"b": "FB",
+"via": "helicon 細胞 → dFB 神經元（接線確立；dFB 的促睡功能有爭議，見注意）",
+"ev": "確立",
+"src": "Donlea18; De23"
+}
+],
+"caveat": "EB → FB 的接線本身確立；有爭議的是 dFB 神經元「促睡」的功能（De 等人 2023 反駁）。"
+},
+{
+"id": "court",
+"zh": "求偶（雄蠅）",
+"en": "male courtship",
+"group": "state",
+"summary": "雄蠅看到雌蠅：小葉（LO）的 LC10 神經元追蹤小而會動的目標，送到前視結節（AOTU），再經一顆中繼神經元到雄性特有的 P1 神經元群（P1 是「聽覺」那節提到的 pC1 群在雄蠅的主要成員）；P1 的突起在 SIP、SLP、SMP 三區交界一帶（文獻稱「外側前腦複合體」）。腳部碰到雌蠅費洛蒙的訊號（由帶有 ppk23、Gr32a 這兩種受器基因的味覺神經元偵測；「帶有某基因」＝那顆細胞會製造該基因的產物）則經胸腹神經節上行到顎神經節（GNG），由 mAL 神經元轉給 P1。P1 一旦啟動，經下行神經元 pIP10 到胸部的歌唱節律產生器，振翅唱歌。",
+"stations": [
+{
+"k": "LO",
+"stage": 1,
+"cells": "LC10 的樹突。光訊號到小葉之前的前段（LA → ME → LO）與「視覺：特徵偵測」那節相同，這裡省略。"
+},
+{
+"k": "VNC",
+"stage": 1,
+"virtual": true,
+"cells": "腳部費洛蒙味覺神經元（帶有 ppk23、Gr32a 受器基因）→ 上行神經元 vAB3。"
+},
+{
+"k": "AOTU",
+"stage": 2,
+"cells": "LC10 的視覺小球（前視結節外側）→ 再經一顆中繼神經元往 P1。"
+},
+{
+"k": "GNG",
+"stage": 2,
+"cells": "vAB3 終端；mAL 神經元的樹突。"
+},
+{
+"k": "SIP",
+"stage": 3,
+"cells": "P1 群的突起（外側前腦複合體；推定對應 SIP、SMP 與 SLP 交界，SLP 沒有畫成站）。"
+},
+{
+"k": "SMP",
+"stage": 3,
+"cells": "P1 群的突起；mAL 神經元的終端。"
+},
+{
+"k": "VNC_out",
+"stage": 4,
+"virtual": true
+}
+],
+"edges": [
+{
+"a": "LO",
+"b": "AOTU",
+"via": "LC10 柱狀神經元",
+"ev": "確立",
+"src": "Ribeiro18",
+"types": {
+"em": [
+"LC10a"
+],
+"mcns": [
+"LC10a"
+]
+}
+},
+{
+"a": "AOTU",
+"b": "SIP",
+"via": "AOTU 裡 LC10 下游的神經元 → P1",
+"ev": "推定",
+"src": "Ribeiro18",
+"types": {
+"em": [
+"pC1"
+],
+"mcns": [
+"pC1_"
+]
+}
+},
+{
+"a": "VNC",
+"b": "GNG",
+"via": "上行神經元 vAB3",
+"ev": "確立",
+"src": "Clowney15"
+},
+{
+"a": "GNG",
+"b": "SMP",
+"via": "mAL 神經元",
+"ev": "確立",
+"src": "Clowney15; Kohatsu11",
+"types": {
+"em": [
+"mAL"
+],
+"mcns": [
+"mAL"
+]
+}
+},
+{
+"a": "SIP",
+"b": "VNC_out",
+"via": "下行神經元 pIP10（軸突穿過 GNG 與頸連結）",
+"ev": "確立",
+"src": "vonPhilipsborn11",
+"types": {
+"em": [],
+"mcns": [
+"pIP10"
+]
+}
+}
+],
+"caveat": "P1 群的突起跨 SIP、SMP（與 SLP 邊緣），視覺與費洛蒙兩路接到的是同一群 P1；表中視覺線寫到 SIP、費洛蒙線寫到 SMP，只是各自終端較多的區。pIP10 的軸突經過 GNG，但同一條路徑裡一個區只列一站，GNG 已用來標費洛蒙輸入（第 ② 站），所以路線直接寫到 VNC。"
+},
+{
+"id": "dopa",
+"zh": "學習的獎懲調節（多巴胺）",
+"en": "dopaminergic reinforcement",
+"group": "state",
+"summary": "果蠅學到「這個氣味＝好／壞」靠多巴胺神經元。它們依胞體位置分兩群：PPL1（胞體在後外側）帶懲罰訊號到蕈狀體的垂直葉（MB_VL）與 γ 葉最靠近柄的第 1 隔間（γ1），PAM（胞體在前內側）帶獎勵到內側葉（MB_ML）。兩群的樹突在上方前腦（SMP、SIP、SLP）與 CRE 收集味覺、痛覺、飽足與 MBON 的回饋，和 MBON 一起形成學習迴路（所以圖上的箭頭是來回的）。學習發生在隔間裡：多巴胺到達時，正在活動的 KC（也就是正被這個氣味的 PN 激活的那群 KC）與該隔間 MBON 之間的突觸會被削弱，削弱的是「這個氣味 → 這個隔間的 MBON」這條線。各隔間的 MBON 本來就有的偏向趨近、有的偏向逃避：懲罰的 PPL1 削弱趨近型隔間，獎勵的 PAM 削弱逃避型隔間，所以同樣是削弱，結果一個變討厭、一個變喜歡。",
+"stations": [
+{
+"k": "SMP",
+"stage": 1,
+"cells": "PPL1 與 PAM 的樹突；MBON 的終端。"
+},
+{
+"k": "SIP",
+"stage": 1,
+"cells": "PPL1 的樹突；MBON 終端。"
+},
+{
+"k": "SLP",
+"stage": 1,
+"cells": "PPL1 的樹突；MBON 的終端。"
+},
+{
+"k": "CRE",
+"stage": 1,
+"cells": "PAM 的樹突；MBON 終端。"
+},
+{
+"k": "MB_VL",
+"stage": 2,
+"cells": "PPL1 的終端（α／α′ 隔間）。"
+},
+{
+"k": "MB_ML",
+"stage": 2,
+"cells": "PAM 的終端（β／β′ 與 γ2–γ5 隔間）；PPL1 的 γ1 終端也在內側葉這一端（γ1 緊鄰柄）。"
+}
+],
+"edges": [
+{
+"a": "SMP",
+"b": "MB_VL",
+"via": "PPL1 多巴胺神經元",
+"ev": "確立",
+"src": "Aso14; Li20",
+"types": {
+"em": [
+"PPL101"
+],
+"mcns": [
+"PPL101"
+]
+}
+},
+{
+"a": "SIP",
+"b": "MB_VL",
+"via": "PPL1 多巴胺神經元",
+"ev": "確立",
+"src": "Aso14; Li20",
+"types": {
+"em": [
+"PPL103"
+],
+"mcns": [
+"PPL103"
+]
+}
+},
+{
+"a": "SLP",
+"b": "MB_VL",
+"via": "PPL1 多巴胺神經元",
+"ev": "確立",
+"src": "Aso14; Li20",
+"types": {
+"em": [
+"PPL104"
+],
+"mcns": [
+"PPL104"
+]
+}
+},
+{
+"a": "SMP",
+"b": "MB_ML",
+"via": "PAM 多巴胺神經元；PPL1 到 γ1 的分支",
+"ev": "確立",
+"src": "Aso14; Li20",
+"types": {
+"em": [
+"PAM08"
+],
+"mcns": [
+"PAM08"
+]
+}
+},
+{
+"a": "CRE",
+"b": "MB_ML",
+"via": "PAM 多巴胺神經元",
+"ev": "確立",
+"src": "Otto20; Li20",
+"types": {
+"em": [
+"PAM01"
+],
+"mcns": [
+"PAM01"
+]
+}
+},
+{
+"a": "MB_VL",
+"b": "SMP",
+"via": "MBON（回饋）",
+"ev": "確立",
+"src": "Aso14; Li20",
+"types": {
+"em": [
+"MBON07"
+],
+"mcns": [
+"MBON07"
+]
+}
+},
+{
+"a": "MB_ML",
+"b": "CRE",
+"via": "MBON（回饋）",
+"ev": "確立",
+"src": "Aso14; Li20",
+"types": {
+"em": [
+"MBON01"
+],
+"mcns": [
+"MBON01"
+]
+}
+},
+{
+"a": "MB_ML",
+"b": "SLP",
+"via": "MBON（回饋）",
+"ev": "確立",
+"src": "Aso14; Li20",
+"types": {
+"em": [
+"MBON11"
+],
+"mcns": [
+"MBON11"
+]
+}
+}
+]
+}
+],
+"resolved": {
+"chiang": {
+"AL": [
+"AL"
+],
+"MB_CA": [
+"Cal"
+],
+"LH": [
+"LH"
+],
+"MB_PED": [
+"MB"
+],
+"MB_VL": [
+"MB"
+],
+"MB_ML": [
+"MB"
+],
+"SLP": [
+"DLP"
+],
+"SIP": [
+"DLP"
+],
+"SMP": [
+"IDLP",
+"SDFP"
+],
+"CRE": [
+"IDFP"
+],
+"LA": [],
+"ME": [
+"Med"
+],
+"LO": [
+"Lob"
+],
+"LOP": [
+"LoP"
+],
+"SPS": [
+"DMP"
+],
+"IPS": [
+"VMP"
+],
+"GNG": [
+"SOG"
+],
+"PVLP": [
+"OG",
+"VLP"
+],
+"PLP": [
+"CVLP",
+"SPP"
+],
+"AMMC": [
+"AMMC"
+],
+"WED": [
+"CVLP"
+],
+"AVLP": [
+"VLP"
+],
+"SAD": [
+"AMMC"
+],
+"PRW": [
+"SOG"
+],
+"AOTU": [
+"OPTU"
+],
+"BU": [
+"Lat_Tri"
+],
+"EB": [
+"EB"
+],
+"PB": [
+"PCB"
+],
+"LAL": [
+"IDFP"
+],
+"NO": [
+"Nod"
+],
+"FB": [
+"FB"
+],
+"AME": [
+"Med"
+]
+},
+"ito": {
+"AL": [
+"AL"
+],
+"MB_CA": [
+"MB_CA"
+],
+"LH": [
+"LH"
+],
+"MB_PED": [
+"MB_PED"
+],
+"MB_VL": [
+"MB_VL"
+],
+"MB_ML": [
+"MB_ML"
+],
+"SLP": [
+"SLP"
+],
+"SIP": [
+"SIP"
+],
+"SMP": [
+"SMP"
+],
+"CRE": [
+"CRE"
+],
+"LA": [],
+"ME": [
+"ME"
+],
+"LO": [
+"LO"
+],
+"LOP": [
+"LOP"
+],
+"SPS": [
+"SPS"
+],
+"IPS": [
+"IPS"
+],
+"GNG": [
+"GNG"
+],
+"PVLP": [
+"PVLP"
+],
+"PLP": [
+"PLP"
+],
+"AMMC": [
+"AMMC"
+],
+"WED": [
+"WED"
+],
+"AVLP": [
+"AVLP"
+],
+"SAD": [
+"SAD"
+],
+"PRW": [
+"PRW"
+],
+"AOTU": [
+"AOTU"
+],
+"BU": [
+"BU"
+],
+"EB": [
+"EB"
+],
+"PB": [
+"PB"
+],
+"LAL": [
+"LAL"
+],
+"NO": [
+"NO"
+],
+"FB": [
+"FB"
+],
+"AME": [
+"AME"
+]
+},
+"itoem": {
+"AL": [
+"AL"
+],
+"MB_CA": [
+"MB_CA"
+],
+"LH": [
+"LH"
+],
+"MB_PED": [
+"MB_PED"
+],
+"MB_VL": [
+"MB_VL"
+],
+"MB_ML": [
+"MB_ML"
+],
+"SLP": [
+"SLP"
+],
+"SIP": [
+"SIP"
+],
+"SMP": [
+"SMP"
+],
+"CRE": [
+"CRE"
+],
+"LA": [],
+"ME": [
+"ME"
+],
+"LO": [
+"LO"
+],
+"LOP": [
+"LOP"
+],
+"SPS": [
+"SPS"
+],
+"IPS": [
+"IPS"
+],
+"GNG": [
+"GNG"
+],
+"PVLP": [
+"PVLP"
+],
+"PLP": [
+"PLP"
+],
+"AMMC": [
+"AMMC"
+],
+"WED": [
+"WED"
+],
+"AVLP": [
+"AVLP"
+],
+"SAD": [
+"SAD"
+],
+"PRW": [
+"PRW"
+],
+"AOTU": [
+"AOTU"
+],
+"BU": [
+"BU"
+],
+"EB": [
+"EB"
+],
+"PB": [
+"PB"
+],
+"LAL": [
+"LAL"
+],
+"NO": [
+"NO"
+],
+"FB": [
+"FB"
+],
+"AME": [
+"AME"
+]
+},
+"malecns": {
+"AL": [
+"AL"
+],
+"MB_CA": [
+"MB_CA"
+],
+"LH": [
+"LH"
+],
+"MB_PED": [
+"MB_PED"
+],
+"MB_VL": [
+"MB_aL",
+"MB_apL"
+],
+"MB_ML": [
+"MB_bL",
+"MB_bpL",
+"MB_gL"
+],
+"SLP": [
+"SLP"
+],
+"SIP": [
+"SIP"
+],
+"SMP": [
+"SMP"
+],
+"CRE": [
+"CRE"
+],
+"LA": [
+"LA"
+],
+"ME": [
+"ME"
+],
+"LO": [
+"LO"
+],
+"LOP": [
+"LOP"
+],
+"SPS": [
+"SPS"
+],
+"IPS": [
+"IPS"
+],
+"GNG": [
+"GNG"
+],
+"PVLP": [
+"PVLP"
+],
+"PLP": [
+"PLP"
+],
+"AMMC": [
+"SAD"
+],
+"WED": [
+"WED"
+],
+"AVLP": [
+"AVLP"
+],
+"SAD": [
+"SAD"
+],
+"PRW": [
+"PRW"
+],
+"AOTU": [
+"AOTU"
+],
+"BU": [
+"BU"
+],
+"EB": [
+"EB"
+],
+"PB": [
+"PB"
+],
+"LAL": [
+"LAL"
+],
+"NO": [
+"NO"
+],
+"FB": [
+"FB"
+],
+"AME": [
+"AME"
+]
+},
+"mcnstpl": {
+"AL": [
+"D06_AL",
+"D07_AL",
+"D10_AL",
+"D35_AL",
+"D44_AL",
+"D47_AL"
+],
+"MB_CA": [
+"D05_CA",
+"D50_CA"
+],
+"LH": [
+"D30_LH"
+],
+"MB_PED": [],
+"MB_VL": [],
+"MB_ML": [
+"D38_gL",
+"D49_gL"
+],
+"SLP": [
+"D21_SLP",
+"D28_SLP"
+],
+"SIP": [],
+"SMP": [
+"D13_SMP",
+"D19_SMP"
+],
+"CRE": [],
+"LA": [
+"D56_LA",
+"D57_LA",
+"D58_LA",
+"D59_LA",
+"D60_LA",
+"D61_LA",
+"D62_LA",
+"D63_LA",
+"D64_LA"
+],
+"ME": [
+"D00_ME",
+"D01_ME",
+"D02_ME",
+"D51_ME",
+"D53_ME"
+],
+"LO": [
+"D03_LO",
+"D52_LO"
+],
+"LOP": [
+"D04_LOP",
+"D54_LOP",
+"D55_LOP"
+],
+"SPS": [
+"D14_SPS"
+],
+"IPS": [
+"D36_IPS"
+],
+"GNG": [
+"D08_GNG",
+"D09_GNG",
+"D24_GNG",
+"D26_GNG",
+"D34_GNG",
+"D39_GNG",
+"D40_GNG",
+"D41_GNG",
+"D42_GNG",
+"D43_GNG",
+"D45_GNG",
+"D46_GNG",
+"D48_GNG"
+],
+"PVLP": [
+"D17_PVLP",
+"D18_PVLP",
+"D31_PVLP"
+],
+"PLP": [
+"D22_PLP"
+],
+"AMMC": [],
+"WED": [
+"D11_WED"
+],
+"AVLP": [
+"D15_AVLP",
+"D16_AVLP",
+"D29_AVLP"
+],
+"SAD": [],
+"PRW": [],
+"AOTU": [
+"D12_AOTU",
+"D32_AOTU"
+],
+"BU": [],
+"EB": [
+"D37_EB"
+],
+"PB": [],
+"LAL": [
+"D23_LAL",
+"D33_LAL"
+],
+"NO": [],
+"FB": [
+"D25_FB"
+],
+"AME": []
+},
+"mcnstpl2": {
+"AL": [],
+"MB_CA": [],
+"LH": [],
+"MB_PED": [],
+"MB_VL": [],
+"MB_ML": [],
+"SLP": [],
+"SIP": [],
+"SMP": [],
+"CRE": [],
+"LA": [],
+"ME": [],
+"LO": [],
+"LOP": [],
+"SPS": [],
+"IPS": [],
+"GNG": [],
+"PVLP": [],
+"PLP": [],
+"AMMC": [],
+"WED": [],
+"AVLP": [],
+"SAD": [],
+"PRW": [],
+"AOTU": [],
+"BU": [],
+"EB": [],
+"PB": [],
+"LAL": [],
+"NO": [],
+"FB": [],
+"AME": []
+}
+}
+}
